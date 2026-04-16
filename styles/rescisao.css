@@ -1,0 +1,542 @@
+/* =========== 1. RESET E TOKENS DE DESIGN =========== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            /* Paleta de confiança (azul/branco/cinza) */
+            --color-primary: #1D4ED8;
+            --color-primary-dark: #1E3A8A;
+            --color-primary-light: #3B82F6;
+            --color-accent: #0EA5E9;
+            --color-success: #059669;
+            --color-success-bg: #ECFDF5;
+            --color-warning-bg: #FEF3C7;
+            --color-warning-text: #92400E;
+
+            /* Neutros */
+            --color-bg: #F8FAFC;
+            --color-surface: #FFFFFF;
+            --color-border: #E2E8F0;
+            --color-border-strong: #CBD5E1;
+
+            --color-text: #0F172A;
+            --color-text-muted: #475569;
+            --color-text-light: #94A3B8;
+
+            /* Sombras */
+            --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+            --shadow-lg: 0 10px 25px -5px rgba(15, 23, 42, 0.10), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+
+            /* Layout */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --container-max: 900px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: var(--color-bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* =========== 2. HEADER =========== */
+        .header {
+            position: sticky;
+            top: 0;
+            background-color: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+            z-index: 50;
+        }
+
+        .header__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .logo__mark {
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            color: #fff;
+        }
+
+        /* Botão "Voltar para Home" */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            background-color: var(--color-bg);
+            transition: all var(--transition);
+        }
+
+        .back-btn:hover {
+            background-color: var(--color-primary);
+            color: #fff;
+        }
+
+        .back-btn__icon {
+            transition: transform var(--transition);
+        }
+
+        .back-btn:hover .back-btn__icon {
+            transform: translateX(-3px);
+        }
+
+        /* =========== 3. HERO / TÍTULO =========== */
+        .hero {
+            padding: 40px 0 32px;
+            text-align: center;
+            background: linear-gradient(180deg, #FFFFFF 0%, #EFF6FF 100%);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .hero__breadcrumb {
+            font-size: 0.8125rem;
+            color: var(--color-text-muted);
+            margin-bottom: 16px;
+        }
+
+        .hero__breadcrumb a {
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+
+        .hero__breadcrumb a:hover {
+            color: var(--color-primary);
+        }
+
+        .hero__title {
+            font-size: clamp(1.625rem, 5vw, 2.25rem);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+            color: var(--color-text);
+        }
+
+        .hero__subtitle {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        /* =========== 4. CALCULADORA (FORM) =========== */
+        .calc-section {
+            padding: 32px 0;
+        }
+
+        .calc-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .calc-card__title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .calc-card__hint {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 12px 14px;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--color-text);
+            background-color: var(--color-surface);
+            border: 1.5px solid var(--color-border-strong);
+            border-radius: var(--radius-sm);
+            transition: border-color var(--transition), box-shadow var(--transition);
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.12);
+        }
+
+        .form-select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 16px;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+
+        /* Prefixo "R$" no input de salário */
+        .input-prefix {
+            position: relative;
+        }
+        .input-prefix::before {
+            content: 'R$';
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-text-muted);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            pointer-events: none;
+        }
+        .input-prefix .form-input {
+            padding-left: 40px;
+        }
+
+        .form-error {
+            font-size: 0.8125rem;
+            color: #DC2626;
+            margin-top: 4px;
+            display: none;
+        }
+        .form-field.has-error .form-input,
+        .form-field.has-error .form-select {
+            border-color: #DC2626;
+        }
+        .form-field.has-error .form-error {
+            display: block;
+        }
+
+        /* Botão Calcular */
+        .submit-btn {
+            width: 100%;
+            padding: 16px 24px;
+            margin-top: 8px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform var(--transition), box-shadow var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 30px -5px rgba(29, 78, 216, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* =========== 5. RESULTADO =========== */
+        .result-card {
+            margin-top: 24px;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+            /* Fica oculto até calcular */
+            display: none;
+            animation: fadeInUp 0.4s ease-out;
+        }
+
+        .result-card.is-visible {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-card__header {
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .result-card__kicker {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-success);
+            background-color: var(--color-success-bg);
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-bottom: 8px;
+        }
+
+        .result-card__title {
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        .result-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px dashed var(--color-border);
+        }
+
+        .result-line:last-of-type {
+            border-bottom: none;
+        }
+
+        .result-line__label {
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+        }
+
+        .result-line__label strong {
+            display: block;
+            color: var(--color-text);
+            font-weight: 600;
+            margin-bottom: 2px;
+            font-size: 0.9375rem;
+        }
+
+        .result-line__label small {
+            font-size: 0.8125rem;
+            color: var(--color-text-light);
+        }
+
+        .result-line__value {
+            font-weight: 700;
+            color: var(--color-text);
+            font-size: 1rem;
+            white-space: nowrap;
+        }
+
+        /* Linha do Total */
+        .result-total {
+            margin-top: 12px;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            color: #fff;
+            border-radius: var(--radius-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .result-total__label {
+            font-weight: 600;
+            font-size: 0.9375rem;
+        }
+
+        .result-total__value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+        }
+
+        .result-disclaimer {
+            margin-top: 16px;
+            padding: 14px 16px;
+            background-color: var(--color-warning-bg);
+            border-left: 4px solid #F59E0B;
+            border-radius: var(--radius-sm);
+            color: var(--color-warning-text);
+            font-size: 0.875rem;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        /* =========== 6. ARTIGO SEO =========== */
+        .article {
+            padding: 40px 0 60px;
+        }
+
+        .article__wrapper {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 28px 24px;
+        }
+
+        .article h2 {
+            font-size: 1.375rem;
+            font-weight: 800;
+            color: var(--color-text);
+            margin-top: 32px;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+            line-height: 1.25;
+        }
+
+        .article h2:first-child {
+            margin-top: 0;
+        }
+
+        .article h3 {
+            font-size: 1.0625rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+
+        .article p {
+            color: var(--color-text-muted);
+            margin-bottom: 14px;
+            line-height: 1.75;
+        }
+
+        .article ul {
+            margin: 0 0 16px 0;
+            padding-left: 22px;
+            color: var(--color-text-muted);
+        }
+
+        .article li {
+            margin-bottom: 8px;
+            line-height: 1.65;
+        }
+
+        .article strong {
+            color: var(--color-text);
+            font-weight: 600;
+        }
+
+        /* =========== 7. FOOTER =========== */
+        .footer {
+            background-color: #0F172A;
+            color: #94A3B8;
+            padding: 28px 0;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+
+        .footer strong {
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
+        /* =========== 8. UTILS E ACESSIBILIDADE =========== */
+        .sr-only {
+            position: absolute; width: 1px; height: 1px;
+            padding: 0; margin: -1px; overflow: hidden;
+            clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--color-accent);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+            html { scroll-behavior: auto; }
+        }
+
+        /* =========== 9. BREAKPOINTS (>= 640px e >= 900px) =========== */
+        @media (min-width: 640px) {
+            .container {
+                padding: 0 32px;
+            }
+            .hero {
+                padding: 56px 0 48px;
+            }
+            .calc-card,
+            .result-card,
+            .article__wrapper {
+                padding: 32px;
+            }
+            /* Datas lado a lado no tablet */
+            .form-grid--dates {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .hero__title {
+                line-height: 1.15;
+            }
+        }

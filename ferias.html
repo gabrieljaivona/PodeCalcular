@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- ============================================= -->
+    <!-- META TAGS DE SEO / ADSENSE                    -->
+    <!-- ============================================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1D4ED8">
+
+    <title>Calculadora de Férias CLT 2026 | PodeCalcular</title>
+    <meta name="description" content="Calcule o valor das suas férias CLT com 1/3 constitucional e abono pecuniário (venda de 10 dias). Ferramenta online, gratuita e sem cadastro.">
+    <meta name="keywords" content="calculadora de férias, férias CLT, 1/3 constitucional, abono pecuniário, venda de férias, cálculo férias 2026, férias proporcionais">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="PodeCalcular">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Calculadora de Férias CLT | PodeCalcular">
+    <meta property="og:description" content="Descubra quanto você vai receber nas suas férias. Inclui o 1/3 constitucional e o cálculo da venda de 10 dias.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Favicon SVG (mesma marca do portal) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231D4ED8'/%3E%3Cpath d='M28 52 L44 68 L74 34' stroke='white' stroke-width='10' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+    <!-- CSS-->
+    <link rel="stylesheet" href="styles/ferias.css">
+
+    <!-- Fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- ============================================= -->
+    <!-- CSS - MOBILE-FIRST                            -->
+    <!-- ============================================= -->
+</head>
+<body>
+
+    <!-- =================================================== -->
+    <!-- 1. HEADER - Logo + Botão Voltar                       -->
+    <!-- =================================================== -->
+    <header class="header" role="banner">
+        <div class="container header__inner">
+            <a href="index.html" class="logo" aria-label="PodeCalcular - Página inicial">
+                <span class="logo__mark" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="5 12 10 17 20 7"></polyline>
+                    </svg>
+                </span>
+                PodeCalcular
+            </a>
+
+            <a href="index.html" class="back-btn" aria-label="Voltar para a página inicial">
+                <svg class="back-btn__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span class="back-btn__text">Voltar para Início</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- =================================================== -->
+        <!-- 2. HERO / TÍTULO                                      -->
+        <!-- =================================================== -->
+        <section class="hero">
+            <div class="container">
+                <nav class="hero__breadcrumb" aria-label="Trilha de navegação">
+                    <a href="index.html">Home</a> › <a href="#">Trabalhador</a> › <span>Férias</span>
+                </nav>
+                <h1 class="hero__title">Calculadora de Férias CLT</h1>
+                <p class="hero__subtitle">
+                    Descubra quanto você vai receber ao tirar suas férias, com o 1/3 constitucional
+                    e, se desejar, a venda de 10 dias (abono pecuniário).
+                </p>
+            </div>
+        </section>
+
+        <!-- =================================================== -->
+        <!-- 3 e 4. FORMULÁRIO + RESULTADO                         -->
+        <!-- =================================================== -->
+        <section class="calc-section">
+            <div class="container">
+
+                <!-- Formulário -->
+                <div class="calc-card">
+                    <h2 class="calc-card__title">Preencha seus dados</h2>
+                    <p class="calc-card__hint">O cálculo é feito no seu navegador. Nenhuma informação é enviada para nós.</p>
+
+                    <form id="formFerias" class="form-grid" novalidate>
+
+                        <div class="form-grid form-grid--top">
+
+                            <!-- Salário Base Bruto -->
+                            <div class="form-field" id="field-salario">
+                                <label for="salario" class="form-label">Salário Base Bruto</label>
+                                <div class="input-prefix">
+                                    <input
+                                        type="number"
+                                        id="salario"
+                                        class="form-input"
+                                        placeholder="0,00"
+                                        step="0.01"
+                                        min="0"
+                                        inputmode="decimal"
+                                        required>
+                                </div>
+                                <span class="form-error">Informe um salário válido (maior que zero).</span>
+                            </div>
+
+                            <!-- Dias de Férias -->
+                            <div class="form-field" id="field-dias">
+                                <label for="diasFerias" class="form-label">
+                                    Quantos dias vai tirar?
+                                </label>
+                                <div class="input-suffix">
+                                    <input
+                                        type="number"
+                                        id="diasFerias"
+                                        class="form-input"
+                                        placeholder="30"
+                                        min="1"
+                                        max="30"
+                                        step="1"
+                                        inputmode="numeric"
+                                        required>
+                                </div>
+                                <span class="form-error">Informe um número entre 1 e 30.</span>
+                            </div>
+
+                        </div>
+
+                        <!-- Vai vender 10 dias (abono pecuniário)? -->
+                        <div class="form-field">
+                            <label class="form-label">
+                                Vai vender 1/3 das férias?
+                                <span class="form-hint">(10 dias de abono pecuniário)</span>
+                            </label>
+                            <div class="radio-group" role="radiogroup" aria-label="Abono pecuniário">
+                                <div class="radio-pill">
+                                    <input type="radio" id="abono-nao" name="abono" value="nao" checked>
+                                    <label for="abono-nao">Não</label>
+                                </div>
+                                <div class="radio-pill">
+                                    <input type="radio" id="abono-sim" name="abono" value="sim">
+                                    <label for="abono-sim">Sim</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            Calcular Férias
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+
+                    </form>
+                </div>
+
+                <!-- Área de Resultados (preenchida por JS) -->
+                <div id="resultado" class="result-card" aria-live="polite">
+                    <div class="result-card__header">
+                        <span class="result-card__kicker">✓ Cálculo realizado</span>
+                        <h2 class="result-card__title">Detalhamento das suas férias</h2>
+                    </div>
+
+                    <div id="resultadoLinhas"></div>
+
+                    <div class="result-total">
+                        <span class="result-total__label">Total Bruto Estimado</span>
+                        <span class="result-total__value" id="resultadoTotal">R$ 0,00</span>
+                    </div>
+
+                    <p class="result-disclaimer">
+                        ⚠️ Estes valores são estimativas brutas e não incluem os descontos
+                        obrigatórios de INSS e IRRF. Para o valor líquido exato que cairá na
+                        sua conta, consulte o seu holerite ou fale com um contador.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =================================================== -->
+        <!-- 5. CONTEÚDO SEO (artigo explicativo)                  -->
+        <!-- =================================================== -->
+        <section class="article">
+            <div class="container">
+                <article class="article__wrapper">
+
+                    <h2>Como funciona o cálculo de férias na CLT?</h2>
+                    <p>
+                        As <strong>férias</strong> são um dos principais direitos garantidos pela
+                        Consolidação das Leis do Trabalho (CLT) e pela Constituição Federal. Todo
+                        trabalhador com carteira assinada tem direito a <strong>30 dias de descanso
+                        remunerado</strong> a cada 12 meses de serviço prestado ao mesmo empregador.
+                        Esse intervalo de 12 meses de trabalho é chamado de <strong>período
+                        aquisitivo</strong>, e só após completá-lo o empregado adquire o direito
+                        ao descanso.
+                    </p>
+                    <p>
+                        Depois do período aquisitivo, a empresa tem mais 12 meses — o chamado
+                        <strong>período concessivo</strong> — para conceder efetivamente as
+                        férias ao funcionário. Se o prazo passar sem que o empregador libere o
+                        descanso, as férias se tornam vencidas e devem ser pagas em dobro, conforme
+                        determina o artigo 137 da CLT.
+                    </p>
+
+                    <h3>Fórmula básica do cálculo</h3>
+                    <p>
+                        O cálculo das férias é simples: divide-se o salário bruto por 30 e
+                        multiplica-se pelo número de dias de descanso. Sobre esse valor aplica-se
+                        o acréscimo de 1/3 constitucional. A fórmula fica assim:
+                    </p>
+                    <div class="highlight-box">
+                        <p>
+                            <strong>Valor das férias =</strong> (Salário ÷ 30) × Dias de férias <br>
+                            <strong>1/3 constitucional =</strong> Valor das férias ÷ 3 <br>
+                            <strong>Total bruto =</strong> Valor das férias + 1/3 constitucional
+                        </p>
+                    </div>
+                    <p>
+                        <strong>Exemplo prático:</strong> um trabalhador com salário de R$ 3.000
+                        que tira 30 dias de férias receberá: (3.000 ÷ 30) × 30 = R$ 3.000,
+                        mais o terço constitucional de R$ 1.000, totalizando <strong>R$ 4.000
+                        brutos</strong> antes dos descontos de INSS e Imposto de Renda.
+                    </p>
+
+                    <h3>Quando devem ser pagas?</h3>
+                    <p>
+                        De acordo com o artigo 145 da CLT, o pagamento das férias (incluindo o
+                        terço constitucional) deve ser feito em até <strong>2 dias úteis antes
+                        do início do período de descanso</strong>. Esse valor cai na conta do
+                        trabalhador em um único depósito, separado do salário do mês.
+                    </p>
+
+                    <h2>O que é o 1/3 constitucional?</h2>
+                    <p>
+                        O <strong>1/3 constitucional</strong>, também chamado de <strong>terço
+                        constitucional de férias</strong>, é um adicional que todo trabalhador
+                        recebe junto com o valor das férias. Ele está previsto no <strong>artigo
+                        7º, inciso XVII, da Constituição Federal de 1988</strong> e corresponde a
+                        um terço a mais sobre o valor normal das férias.
+                    </p>
+                    <p>
+                        A lógica por trás desse bônus é simples: como o trabalhador não vai
+                        trabalhar durante o período de descanso, ele deveria ter um valor extra
+                        para aproveitar melhor o tempo livre — seja para viajar, descansar em
+                        casa ou fazer qualquer outra atividade de lazer. É por isso que o 1/3
+                        constitucional é, na prática, um <strong>incentivo financeiro ao
+                        descanso</strong>.
+                    </p>
+
+                    <h3>Como o terço é calculado?</h3>
+                    <p>
+                        O cálculo é direto: o valor das férias é dividido por 3 e esse resultado
+                        é somado ao valor principal. Se as férias são de R$ 3.000, o 1/3 vale
+                        R$ 1.000, e o total bruto a receber será de R$ 4.000.
+                    </p>
+                    <p>
+                        Uma informação importante: o 1/3 constitucional também incide sobre o
+                        <strong>abono pecuniário</strong> (a venda de dias de férias). Ou seja,
+                        mesmo que você venda 10 dias ao empregador, sobre esses 10 dias também
+                        será aplicado o acréscimo de um terço. Essa é uma regra consolidada pela
+                        jurisprudência do Tribunal Superior do Trabalho (TST).
+                    </p>
+
+                    <h2>Como funciona a venda de férias (abono pecuniário)?</h2>
+                    <p>
+                        O <strong>abono pecuniário</strong> — popularmente conhecido como
+                        <strong>venda de férias</strong> — é a faculdade que o trabalhador tem
+                        de converter <strong>um terço dos seus 30 dias de férias em dinheiro</strong>.
+                        Na prática, isso significa que o empregado pode "vender" 10 dias para a
+                        empresa e tirar apenas 20 dias de descanso, recebendo esses 10 dias em
+                        forma de pagamento extra.
+                    </p>
+                    <p>
+                        Essa possibilidade está prevista no <strong>artigo 143 da CLT</strong>
+                        e é uma <strong>escolha do trabalhador</strong>, e não uma imposição do
+                        empregador. Ou seja, a empresa não pode obrigar o funcionário a vender
+                        suas férias, mas também não pode recusar quando o pedido é feito dentro
+                        do prazo legal.
+                    </p>
+
+                    <h3>Regras importantes do abono pecuniário</h3>
+                    <ul>
+                        <li>A solicitação deve ser feita <strong>até 15 dias antes do fim do período aquisitivo</strong>.</li>
+                        <li>O trabalhador pode vender <strong>no máximo 10 dias</strong> (1/3 dos 30 dias de férias).</li>
+                        <li>Sobre os dias vendidos também incide o <strong>1/3 constitucional</strong>.</li>
+                        <li>O <strong>abono pecuniário é isento de Imposto de Renda e de INSS</strong>, conforme a legislação tributária vigente.</li>
+                        <li>Para empregados em regime de tempo parcial, as regras podem ser diferentes; consulte sempre um contador.</li>
+                    </ul>
+
+                    <h3>Exemplo prático de cálculo com abono</h3>
+                    <div class="highlight-box">
+                        <p>
+                            Salário: <strong>R$ 3.000</strong><br>
+                            Dias tirados: <strong>20 dias</strong> + 10 dias vendidos<br><br>
+                            Férias (20 dias): (3.000 ÷ 30) × 20 = <strong>R$ 2.000</strong><br>
+                            1/3 sobre as férias: 2.000 ÷ 3 ≈ <strong>R$ 666,67</strong><br>
+                            Abono (10 dias): (3.000 ÷ 30) × 10 = <strong>R$ 1.000</strong><br>
+                            1/3 sobre o abono: 1.000 ÷ 3 ≈ <strong>R$ 333,33</strong><br><br>
+                            <strong>Total bruto: R$ 4.000,00</strong>
+                        </p>
+                    </div>
+                    <p>
+                        Perceba que, ao vender os 10 dias, o total a receber é o mesmo que tirar
+                        30 dias de descanso. A diferença é que o trabalhador recebe o valor do
+                        abono para "reforçar o caixa" e ainda tira 20 dias de férias.
+                    </p>
+
+                    <h2>Por que usar a Calculadora do PodeCalcular?</h2>
+                    <p>
+                        Nossa <strong>Calculadora de Férias CLT</strong> foi criada para oferecer
+                        uma estimativa rápida e confiável do valor bruto que você vai receber.
+                        Todos os cálculos acontecem diretamente no seu navegador, sem envio de
+                        dados para servidores externos — sua privacidade está protegida.
+                    </p>
+                    <p>
+                        Lembre-se de que esta ferramenta apresenta <strong>valores brutos</strong>,
+                        ou seja, antes dos descontos de INSS e IRRF. Para saber o valor líquido
+                        exato que cairá na sua conta, o ideal é conferir o holerite entregue pela
+                        empresa ou consultar um contador.
+                    </p>
+
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =================================================== -->
+    <!-- 6. FOOTER                                             -->
+    <!-- =================================================== -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p>© 2026 <strong>PodeCalcular</strong>. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- =================================================== -->
+    <!-- JAVASCRIPT - LÓGICA DE CÁLCULO DE FÉRIAS CLT          -->
+    <!-- =================================================== -->
+    <script>
+        /**
+         * PodeCalcular - Calculadora de Férias CLT
+         * ------------------------------------------
+         * Regras aplicadas (valores BRUTOS, sem descontos):
+         *   - Valor das férias:     (salário / 30) × dias tirados
+         *   - 1/3 constitucional:   valor das férias / 3
+         *   - Abono pecuniário:     (salário / 30) × 10  [se o usuário escolher vender]
+         *   - 1/3 sobre o abono:    abono / 3
+         *   - Total bruto:          soma de todos os valores acima
+         *
+         * Não aplicamos descontos de INSS nem de IRRF (conforme briefing).
+         * O abono pecuniário é isento desses tributos na prática, mas o valor
+         * das férias em si sofre tributação — o usuário é avisado no disclaimer.
+         */
+
+        (function() {
+            'use strict';
+
+            // =========== REFERÊNCIAS DOM ===========
+            const form = document.getElementById('formFerias');
+            const resultadoEl = document.getElementById('resultado');
+            const resultadoLinhasEl = document.getElementById('resultadoLinhas');
+            const resultadoTotalEl = document.getElementById('resultadoTotal');
+
+            // =========== HELPERS ===========
+
+            /**
+             * Formata um número em moeda brasileira.
+             */
+            function formatBRL(valor) {
+                return valor.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+            }
+
+            // =========== REGRAS DE CÁLCULO ===========
+
+            /**
+             * Valor das férias: salário diário × dias tirados.
+             */
+            function calcValorFerias(salario, dias) {
+                return (salario / 30) * dias;
+            }
+
+            /**
+             * 1/3 constitucional: aplica-se sempre sobre o valor calculado.
+             */
+            function calcUmTerco(valor) {
+                return valor / 3;
+            }
+
+            /**
+             * Abono pecuniário: 10 dias convertidos em dinheiro (art. 143 CLT).
+             * Retorna um objeto com o valor do abono e o 1/3 constitucional sobre ele.
+             */
+            function calcAbono(salario) {
+                const valorAbono = (salario / 30) * 10;
+                const umTercoAbono = valorAbono / 3;
+                return {
+                    valor: valorAbono,
+                    umTerco: umTercoAbono,
+                    total: valorAbono + umTercoAbono
+                };
+            }
+
+            // =========== VALIDAÇÃO ===========
+
+            function limparErros() {
+                document.querySelectorAll('.form-field').forEach(f => f.classList.remove('has-error'));
+            }
+
+            function marcarErro(id) {
+                const field = document.getElementById(id);
+                if (field) field.classList.add('has-error');
+            }
+
+            function validar(salario, dias) {
+                let ok = true;
+
+                if (!salario || salario <= 0 || isNaN(salario)) {
+                    marcarErro('field-salario');
+                    ok = false;
+                }
+                if (!dias || dias < 1 || dias > 30 || isNaN(dias)) {
+                    marcarErro('field-dias');
+                    ok = false;
+                }
+                return ok;
+            }
+
+            // =========== RENDERIZAÇÃO ===========
+
+            function criarLinha(label, desc, valor) {
+                const div = document.createElement('div');
+                div.className = 'result-line';
+                div.innerHTML = `
+                    <div class="result-line__label">
+                        <strong>${label}</strong>
+                        <small>${desc}</small>
+                    </div>
+                    <div class="result-line__value">${formatBRL(valor)}</div>
+                `;
+                return div;
+            }
+
+            function renderizarResultado(dados) {
+                resultadoLinhasEl.innerHTML = '';
+
+                // Linha 1 - Valor das férias
+                resultadoLinhasEl.appendChild(criarLinha(
+                    'Valor das férias',
+                    `${dados.dias} dia(s) × (salário ÷ 30)`,
+                    dados.valorFerias
+                ));
+
+                // Linha 2 - 1/3 constitucional sobre as férias
+                resultadoLinhasEl.appendChild(criarLinha(
+                    '1/3 Constitucional',
+                    'Adicional sobre o valor das férias (Art. 7º, XVII da CF)',
+                    dados.umTercoFerias
+                ));
+
+                // Linha 3 e 4 - Abono pecuniário (somente se escolhido)
+                if (dados.vendeuAbono) {
+                    resultadoLinhasEl.appendChild(criarLinha(
+                        'Abono Pecuniário',
+                        '10 dias vendidos (Art. 143 da CLT)',
+                        dados.abonoValor
+                    ));
+                    resultadoLinhasEl.appendChild(criarLinha(
+                        '1/3 sobre o Abono',
+                        'Terço constitucional sobre os 10 dias vendidos',
+                        dados.abonoUmTerco
+                    ));
+                }
+
+                resultadoTotalEl.textContent = formatBRL(dados.total);
+                resultadoEl.classList.add('is-visible');
+
+                // Scroll suave até o resultado
+                setTimeout(() => {
+                    resultadoEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 80);
+            }
+
+            // =========== SUBMIT HANDLER ===========
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                limparErros();
+
+                const salario = parseFloat(document.getElementById('salario').value);
+                const dias = parseInt(document.getElementById('diasFerias').value, 10);
+                const vendeuAbono = document.querySelector('input[name="abono"]:checked').value === 'sim';
+
+                if (!validar(salario, dias)) {
+                    return;
+                }
+
+                // --- Cálculos ---
+                const valorFerias = calcValorFerias(salario, dias);
+                const umTercoFerias = calcUmTerco(valorFerias);
+
+                let abonoValor = 0;
+                let abonoUmTerco = 0;
+                let abonoTotal = 0;
+
+                if (vendeuAbono) {
+                    const abono = calcAbono(salario);
+                    abonoValor = abono.valor;
+                    abonoUmTerco = abono.umTerco;
+                    abonoTotal = abono.total;
+                }
+
+                const total = valorFerias + umTercoFerias + abonoTotal;
+
+                renderizarResultado({
+                    dias,
+                    valorFerias,
+                    umTercoFerias,
+                    vendeuAbono,
+                    abonoValor,
+                    abonoUmTerco,
+                    total
+                });
+            });
+
+            // Limpa o estado de erro conforme o usuário digita
+            form.addEventListener('input', function(e) {
+                const field = e.target.closest('.form-field');
+                if (field) field.classList.remove('has-error');
+            });
+
+        })();
+    </script>
+
+</body>
+</html>

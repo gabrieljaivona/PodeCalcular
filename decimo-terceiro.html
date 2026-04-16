@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- ============================================= -->
+    <!-- META TAGS DE SEO / ADSENSE                    -->
+    <!-- ============================================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1D4ED8">
+
+    <title>Calculadora de Décimo Terceiro Salário 2026 | PodeCalcular</title>
+    <meta name="description" content="Calcule o valor do seu 13º salário online e grátis. Veja a 1ª parcela, a 2ª parcela e o valor bruto proporcional aos meses trabalhados. Simples, rápido e confiável.">
+    <meta name="keywords" content="calculadora 13º salário, décimo terceiro, cálculo 13 salário proporcional, primeira parcela 13º, segunda parcela 13º, décimo terceiro CLT 2026">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="PodeCalcular">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Calculadora de Décimo Terceiro Salário | PodeCalcular">
+    <meta property="og:description" content="Descubra quanto você vai receber de 13º salário. Cálculo automático da 1ª e 2ª parcelas com base nos meses trabalhados.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Favicon SVG (mesma marca do portal) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231D4ED8'/%3E%3Cpath d='M28 52 L44 68 L74 34' stroke='white' stroke-width='10' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+    <!-- CSS-->
+    <link rel="stylesheet" href="styles/style.css">
+
+    <!-- Fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <!-- =================================================== -->
+    <!-- 1. HEADER                                             -->
+    <!-- =================================================== -->
+    <header class="header" role="banner">
+        <div class="container header__inner">
+            <a href="index.html" class="logo" aria-label="PodeCalcular - Página inicial">
+                <span class="logo__mark" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 20 7"></polyline></svg>
+                </span>
+                PodeCalcular
+            </a>
+            <a href="index.html" class="back-btn" aria-label="Voltar para a página inicial">
+                <svg class="back-btn__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span class="back-btn__text">Voltar para Início</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- =================================================== -->
+        <!-- 2. HERO                                               -->
+        <!-- =================================================== -->
+        <section class="hero">
+            <div class="container">
+                <nav class="hero__breadcrumb" aria-label="Trilha de navegação">
+                    <a href="index.html">Home</a> › <a href="#">Trabalhador</a> › <span>Décimo Terceiro</span>
+                </nav>
+                <h1 class="hero__title">Calculadora de Décimo Terceiro Salário</h1>
+                <p class="hero__subtitle">
+                    Descubra o valor bruto do seu 13º salário e veja como ele é dividido
+                    entre a 1ª parcela (novembro) e a 2ª parcela (dezembro).
+                </p>
+            </div>
+        </section>
+
+        <!-- =================================================== -->
+        <!-- 3 e 4. FORMULÁRIO + RESULTADO                         -->
+        <!-- =================================================== -->
+        <section class="calc-section">
+            <div class="container">
+
+                <div class="calc-card">
+                    <h2 class="calc-card__title">Preencha seus dados</h2>
+                    <p class="calc-card__hint">Todo o cálculo é feito no seu navegador — nenhuma informação é enviada para nós.</p>
+
+                    <form id="formDecimo" class="form-grid" novalidate>
+
+                        <div class="form-grid form-grid--row">
+
+                            <!-- Salário Base Bruto -->
+                            <div class="form-field" id="field-salario">
+                                <label for="salario" class="form-label">Salário Base Bruto</label>
+                                <div class="input-prefix">
+                                    <input
+                                        type="number"
+                                        id="salario"
+                                        class="form-input"
+                                        placeholder="0,00"
+                                        step="0.01"
+                                        min="0"
+                                        inputmode="decimal"
+                                        required>
+                                </div>
+                                <span class="form-error">Informe um salário válido (maior que zero).</span>
+                            </div>
+
+                            <!-- Meses Trabalhados -->
+                            <div class="form-field" id="field-meses">
+                                <label for="meses" class="form-label">
+                                    Meses trabalhados no ano
+                                    <span class="form-label-hint">(1 a 12)</span>
+                                </label>
+                                <select id="meses" class="form-select" required>
+                                    <option value="" disabled selected>Selecione</option>
+                                    <option value="1">1 mês</option>
+                                    <option value="2">2 meses</option>
+                                    <option value="3">3 meses</option>
+                                    <option value="4">4 meses</option>
+                                    <option value="5">5 meses</option>
+                                    <option value="6">6 meses</option>
+                                    <option value="7">7 meses</option>
+                                    <option value="8">8 meses</option>
+                                    <option value="9">9 meses</option>
+                                    <option value="10">10 meses</option>
+                                    <option value="11">11 meses</option>
+                                    <option value="12">12 meses (ano completo)</option>
+                                </select>
+                                <span class="form-error">Selecione o número de meses trabalhados.</span>
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            Calcular 13º Salário
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+
+                    </form>
+                </div>
+
+                <!-- Resultado -->
+                <div id="resultado" class="result-card" aria-live="polite">
+                    <div class="result-card__header">
+                        <span class="result-card__kicker">✓ Cálculo realizado</span>
+                        <h2 class="result-card__title">Detalhamento do seu 13º salário</h2>
+                    </div>
+
+                    <div id="resultadoLinhas"></div>
+
+                    <!-- Cards das parcelas -->
+                    <div class="parcels-grid">
+                        <div class="parcel-card parcel-card--first">
+                            <span class="parcel-card__tag">Até 30 de novembro</span>
+                            <div class="parcel-card__row">
+                                <span class="parcel-card__label">1ª Parcela</span>
+                                <span class="parcel-card__value" id="val1parcela">R$ 0,00</span>
+                            </div>
+                            <span class="parcel-card__note">50% do valor bruto, sem descontos</span>
+                        </div>
+                        <div class="parcel-card parcel-card--second">
+                            <span class="parcel-card__tag">Até 20 de dezembro</span>
+                            <div class="parcel-card__row">
+                                <span class="parcel-card__label">2ª Parcela</span>
+                                <span class="parcel-card__value" id="val2parcela">R$ 0,00</span>
+                            </div>
+                            <span class="parcel-card__note">50% do bruto, com descontos de INSS e IRRF</span>
+                        </div>
+                    </div>
+
+                    <!-- Total geral -->
+                    <div class="result-total-wrapper">
+                        <span class="result-total-wrapper__label">Total Bruto do 13º</span>
+                        <span class="result-total-wrapper__value" id="resultadoTotal">R$ 0,00</span>
+                    </div>
+
+                    <p class="result-disclaimer">
+                        ⚠️ Os valores da 2ª parcela sofrem descontos de INSS e IRRF de acordo
+                        com a sua faixa salarial, portanto o valor líquido final será menor que
+                        a estimativa bruta apresentada. Para o valor exato, consulte o seu
+                        holerite ou fale com um contador.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =================================================== -->
+        <!-- 5. CONTEÚDO SEO                                       -->
+        <!-- =================================================== -->
+        <section class="article">
+            <div class="container">
+                <article class="article__wrapper">
+
+                    <h2>Quem tem direito ao Décimo Terceiro salário?</h2>
+                    <p>
+                        O <strong>Décimo Terceiro salário</strong> (também chamado de
+                        <strong>gratificação natalina</strong>) é um direito de todo trabalhador
+                        brasileiro com carteira assinada. Ele foi instituído pela <strong>Lei
+                        4.090 de 13 de julho de 1962</strong> e regulamentado pelo
+                        <strong>Decreto 57.155/65</strong>. Na prática, o 13º é como se o
+                        empregado recebesse um salário extra por ano, proporcional aos meses
+                        efetivamente trabalhados.
+                    </p>
+                    <p>
+                        Além dos empregados regidos pela CLT, têm direito ao 13º salário:
+                    </p>
+                    <ul>
+                        <li><strong>Aposentados e pensionistas do INSS</strong> (o benefício é pago em duas parcelas, geralmente entre agosto e dezembro).</li>
+                        <li><strong>Trabalhadores domésticos</strong>, garantido pela PEC das Domésticas (EC nº 72/2013).</li>
+                        <li><strong>Trabalhadores rurais</strong> registrados em carteira.</li>
+                        <li><strong>Trabalhadores avulsos</strong> com contrato formal.</li>
+                    </ul>
+                    <p>
+                        Já estagiários, trabalhadores autônomos e profissionais informais
+                        (sem registro) <strong>não têm direito</strong> ao benefício por lei,
+                        embora algumas empresas optem por concedê-lo voluntariamente.
+                    </p>
+
+                    <h2>Como é feito o cálculo do 13º proporcional?</h2>
+                    <p>
+                        O cálculo do 13º salário é simples: divide-se o <strong>salário bruto
+                        por 12</strong> e multiplica-se pelo <strong>número de meses trabalhados
+                        </strong> dentro do ano calendário. Se o funcionário trabalhou o ano
+                        todo (12 meses), receberá o equivalente a um salário integral; se
+                        trabalhou metade do ano, receberá metade.
+                    </p>
+                    <div class="highlight-box">
+                        <p>
+                            <strong>13º Proporcional = (Salário Bruto ÷ 12) × Meses Trabalhados</strong>
+                        </p>
+                    </div>
+
+                    <h3>A regra dos 15 dias</h3>
+                    <p>
+                        Para contar como <strong>mês inteiro</strong> para o 13º, o trabalhador
+                        precisa ter exercido sua atividade por pelo menos <strong>15 dias dentro
+                        daquele mês</strong>. Se trabalhou menos de 15 dias em um determinado
+                        mês, essa fração é desconsiderada no cálculo. Essa é uma regra
+                        consolidada pela CLT e pela jurisprudência do TST.
+                    </p>
+
+                    <h3>Exemplo prático</h3>
+                    <p>
+                        Um funcionário foi admitido em <strong>1º de abril</strong> e recebe um
+                        salário de <strong>R$ 3.600</strong>. Como ele trabalhou de abril a
+                        dezembro (9 meses), o cálculo fica:
+                    </p>
+                    <div class="highlight-box">
+                        <p>
+                            (R$ 3.600 ÷ 12) × 9 = <strong>R$ 2.700 brutos</strong><br><br>
+                            1ª Parcela (50%): <strong>R$ 1.350</strong> — sem descontos<br>
+                            2ª Parcela (50%): <strong>R$ 1.350</strong> — com descontos de INSS e IRRF
+                        </p>
+                    </div>
+                    <p>
+                        Perceba que a 1ª parcela sempre corresponde a metade do valor bruto
+                        e é paga sem qualquer desconto. Já a 2ª parcela é o complemento, mas
+                        dela são deduzidos o INSS e o Imposto de Renda (quando aplicável),
+                        o que reduz o valor líquido efetivamente depositado na conta.
+                    </p>
+
+                    <h2>Quando as parcelas devem ser pagas?</h2>
+                    <p>
+                        O pagamento do 13º salário é obrigatoriamente dividido em duas parcelas,
+                        e a legislação define datas-limite bastante claras. Confira:
+                    </p>
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Parcela</th>
+                                    <th>Prazo legal</th>
+                                    <th>Descontos?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1ª Parcela</strong></td>
+                                    <td>De 1º de fevereiro até <strong>30 de novembro</strong></td>
+                                    <td>Nenhum — paga integralmente</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2ª Parcela</strong></td>
+                                    <td>Até <strong>20 de dezembro</strong></td>
+                                    <td>INSS + IRRF (sobre o valor total)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>1ª Parcela — até 30 de novembro</h3>
+                    <p>
+                        A primeira parcela deve ser paga entre <strong>1º de fevereiro e
+                        30 de novembro</strong>. Ela equivale a 50% do salário bruto (ou do
+                        13º proporcional, para quem não trabalhou o ano inteiro) e <strong>não
+                        sofre nenhum desconto</strong> — nem de INSS, nem de IRRF. O
+                        trabalhador também pode solicitar a antecipação da 1ª parcela
+                        junto com suas férias, desde que faça o pedido por escrito até
+                        janeiro do respectivo ano.
+                    </p>
+
+                    <h3>2ª Parcela — até 20 de dezembro</h3>
+                    <p>
+                        A segunda parcela deve ser paga até o dia <strong>20 de dezembro</strong>.
+                        É neste momento que incidem todos os descontos: o <strong>INSS</strong>
+                        é calculado sobre o valor integral do 13º (e não apenas sobre a 2ª
+                        parcela), e o <strong>IRRF</strong> segue a tabela progressiva do
+                        Imposto de Renda vigente. Na prática, o valor líquido da 2ª parcela
+                        é significativamente menor do que o da 1ª.
+                    </p>
+
+                    <h3>E se a empresa atrasar?</h3>
+                    <p>
+                        O não pagamento dentro dos prazos legais sujeita o empregador a
+                        <strong>multas administrativas</strong> aplicadas pelo Ministério do
+                        Trabalho, com valores que variam de R$ 170 a R$ 1.700 por empregado.
+                        Além disso, o trabalhador pode procurar o sindicato da categoria ou
+                        ingressar com uma reclamação na Justiça do Trabalho para garantir o
+                        recebimento.
+                    </p>
+
+                    <h2>Por que usar a calculadora do PodeCalcular?</h2>
+                    <p>
+                        A <strong>Calculadora de Décimo Terceiro Salário</strong> do PodeCalcular
+                        foi criada para ser simples, transparente e 100% gratuita. Ao informar
+                        o salário e os meses trabalhados, você descobre em segundos o valor
+                        bruto do benefício e como ele é dividido entre a 1ª e a 2ª parcelas.
+                        Todo o processamento acontece localmente no seu navegador, garantindo
+                        total privacidade.
+                    </p>
+                    <p>
+                        Lembre-se de que esta ferramenta calcula o <strong>valor bruto</strong>
+                        do 13º. Para saber o valor líquido (após os descontos de INSS e IRRF),
+                        o ideal é conferir o seu holerite ou procurar a orientação de um
+                        contador.
+                    </p>
+
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =================================================== -->
+    <!-- 6. FOOTER                                             -->
+    <!-- =================================================== -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p>© 2026 <strong>PodeCalcular</strong>. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- =================================================== -->
+    <!-- JAVASCRIPT - LÓGICA DO 13º SALÁRIO CLT                -->
+    <!-- =================================================== -->
+    <script>
+        /**
+         * PodeCalcular - Calculadora de 13º Salário
+         * -------------------------------------------
+         * Regras aplicadas (valores BRUTOS, sem descontos):
+         *   - 13º proporcional = (salário ÷ 12) × meses trabalhados
+         *   - 1ª parcela       = 50% do valor bruto (sem descontos)
+         *   - 2ª parcela       = 50% do valor bruto (na prática, INSS e IRRF incidem aqui)
+         *
+         * Não aplicamos descontos de INSS/IRRF (conforme briefing).
+         * O usuário é avisado no disclaimer.
+         */
+
+        (function() {
+            'use strict';
+
+            // =========== REFERÊNCIAS DOM ===========
+            const form = document.getElementById('formDecimo');
+            const resultadoEl = document.getElementById('resultado');
+            const resultadoLinhasEl = document.getElementById('resultadoLinhas');
+            const resultadoTotalEl = document.getElementById('resultadoTotal');
+            const val1parcela = document.getElementById('val1parcela');
+            const val2parcela = document.getElementById('val2parcela');
+
+            // =========== HELPERS ===========
+
+            /**
+             * Formata um número em moeda brasileira.
+             */
+            function formatBRL(valor) {
+                return valor.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+            }
+
+            // =========== VALIDAÇÃO ===========
+
+            function limparErros() {
+                document.querySelectorAll('.form-field').forEach(f => f.classList.remove('has-error'));
+            }
+
+            function marcarErro(id) {
+                const field = document.getElementById(id);
+                if (field) field.classList.add('has-error');
+            }
+
+            function validar(salario, meses) {
+                let ok = true;
+
+                if (!salario || salario <= 0 || isNaN(salario)) {
+                    marcarErro('field-salario');
+                    ok = false;
+                }
+                if (!meses || meses < 1 || meses > 12 || isNaN(meses)) {
+                    marcarErro('field-meses');
+                    ok = false;
+                }
+                return ok;
+            }
+
+            // =========== RENDERIZAÇÃO ===========
+
+            function criarLinha(label, desc, valor) {
+                const div = document.createElement('div');
+                div.className = 'result-line';
+                div.innerHTML = `
+                    <div class="result-line__label">
+                        <strong>${label}</strong>
+                        <small>${desc}</small>
+                    </div>
+                    <div class="result-line__value">${formatBRL(valor)}</div>
+                `;
+                return div;
+            }
+
+            function renderizarResultado(dados) {
+                resultadoLinhasEl.innerHTML = '';
+
+                // Linha: 13º proporcional bruto
+                resultadoLinhasEl.appendChild(criarLinha(
+                    '13º Salário Proporcional (Bruto)',
+                    `(${formatBRL(dados.salario)} ÷ 12) × ${dados.meses} mês(es)`,
+                    dados.valorBruto
+                ));
+
+                // Linha: valor diário para referência
+                resultadoLinhasEl.appendChild(criarLinha(
+                    'Valor por mês trabalhado',
+                    'Referência: salário ÷ 12',
+                    dados.valorPorMes
+                ));
+
+                // Atualiza os cards das parcelas
+                val1parcela.textContent = formatBRL(dados.primeiraParcela);
+                val2parcela.textContent = formatBRL(dados.segundaParcela);
+
+                // Total
+                resultadoTotalEl.textContent = formatBRL(dados.valorBruto);
+
+                resultadoEl.classList.add('is-visible');
+
+                setTimeout(() => {
+                    resultadoEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 80);
+            }
+
+            // =========== SUBMIT HANDLER ===========
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                limparErros();
+
+                const salario = parseFloat(document.getElementById('salario').value);
+                const meses = parseInt(document.getElementById('meses').value, 10);
+
+                if (!validar(salario, meses)) {
+                    return;
+                }
+
+                // --- Cálculos ---
+                const valorPorMes = salario / 12;
+                const valorBruto = valorPorMes * meses;
+                const primeiraParcela = valorBruto / 2;
+                const segundaParcela = valorBruto / 2;
+
+                renderizarResultado({
+                    salario,
+                    meses,
+                    valorPorMes,
+                    valorBruto,
+                    primeiraParcela,
+                    segundaParcela
+                });
+            });
+
+            // Limpa o estado de erro ao interagir
+            form.addEventListener('input', function(e) {
+                const field = e.target.closest('.form-field');
+                if (field) field.classList.remove('has-error');
+            });
+            form.addEventListener('change', function(e) {
+                const field = e.target.closest('.form-field');
+                if (field) field.classList.remove('has-error');
+            });
+
+        })();
+    </script>
+
+</body>
+</html>

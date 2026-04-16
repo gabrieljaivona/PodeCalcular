@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- ============================================= -->
+    <!-- META TAGS DE SEO / ADSENSE                    -->
+    <!-- ============================================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1D4ED8">
+
+    <title>Calculadora de Rescisão Trabalhista CLT 2026 | PodeCalcular</title>
+    <meta name="description" content="Calcule sua rescisão trabalhista CLT online e grátis. Saldo de salário, 13º proporcional, férias + 1/3 e multa de 40% do FGTS em segundos. Simples e confiável.">
+    <meta name="keywords" content="calculadora de rescisão, rescisão CLT, cálculo rescisão trabalhista, demissão sem justa causa, multa 40% FGTS, férias proporcionais, 13º proporcional">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="PodeCalcular">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Calculadora de Rescisão Trabalhista CLT | PodeCalcular">
+    <meta property="og:description" content="Descubra em segundos quanto você tem a receber na sua rescisão. Gratuito e sem cadastro.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Favicon SVG -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231D4ED8'/%3E%3Cpath d='M28 52 L44 68 L74 34' stroke='white' stroke-width='10' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+    <!-- CSS-->
+    <link rel="stylesheet" href="styles/rescisao.css">
+
+    <!-- Fonte Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- ============================================= -->
+    <!-- CSS - MOBILE-FIRST                            -->
+    <!-- ============================================= -->
+</head>
+<body>
+
+    <!-- =================================================== -->
+    <!-- 1. HEADER - Logo + Botão Voltar                       -->
+    <!-- =================================================== -->
+    <header class="header" role="banner">
+        <div class="container header__inner">
+            <a href="index.html" class="logo" aria-label="PodeCalcular - Home">
+                <span class="logo__mark" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="5 12 10 17 20 7"></polyline>
+                    </svg>
+                </span>
+                PodeCalcular
+            </a>
+
+            <a href="index.html" class="back-btn" aria-label="Voltar para a página inicial">
+                <svg class="back-btn__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>Voltar</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- =================================================== -->
+        <!-- 2. HERO / TÍTULO                                      -->
+        <!-- =================================================== -->
+        <section class="hero">
+            <div class="container">
+                <nav class="hero__breadcrumb" aria-label="Trilha de navegação">
+                    <a href="index.html">Home</a> › <a href="#">Trabalhador</a> › <span>Rescisão</span>
+                </nav>
+                <h1 class="hero__title">Calculadora de Rescisão Trabalhista CLT</h1>
+                <p class="hero__subtitle">
+                    Descubra de forma rápida quanto você tem a receber ao ser desligado da empresa.
+                    Preencha os dados abaixo e veja o detalhamento dos seus direitos.
+                </p>
+            </div>
+        </section>
+
+        <!-- =================================================== -->
+        <!-- 3 e 4. FORMULÁRIO + ÁREA DE RESULTADOS                -->
+        <!-- =================================================== -->
+        <section class="calc-section">
+            <div class="container">
+
+                <!-- Formulário -->
+                <div class="calc-card">
+                    <h2 class="calc-card__title">Preencha seus dados</h2>
+                    <p class="calc-card__hint">Os cálculos são feitos no seu navegador — nenhuma informação é enviada para nós.</p>
+
+                    <form id="formRescisao" class="form-grid" novalidate>
+
+                        <!-- Salário -->
+                        <div class="form-field" id="field-salario">
+                            <label for="salario" class="form-label">Salário Base Bruto</label>
+                            <div class="input-prefix">
+                                <input
+                                    type="number"
+                                    id="salario"
+                                    class="form-input"
+                                    placeholder="0,00"
+                                    step="0.01"
+                                    min="0"
+                                    inputmode="decimal"
+                                    required>
+                            </div>
+                            <span class="form-error">Informe um salário válido (maior que zero).</span>
+                        </div>
+
+                        <!-- Datas lado a lado em tela maior -->
+                        <div class="form-grid form-grid--dates">
+
+                            <div class="form-field" id="field-admissao">
+                                <label for="dataAdmissao" class="form-label">Data de Admissão</label>
+                                <input
+                                    type="date"
+                                    id="dataAdmissao"
+                                    class="form-input"
+                                    required>
+                                <span class="form-error">Informe a data de admissão.</span>
+                            </div>
+
+                            <div class="form-field" id="field-demissao">
+                                <label for="dataDemissao" class="form-label">Data de Demissão</label>
+                                <input
+                                    type="date"
+                                    id="dataDemissao"
+                                    class="form-input"
+                                    required>
+                                <span class="form-error">A data de demissão deve ser posterior à admissão.</span>
+                            </div>
+
+                        </div>
+
+                        <!-- Motivo -->
+                        <div class="form-field" id="field-motivo">
+                            <label for="motivo" class="form-label">Motivo da Rescisão</label>
+                            <select id="motivo" class="form-select" required>
+                                <option value="sem-justa-causa">Dispensa sem justa causa</option>
+                                <option value="pedido-demissao">Pedido de demissão</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            Calcular Rescisão
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+
+                    </form>
+                </div>
+
+                <!-- Área de Resultados (preenchida por JS) -->
+                <div id="resultado" class="result-card" aria-live="polite">
+                    <div class="result-card__header">
+                        <span class="result-card__kicker">✓ Cálculo realizado</span>
+                        <h2 class="result-card__title">Detalhamento da sua rescisão</h2>
+                    </div>
+
+                    <!-- O conteúdo das linhas é inserido via JavaScript -->
+                    <div id="resultadoLinhas"></div>
+
+                    <div class="result-total">
+                        <span class="result-total__label">Total Estimado</span>
+                        <span class="result-total__value" id="resultadoTotal">R$ 0,00</span>
+                    </div>
+
+                    <p class="result-disclaimer">
+                        ⚠️ Os valores apresentados são estimativas e não substituem a consulta a um
+                        contador ou advogado trabalhista. Cálculos oficiais podem variar conforme
+                        descontos de INSS, IRRF, faltas, horas extras e outros fatores específicos
+                        do seu contrato de trabalho.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =================================================== -->
+        <!-- 5. CONTEÚDO SEO (artigo explicativo)                  -->
+        <!-- =================================================== -->
+        <section class="article">
+            <div class="container">
+                <article class="article__wrapper">
+
+                    <h2>O que é o cálculo de rescisão trabalhista?</h2>
+                    <p>
+                        O <strong>cálculo de rescisão</strong> é o procedimento pelo qual se apura
+                        todos os valores que o empregador deve pagar ao trabalhador no momento em
+                        que o contrato de trabalho é encerrado. Esse acerto final recebe o nome de
+                        <strong>verbas rescisórias</strong> e está previsto na Consolidação das Leis
+                        do Trabalho (CLT), garantindo ao funcionário o recebimento de tudo aquilo
+                        que adquiriu ao longo do seu vínculo empregatício.
+                    </p>
+                    <p>
+                        De forma resumida, a rescisão reúne pagamentos proporcionais (como o saldo
+                        de salário, o 13º e as férias do período trabalhado) e, em alguns casos,
+                        indenizações específicas (como a multa de 40% sobre o FGTS). O valor final
+                        depende de três fatores principais: o <strong>tipo de rescisão</strong>
+                        (sem justa causa, por justa causa, pedido de demissão, acordo etc.), o
+                        <strong>tempo de casa</strong> do trabalhador e o <strong>salário base</strong>
+                        registrado em carteira. Por isso, mesmo dois profissionais com o mesmo
+                        salário podem receber valores diferentes ao serem desligados.
+                    </p>
+
+                    <h2>Quais são os meus direitos ao ser demitido sem justa causa?</h2>
+                    <p>
+                        A <strong>demissão sem justa causa</strong> é a modalidade mais vantajosa
+                        para o trabalhador, pois garante o recebimento de todas as verbas
+                        rescisórias previstas em lei. Nessa situação, o empregador decide encerrar
+                        o contrato por conta própria, sem que o funcionário tenha cometido falta
+                        grave. Os principais direitos são:
+                    </p>
+                    <ul>
+                        <li><strong>Saldo de salário:</strong> referente aos dias efetivamente trabalhados no mês da demissão.</li>
+                        <li><strong>Aviso prévio:</strong> indenizado ou trabalhado, com acréscimo de 3 dias por ano trabalhado (limitado a 90 dias).</li>
+                        <li><strong>13º salário proporcional:</strong> calculado com base nos meses trabalhados no ano corrente.</li>
+                        <li><strong>Férias vencidas (se houver) + 1/3 constitucional:</strong> se o período aquisitivo foi completado e as férias não foram usufruídas.</li>
+                        <li><strong>Férias proporcionais + 1/3:</strong> referentes aos meses trabalhados no período aquisitivo em curso.</li>
+                        <li><strong>Saque integral do FGTS:</strong> liberação de todo o saldo depositado na conta vinculada.</li>
+                        <li><strong>Multa de 40% do FGTS:</strong> indenização paga pelo empregador sobre todo o valor depositado ao longo do contrato.</li>
+                        <li><strong>Seguro-desemprego:</strong> benefício solicitado junto ao Ministério do Trabalho, desde que cumpridos os requisitos legais.</li>
+                    </ul>
+                    <p>
+                        Já em um <strong>pedido de demissão</strong>, o trabalhador perde o direito
+                        à multa de 40%, ao saque do FGTS e ao seguro-desemprego, recebendo apenas
+                        o saldo de salário, o 13º proporcional e as férias proporcionais + 1/3.
+                    </p>
+
+                    <h2>Como funciona o cálculo de férias e 13º proporcionais?</h2>
+                    <p>
+                        Tanto o <strong>13º salário</strong> quanto as <strong>férias
+                        proporcionais</strong> seguem uma lógica parecida: a cada mês trabalhado,
+                        o funcionário acumula 1/12 (um doze avos) do benefício. Existe, porém,
+                        uma regra importante definida pela CLT e pela Súmula 10 do TST:
+                        <strong>frações iguais ou superiores a 15 dias de trabalho em um mês
+                        valem como mês integral</strong>. Frações menores que isso são
+                        desconsideradas no cálculo.
+                    </p>
+
+                    <h3>Cálculo do 13º salário proporcional</h3>
+                    <p>
+                        O 13º proporcional considera apenas os meses trabalhados dentro do ano
+                        calendário da rescisão (de janeiro até a data do desligamento). A fórmula é:
+                    </p>
+                    <p>
+                        <strong>(Salário ÷ 12) × meses trabalhados no ano</strong>
+                    </p>
+                    <p>
+                        Exemplo prático: um trabalhador com salário de R$ 3.000 que foi dispensado
+                        em 20 de julho trabalhou 7 meses completos no ano (janeiro a julho, já que
+                        julho ultrapassa 15 dias). O cálculo fica: (3.000 ÷ 12) × 7 = <strong>R$ 1.750</strong>
+                        de 13º proporcional.
+                    </p>
+
+                    <h3>Cálculo das férias proporcionais + 1/3</h3>
+                    <p>
+                        As férias proporcionais são calculadas com base no <strong>período
+                        aquisitivo</strong> em aberto no momento da rescisão, ou seja, os meses
+                        trabalhados desde o último aniversário de admissão. Sobre esse valor,
+                        soma-se o <strong>adicional constitucional de 1/3</strong>:
+                    </p>
+                    <p>
+                        <strong>[(Salário ÷ 12) × meses no período aquisitivo] + 1/3 desse valor</strong>
+                    </p>
+                    <p>
+                        Usando o mesmo exemplo anterior: se o trabalhador foi admitido em 1º de
+                        fevereiro, no dia da rescisão ele havia completado 6 meses no período
+                        aquisitivo atual. O cálculo seria: (3.000 ÷ 12) × 6 = R$ 1.500, mais o
+                        terço constitucional de R$ 500, totalizando <strong>R$ 2.000</strong>
+                        de férias proporcionais.
+                    </p>
+
+                    <h2>Por que usar a calculadora do PodeCalcular?</h2>
+                    <p>
+                        A Calculadora de Rescisão do PodeCalcular foi desenvolvida para oferecer
+                        uma <strong>estimativa rápida e transparente</strong> dos seus direitos,
+                        sem a necessidade de cadastro ou instalação de aplicativos. Todo o cálculo
+                        é feito diretamente no seu navegador, o que garante privacidade: nenhum
+                        dado sensível é enviado aos nossos servidores. Nosso objetivo é ajudar o
+                        trabalhador brasileiro a entender, de forma clara, o que a legislação
+                        trabalhista garante no momento de um desligamento.
+                    </p>
+                    <p>
+                        Lembre-se sempre: esta ferramenta é um ponto de partida informativo.
+                        Para <strong>valores oficiais e exatos</strong> — que incluem descontos
+                        de INSS, IRRF, pensão alimentícia, vale-transporte, faltas e outros itens
+                        particulares do seu contrato — o ideal é procurar um contador, um
+                        advogado trabalhista ou o sindicato da sua categoria profissional.
+                    </p>
+
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =================================================== -->
+    <!-- 6. FOOTER                                             -->
+    <!-- =================================================== -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p>© 2026 <strong>PodeCalcular</strong>. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- =================================================== -->
+    <!-- JAVASCRIPT - LÓGICA CLT                               -->
+    <!-- =================================================== -->
+    <script>
+        /**
+         * PodeCalcular - Calculadora de Rescisão CLT
+         * --------------------------------------------
+         * Regras aplicadas (de forma simplificada):
+         *  - Saldo de salário: salário/30 × dias trabalhados no último mês
+         *  - 13º proporcional: salário/12 × meses no ano corrente (>= 15 dias = mês cheio)
+         *  - Férias proporcionais + 1/3: salário/12 × meses no período aquisitivo atual
+         *  - Multa 40% FGTS: (salário × 8% × meses totais) × 40% — apenas dispensa sem justa causa
+         *
+         * Descontos de INSS/IRRF NÃO são aplicados (conforme briefing).
+         */
+
+        (function() {
+            'use strict';
+
+            // =========== REFERÊNCIAS DOM ===========
+            const form = document.getElementById('formRescisao');
+            const resultadoEl = document.getElementById('resultado');
+            const resultadoLinhasEl = document.getElementById('resultadoLinhas');
+            const resultadoTotalEl = document.getElementById('resultadoTotal');
+
+            // =========== HELPERS ===========
+
+            /**
+             * Formata um número em moeda brasileira (R$ 1.234,56).
+             */
+            function formatBRL(valor) {
+                return valor.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+            }
+
+            /**
+             * Recebe uma string "YYYY-MM-DD" e devolve um objeto Date no fuso local.
+             * Evita o bug clássico de `new Date('2024-01-01')` vir como UTC.
+             */
+            function parseDate(str) {
+                const [ano, mes, dia] = str.split('-').map(Number);
+                return new Date(ano, mes - 1, dia);
+            }
+
+            /**
+             * Conta os meses para fins de cálculo trabalhista.
+             * Regra CLT: fração >= 15 dias em um mês conta como mês integral.
+             *
+             * @param {Date} inicio - data inicial (inclusive)
+             * @param {Date} fim    - data final (inclusive)
+             * @returns {number} - total de meses computáveis
+             */
+            function contarMesesCLT(inicio, fim) {
+                if (inicio > fim) return 0;
+
+                let meses = 0;
+                // Percorre mês a mês entre inicio e fim
+                let cursor = new Date(inicio.getFullYear(), inicio.getMonth(), 1);
+                const fimCursor = new Date(fim.getFullYear(), fim.getMonth(), 1);
+
+                while (cursor <= fimCursor) {
+                    // Intervalo real trabalhado dentro deste mês específico
+                    const primeiroDiaMes = new Date(cursor.getFullYear(), cursor.getMonth(), 1);
+                    const ultimoDiaMes  = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 0);
+
+                    const inicioEfetivo = inicio > primeiroDiaMes ? inicio : primeiroDiaMes;
+                    const fimEfetivo    = fim < ultimoDiaMes ? fim : ultimoDiaMes;
+
+                    const umDia = 1000 * 60 * 60 * 24;
+                    const diasTrabalhados = Math.floor((fimEfetivo - inicioEfetivo) / umDia) + 1;
+
+                    if (diasTrabalhados >= 15) {
+                        meses++;
+                    }
+
+                    // Avança para o mês seguinte
+                    cursor = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1);
+                }
+
+                return meses;
+            }
+
+            // =========== REGRAS DE CÁLCULO CLT ===========
+
+            /**
+             * Saldo de salário: proporcional aos dias trabalhados no mês da rescisão.
+             * Fórmula: (salário ÷ 30) × dia da demissão
+             */
+            function calcSaldoSalario(salario, dataDemissao) {
+                const dia = dataDemissao.getDate();
+                return (salario / 30) * dia;
+            }
+
+            /**
+             * 13º proporcional: meses trabalhados no ano corrente da rescisão.
+             * Se o trabalhador foi admitido no mesmo ano, conta-se desde a admissão.
+             */
+            function calc13Proporcional(salario, dataAdmissao, dataDemissao) {
+                const inicioAno = new Date(dataDemissao.getFullYear(), 0, 1);
+                const inicio = dataAdmissao > inicioAno ? dataAdmissao : inicioAno;
+                const meses = contarMesesCLT(inicio, dataDemissao);
+                return (salario / 12) * meses;
+            }
+
+            /**
+             * Férias proporcionais + 1/3 constitucional.
+             * Simplificação: considera apenas o período aquisitivo atual (0 a 11 meses).
+             * Assume-se que férias de períodos anteriores já foram usufruídas.
+             */
+            function calcFeriasProporcionais(salario, dataAdmissao, dataDemissao) {
+                const totalMeses = contarMesesCLT(dataAdmissao, dataDemissao);
+                // Meses no período aquisitivo atual (o resto após ciclos completos de 12)
+                let mesesAquisitivo = totalMeses % 12;
+
+                // Se o total de meses é múltiplo exato de 12 e > 0, ele tem 12 meses
+                // no último período (férias integrais proporcionais, não vencidas ainda).
+                if (totalMeses > 0 && mesesAquisitivo === 0) {
+                    mesesAquisitivo = 12;
+                }
+
+                const valorBase = (salario / 12) * mesesAquisitivo;
+                const umTerco = valorBase / 3;
+                return valorBase + umTerco;
+            }
+
+            /**
+             * Multa de 40% do FGTS sobre todo o contrato.
+             * Aproximação: FGTS ≈ 8% do salário bruto por mês trabalhado.
+             */
+            function calcMultaFGTS(salario, dataAdmissao, dataDemissao) {
+                const totalMeses = contarMesesCLT(dataAdmissao, dataDemissao);
+                const fgtsEstimado = salario * 0.08 * totalMeses;
+                return fgtsEstimado * 0.40;
+            }
+
+            // =========== VALIDAÇÃO DO FORM ===========
+
+            function limparErros() {
+                document.querySelectorAll('.form-field').forEach(f => f.classList.remove('has-error'));
+            }
+
+            function marcarErro(id) {
+                const field = document.getElementById(id);
+                if (field) field.classList.add('has-error');
+            }
+
+            function validar(salario, admissao, demissao) {
+                let ok = true;
+
+                if (!salario || salario <= 0 || isNaN(salario)) {
+                    marcarErro('field-salario');
+                    ok = false;
+                }
+                if (!admissao) {
+                    marcarErro('field-admissao');
+                    ok = false;
+                }
+                if (!demissao) {
+                    marcarErro('field-demissao');
+                    ok = false;
+                }
+                if (admissao && demissao) {
+                    const dAdm = parseDate(admissao);
+                    const dDem = parseDate(demissao);
+                    if (dDem <= dAdm) {
+                        marcarErro('field-demissao');
+                        ok = false;
+                    }
+                }
+                return ok;
+            }
+
+            // =========== RENDERIZAÇÃO DO RESULTADO ===========
+
+            function criarLinha(label, desc, valor) {
+                const div = document.createElement('div');
+                div.className = 'result-line';
+                div.innerHTML = `
+                    <div class="result-line__label">
+                        <strong>${label}</strong>
+                        <small>${desc}</small>
+                    </div>
+                    <div class="result-line__value">${formatBRL(valor)}</div>
+                `;
+                return div;
+            }
+
+            function renderizarResultado(dados) {
+                resultadoLinhasEl.innerHTML = ''; // limpa anterior
+
+                resultadoLinhasEl.appendChild(criarLinha(
+                    'Saldo de Salário',
+                    `${dados.diasTrabalhados} dia(s) trabalhado(s) no último mês`,
+                    dados.saldoSalario
+                ));
+
+                resultadoLinhasEl.appendChild(criarLinha(
+                    '13º Salário Proporcional',
+                    `${dados.mesesNoAno} mês(es) trabalhado(s) no ano`,
+                    dados.decimoTerceiro
+                ));
+
+                resultadoLinhasEl.appendChild(criarLinha(
+                    'Férias Proporcionais + 1/3',
+                    `${dados.mesesFerias} mês(es) no período aquisitivo atual`,
+                    dados.ferias
+                ));
+
+                if (dados.multaFgts > 0) {
+                    resultadoLinhasEl.appendChild(criarLinha(
+                        'Multa de 40% do FGTS',
+                        'Estimativa sobre 8% de FGTS ao mês',
+                        dados.multaFgts
+                    ));
+                }
+
+                resultadoTotalEl.textContent = formatBRL(dados.total);
+                resultadoEl.classList.add('is-visible');
+
+                // Scroll suave até o resultado
+                setTimeout(() => {
+                    resultadoEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 80);
+            }
+
+            // =========== SUBMIT HANDLER ===========
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                limparErros();
+
+                const salarioStr = document.getElementById('salario').value;
+                const salario = parseFloat(salarioStr);
+                const admissaoStr = document.getElementById('dataAdmissao').value;
+                const demissaoStr = document.getElementById('dataDemissao').value;
+                const motivo = document.getElementById('motivo').value;
+
+                if (!validar(salario, admissaoStr, demissaoStr)) {
+                    return;
+                }
+
+                const dataAdmissao = parseDate(admissaoStr);
+                const dataDemissao = parseDate(demissaoStr);
+
+                // --- Cálculos ---
+                const saldoSalario = calcSaldoSalario(salario, dataDemissao);
+                const decimoTerceiro = calc13Proporcional(salario, dataAdmissao, dataDemissao);
+                const ferias = calcFeriasProporcionais(salario, dataAdmissao, dataDemissao);
+
+                // Multa 40% FGTS apenas para dispensa sem justa causa
+                const multaFgts = (motivo === 'sem-justa-causa')
+                    ? calcMultaFGTS(salario, dataAdmissao, dataDemissao)
+                    : 0;
+
+                const total = saldoSalario + decimoTerceiro + ferias + multaFgts;
+
+                // --- Metadados para exibir nas linhas ---
+                const inicioAno = new Date(dataDemissao.getFullYear(), 0, 1);
+                const inicioContagem = dataAdmissao > inicioAno ? dataAdmissao : inicioAno;
+                const mesesNoAno = contarMesesCLT(inicioContagem, dataDemissao);
+                const totalMesesContrato = contarMesesCLT(dataAdmissao, dataDemissao);
+                let mesesFerias = totalMesesContrato % 12;
+                if (totalMesesContrato > 0 && mesesFerias === 0) mesesFerias = 12;
+
+                renderizarResultado({
+                    diasTrabalhados: dataDemissao.getDate(),
+                    mesesNoAno,
+                    mesesFerias,
+                    saldoSalario,
+                    decimoTerceiro,
+                    ferias,
+                    multaFgts,
+                    total
+                });
+            });
+
+            // Limpa o estado de erro conforme o usuário corrige os campos
+            form.addEventListener('input', function(e) {
+                const field = e.target.closest('.form-field');
+                if (field) field.classList.remove('has-error');
+            });
+
+        })();
+    </script>
+
+</body>
+</html>

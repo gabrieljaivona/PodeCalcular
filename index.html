@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- ============================================= -->
+    <!-- META TAGS ESSENCIAIS PARA SEO E ADSENSE       -->
+    <!-- ============================================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1E40AF">
+
+    <title>Calculei | Portal de Calculadoras Online Grátis para o Dia a Dia</title>
+    <meta name="description" content="O Calculei reúne as melhores calculadoras online gratuitas do Brasil: trabalhista, financeira, saúde e empreendedorismo. Faça seus cálculos de forma rápida, simples e confiável.">
+    <meta name="keywords" content="calculadora online, calculadora grátis, calculadora de rescisão, calculadora IMC, calculadora margem de lucro, simulador trabalhista, calculadoras">
+    <meta name="author" content="Calculei">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph (compartilhamento em redes sociais) -->
+    <meta property="og:title" content="Calculei | Portal de Calculadoras Online Grátis">
+    <meta property="og:description" content="Calculadoras online gratuitas para trabalhador, empreendedor e saúde. Resultados rápidos e precisos.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Favicon SVG minimalista -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231E40AF'/%3E%3Ctext x='50' y='68' font-family='Arial' font-size='58' font-weight='bold' text-anchor='middle' fill='white'%3E%3D%3C/text%3E%3C/svg%3E">
+
+    <!-- CSS-->
+    <link rel="stylesheet" href="styles/style.css">
+
+    <!-- Preconnect para performance das fontes Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- ============================================= -->
+    <!-- CSS: Mobile-First, cores que passam confiança -->
+    <!-- ============================================= -->
+</head>
+<body>
+
+    <!-- =============================================== -->
+    <!-- 1. HEADER / CABEÇALHO                           -->
+    <!-- =============================================== -->
+    <header class="header" role="banner">
+        <div class="container header__inner">
+
+            <!-- Logo em texto (à esquerda) -->
+            <a href="#" class="logo" aria-label="Calculei - Página inicial">
+                <span class="logo__icon" aria-hidden="true">=</span>
+                Calculei
+            </a>
+
+            <!-- Botão Menu Hambúrguer (à direita) -->
+            <button
+                class="hamburger"
+                id="hamburgerBtn"
+                type="button"
+                aria-label="Abrir menu de navegação"
+                aria-expanded="false"
+                aria-controls="mainNav">
+                <span class="hamburger__line"></span>
+                <span class="hamburger__line"></span>
+                <span class="hamburger__line"></span>
+            </button>
+        </div>
+
+        <!-- Navegação mobile (aberto pelo hambúrguer) -->
+        <nav class="nav-menu" id="mainNav" aria-label="Menu principal">
+            <ul class="nav-menu__list">
+                <li>
+                    <a href="#trabalhador" class="nav-menu__link">
+                        <span class="nav-menu__emoji" aria-hidden="true">👷</span>
+                        Trabalhador
+                    </a>
+                </li>
+                <li>
+                    <a href="#empreendedor" class="nav-menu__link">
+                        <span class="nav-menu__emoji" aria-hidden="true">📊</span>
+                        Empreendedor
+                    </a>
+                </li>
+                <li>
+                    <a href="#saude" class="nav-menu__link">
+                        <span class="nav-menu__emoji" aria-hidden="true">❤️</span>
+                        Saúde
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Overlay que escurece o fundo quando o menu está aberto -->
+    <div class="overlay" id="menuOverlay" aria-hidden="true"></div>
+
+    <main id="main">
+
+        <!-- =============================================== -->
+        <!-- 2. HERO SECTION (Título, subtítulo e busca)      -->
+        <!-- =============================================== -->
+        <section class="hero" aria-labelledby="heroTitle">
+            <div class="container hero__content">
+
+                <span class="hero__badge">✨ Mais de 50 calculadoras gratuitas</span>
+
+                <h1 class="hero__title" id="heroTitle">
+                    Todas as contas da sua vida em um <span>só lugar</span>
+                </h1>
+
+                <p class="hero__subtitle">
+                    Do cálculo da sua rescisão trabalhista ao seu IMC.
+                    Ferramentas precisas, simples de usar e sempre gratuitas.
+                </p>
+
+                <!-- Barra de pesquisa central -->
+                <form class="search" role="search" id="searchForm">
+                    <label for="searchInput" class="visually-hidden">Buscar calculadora</label>
+                    <div class="search__form">
+                        <!-- Ícone de lupa SVG -->
+                        <svg class="search__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <line x1="20" y1="20" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input
+                            type="search"
+                            id="searchInput"
+                            class="search__input"
+                            placeholder="O que você precisa calcular hoje?"
+                            autocomplete="off">
+                        <button type="submit" class="search__button">
+                            <span class="search__button-text">Buscar</span>
+                            <span aria-hidden="true" style="display:inline-block;">→</span>
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </section>
+
+        <!-- =============================================== -->
+        <!-- 3. GRID DE CATEGORIAS PRINCIPAIS                -->
+        <!-- =============================================== -->
+        <section class="section categories" aria-labelledby="categoriesTitle">
+            <div class="container">
+
+                <header class="section__header">
+                    <span class="section__kicker">Categorias</span>
+                    <h2 class="section__title" id="categoriesTitle">Escolha sua área</h2>
+                    <p class="section__description">
+                        Calculadoras organizadas pelas necessidades do seu dia a dia.
+                    </p>
+                </header>
+
+                <div class="categories__grid">
+
+                    <!-- CARD 1: Trabalhador -->
+                    <a href="#trabalhador" class="category-card" id="trabalhador">
+                        <div class="category-card__icon" aria-hidden="true">👷</div>
+                        <h3 class="category-card__title">Trabalhador</h3>
+                        <p class="category-card__description">
+                            Calcule sua rescisão, férias, 13º salário, horas extras, FGTS e muito mais.
+                            Tudo com base na legislação atualizada.
+                        </p>
+                        <span class="category-card__link">
+                            Ver calculadoras <span aria-hidden="true">→</span>
+                        </span>
+                    </a>
+
+                    <!-- CARD 2: Empreendedor -->
+                    <a href="#empreendedor" class="category-card" id="empreendedor">
+                        <div class="category-card__icon" aria-hidden="true">📊</div>
+                        <h3 class="category-card__title">Empreendedor</h3>
+                        <p class="category-card__description">
+                            Margem de lucro, markup, preço de venda, Simples Nacional e fluxo de caixa.
+                            Decisões melhores para o seu negócio.
+                        </p>
+                        <span class="category-card__link">
+                            Ver calculadoras <span aria-hidden="true">→</span>
+                        </span>
+                    </a>
+
+                    <!-- CARD 3: Saúde -->
+                    <a href="#saude" class="category-card" id="saude">
+                        <div class="category-card__icon" aria-hidden="true">❤️</div>
+                        <h3 class="category-card__title">Saúde</h3>
+                        <p class="category-card__description">
+                            IMC, taxa metabólica basal, consumo de água ideal e muito mais.
+                            Acompanhe seus indicadores com segurança.
+                        </p>
+                        <span class="category-card__link">
+                            Ver calculadoras <span aria-hidden="true">→</span>
+                        </span>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================== -->
+        <!-- 4. CALCULADORAS EM DESTAQUE                      -->
+        <!-- =============================================== -->
+        <section class="section featured" aria-labelledby="featuredTitle">
+            <div class="container">
+
+                <header class="section__header">
+                    <span class="section__kicker">Populares</span>
+                    <h2 class="section__title" id="featuredTitle">Calculadoras em destaque</h2>
+                    <p class="section__description">
+                        As ferramentas mais usadas pelos nossos visitantes esta semana.
+                    </p>
+                </header>
+
+                <div class="featured__grid">
+
+                    <a href="#rescisao" class="featured-card">
+                        <div class="featured-card__icon" aria-hidden="true">💼</div>
+                        <div class="featured-card__content">
+                            <h3 class="featured-card__title">Calculadora de Rescisão</h3>
+                            <p class="featured-card__subtitle">Saiba quanto você tem a receber</p>
+                        </div>
+                        <svg class="featured-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </a>
+
+                    <a href="#margem" class="featured-card">
+                        <div class="featured-card__icon" aria-hidden="true">📈</div>
+                        <div class="featured-card__content">
+                            <h3 class="featured-card__title">Margem de Lucro</h3>
+                            <p class="featured-card__subtitle">Precifique seus produtos corretamente</p>
+                        </div>
+                        <svg class="featured-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </a>
+
+                    <a href="#imc" class="featured-card">
+                        <div class="featured-card__icon" aria-hidden="true">⚖️</div>
+                        <div class="featured-card__content">
+                            <h3 class="featured-card__title">Calculadora de IMC</h3>
+                            <p class="featured-card__subtitle">Descubra seu índice de massa corporal</p>
+                        </div>
+                        <svg class="featured-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =============================================== -->
+    <!-- 5. FOOTER (Rodapé focado em SEO para AdSense)    -->
+    <!-- =============================================== -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+
+            <!-- Bloco de texto rico em conteúdo (importante para o AdSense) -->
+            <div class="footer__seo">
+                <h2 class="footer__seo-title">Sobre o Portal Calculei</h2>
+                <p class="footer__seo-text">
+                    O <strong>Calculei</strong> é um portal brasileiro criado para descomplicar os cálculos
+                    do dia a dia. Reunimos em um único lugar <strong>calculadoras online gratuitas</strong>
+                    para as mais diversas áreas da vida: desde o cálculo da sua
+                    <strong>rescisão trabalhista</strong>, férias e 13º salário, passando por ferramentas
+                    essenciais para <strong>empreendedores</strong> (como margem de lucro, markup e formação
+                    de preço), até indicadores de <strong>saúde</strong> como o IMC e a taxa metabólica basal.
+                    Todas as fórmulas são revisadas por profissionais e mantidas atualizadas conforme a
+                    legislação vigente.
+                </p>
+                <p class="footer__seo-text">
+                    Nosso compromisso é oferecer uma experiência rápida, transparente e 100% gratuita.
+                    Você não precisa criar conta, instalar aplicativos ou preencher formulários longos:
+                    basta acessar o Calculei, escolher a calculadora que precisa e receber o resultado em
+                    segundos, com explicações claras sobre como cada valor foi obtido. Acreditamos que o
+                    acesso à informação financeira, trabalhista e de saúde deve ser simples e universal,
+                    por isso mantemos este portal em constante evolução, adicionando novas ferramentas
+                    sempre que nossos usuários solicitam.
+                </p>
+            </div>
+
+            <div class="footer__divider"></div>
+
+            <div class="footer__bottom">
+                <p class="footer__copy">© 2026 Calculei. Todos os direitos reservados.</p>
+                <ul class="footer__links">
+                    <li><a href="#privacidade" class="footer__link">Política de Privacidade</a></li>
+                    <li><a href="#termos" class="footer__link">Termos de Uso</a></li>
+                    <li><a href="#contato" class="footer__link">Contato</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- =============================================== -->
+    <!-- JAVASCRIPT: Funcionalidades interativas          -->
+    <!-- =============================================== -->
+    <script>
+        /**
+         * Calculei Portal - Scripts principais
+         * ------------------------------------
+         * 1. Controle do Menu Hambúrguer (abrir/fechar + overlay + tecla ESC)
+         * 2. Handler do formulário de busca (demo)
+         *
+         * Escrito em Vanilla JS puro - sem dependências.
+         */
+
+        (function() {
+            'use strict';
+
+            // =============== 1. MENU HAMBÚRGUER ===============
+            const hamburger = document.getElementById('hamburgerBtn');
+            const navMenu   = document.getElementById('mainNav');
+            const overlay   = document.getElementById('menuOverlay');
+
+            /**
+             * Alterna o estado do menu (aberto / fechado).
+             * Mantém aria-expanded sincronizado para acessibilidade.
+             */
+            function toggleMenu() {
+                const isOpen = navMenu.classList.toggle('is-open');
+                hamburger.classList.toggle('is-active', isOpen);
+                overlay.classList.toggle('is-visible', isOpen);
+                hamburger.setAttribute('aria-expanded', String(isOpen));
+                hamburger.setAttribute('aria-label', isOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação');
+
+                // Trava o scroll do body quando o menu está aberto (UX mobile)
+                document.body.style.overflow = isOpen ? 'hidden' : '';
+            }
+
+            /**
+             * Fecha o menu (usado em cliques no overlay, ESC, e nos links internos).
+             */
+            function closeMenu() {
+                if (navMenu.classList.contains('is-open')) {
+                    toggleMenu();
+                }
+            }
+
+            // Clique no botão hambúrguer
+            hamburger.addEventListener('click', toggleMenu);
+
+            // Clique no overlay escurecido fecha o menu
+            overlay.addEventListener('click', closeMenu);
+
+            // Fecha o menu ao clicar em qualquer link do menu (boa UX em SPAs e âncoras)
+            navMenu.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', closeMenu);
+            });
+
+            // Tecla ESC fecha o menu (acessibilidade)
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeMenu();
+            });
+
+            // Se a janela for redimensionada para um tamanho grande, garanta que
+            // o menu/overlay voltem ao estado padrão sem travar o scroll.
+            let resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(function() {
+                    if (window.innerWidth >= 1024) closeMenu();
+                }, 150);
+            });
+
+
+            // =============== 2. BARRA DE PESQUISA ===============
+            const searchForm  = document.getElementById('searchForm');
+            const searchInput = document.getElementById('searchInput');
+
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const query = searchInput.value.trim();
+
+                if (!query) {
+                    searchInput.focus();
+                    return;
+                }
+
+                // Por enquanto apenas uma demonstração.
+                // Em produção, redirecionar para a página de resultados:
+                // window.location.href = '/buscar?q=' + encodeURIComponent(query);
+                console.log('[Calculei] Busca solicitada:', query);
+                alert('Busca por: "' + query + '"\n\n(Integração real com o backend de busca acontecerá nesta etapa.)');
+            });
+
+
+            // =============== 3. SMOOTH SCROLL PARA ÂNCORAS ===============
+            // Suaviza a navegação via links internos (#trabalhador, #empreendedor etc.)
+            // Funciona em conjunto com scroll-behavior: smooth no CSS.
+            document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId.length > 1) {
+                        const target = document.querySelector(targetId);
+                        if (target) {
+                            e.preventDefault();
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }
+                });
+            });
+
+        })();
+    </script>
+
+</body>
+</html>
