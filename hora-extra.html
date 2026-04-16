@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- ============================================= -->
+    <!-- META TAGS DE SEO / ADSENSE                    -->
+    <!-- ============================================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1D4ED8">
+
+    <title>Calculadora de Hora Extra e Adicional Noturno CLT 2026 | PodeCalcular</title>
+    <meta name="description" content="Calcule o valor da sua hora extra (50% e 100%) e do adicional noturno CLT. Descubra quanto vale a sua hora de trabalho. Online, grátis e sem cadastro.">
+    <meta name="keywords" content="calculadora hora extra, hora extra CLT, adicional noturno, cálculo hora extra 50%, hora extra 100%, valor hora de trabalho, hora noturna CLT">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="PodeCalcular">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Calculadora de Hora Extra e Adicional Noturno CLT | PodeCalcular">
+    <meta property="og:description" content="Calcule suas horas extras a 50% e 100%, mais o adicional noturno de 20%. Rápido, gratuito e confiável.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Favicon SVG -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231D4ED8'/%3E%3Cpath d='M28 52 L44 68 L74 34' stroke='white' stroke-width='10' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+    <!-- CSS-->
+    <link rel="stylesheet" href="styles/hora-extra.css"> 
+
+    <!-- Fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <!-- =================================================== -->
+    <!-- 1. HEADER                                             -->
+    <!-- =================================================== -->
+    <header class="header" role="banner">
+        <div class="container header__inner">
+            <a href="index.html" class="logo" aria-label="PodeCalcular - Página inicial">
+                <span class="logo__mark" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 20 7"></polyline></svg>
+                </span>
+                PodeCalcular
+            </a>
+            <a href="index.html" class="back-btn" aria-label="Voltar para a página inicial">
+                <svg class="back-btn__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span class="back-btn__text">Voltar para Início</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- =================================================== -->
+        <!-- 2. HERO                                               -->
+        <!-- =================================================== -->
+        <section class="hero">
+            <div class="container">
+                <nav class="hero__breadcrumb" aria-label="Trilha de navegação">
+                    <a href="index.html">Home</a> › <a href="#">Trabalhador</a> › <span>Hora Extra e Adicional Noturno</span>
+                </nav>
+                <h1 class="hero__title">Calculadora de Hora Extra e Adicional Noturno</h1>
+                <p class="hero__subtitle">
+                    Saiba quanto vale cada hora extra trabalhada (50% e 100%) e o adicional
+                    noturno a que você tem direito pela CLT.
+                </p>
+            </div>
+        </section>
+
+        <!-- =================================================== -->
+        <!-- 3 e 4. FORMULÁRIO + RESULTADO                         -->
+        <!-- =================================================== -->
+        <section class="calc-section">
+            <div class="container">
+
+                <div class="calc-card">
+                    <h2 class="calc-card__title">Preencha seus dados</h2>
+                    <p class="calc-card__hint">Todo o cálculo é feito no seu navegador — nenhuma informação é enviada para nós.</p>
+
+                    <form id="formHoraExtra" class="form-grid" novalidate>
+
+                        <!-- BLOCO 1: Salário e Jornada (lado a lado em tablet+) -->
+                        <div class="form-grid form-grid--2col">
+
+                            <div class="form-field" id="field-salario">
+                                <label for="salario" class="form-label">Salário Base Bruto</label>
+                                <div class="input-decorated input-decorated--prefix" data-prefix="R$">
+                                    <input
+                                        type="number"
+                                        id="salario"
+                                        class="form-input"
+                                        placeholder="0,00"
+                                        step="0.01"
+                                        min="0"
+                                        inputmode="decimal"
+                                        required>
+                                </div>
+                                <span class="form-error">Informe um salário válido (maior que zero).</span>
+                            </div>
+
+                            <div class="form-field" id="field-jornada">
+                                <label for="jornada" class="form-label">
+                                    Jornada Mensal
+                                    <span class="form-label-hint">(padrão: 220h)</span>
+                                </label>
+                                <div class="input-decorated input-decorated--suffix" data-suffix="horas">
+                                    <input
+                                        type="number"
+                                        id="jornada"
+                                        class="form-input"
+                                        value="220"
+                                        min="1"
+                                        max="360"
+                                        step="1"
+                                        inputmode="numeric"
+                                        required>
+                                </div>
+                                <span class="form-error">Informe a jornada mensal (ex: 220).</span>
+                            </div>
+
+                        </div>
+
+                        <!-- Separador visual -->
+                        <div class="form-separator"></div>
+                        <span class="form-section-label">Horas extras e noturnas</span>
+
+                        <!-- BLOCO 2: HE 50%, HE 100%, Noturna (3 colunas em tablet+) -->
+                        <div class="form-grid form-grid--3col">
+
+                            <div class="form-field" id="field-he50">
+                                <label for="he50" class="form-label">
+                                    HE a 50%
+                                    <span class="form-label-hint">(dias úteis)</span>
+                                </label>
+                                <div class="input-decorated input-decorated--suffix" data-suffix="horas">
+                                    <input
+                                        type="number"
+                                        id="he50"
+                                        class="form-input"
+                                        placeholder="0"
+                                        min="0"
+                                        step="0.5"
+                                        inputmode="decimal"
+                                        value="0">
+                                </div>
+                            </div>
+
+                            <div class="form-field" id="field-he100">
+                                <label for="he100" class="form-label">
+                                    HE a 100%
+                                    <span class="form-label-hint">(dom/feriado)</span>
+                                </label>
+                                <div class="input-decorated input-decorated--suffix" data-suffix="horas">
+                                    <input
+                                        type="number"
+                                        id="he100"
+                                        class="form-input"
+                                        placeholder="0"
+                                        min="0"
+                                        step="0.5"
+                                        inputmode="decimal"
+                                        value="0">
+                                </div>
+                            </div>
+
+                            <div class="form-field" id="field-noturna">
+                                <label for="noturna" class="form-label">
+                                    Horas Noturnas
+                                    <span class="form-label-hint">(22h às 05h)</span>
+                                </label>
+                                <div class="input-decorated input-decorated--suffix" data-suffix="horas">
+                                    <input
+                                        type="number"
+                                        id="noturna"
+                                        class="form-input"
+                                        placeholder="0"
+                                        min="0"
+                                        step="0.5"
+                                        inputmode="decimal"
+                                        value="0">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            Calcular Valores
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+
+                    </form>
+                </div>
+
+                <!-- Resultado -->
+                <div id="resultado" class="result-card" aria-live="polite">
+                    <div class="result-card__header">
+                        <span class="result-card__kicker">✓ Cálculo realizado</span>
+                        <h2 class="result-card__title">Detalhamento dos valores</h2>
+                    </div>
+
+                    <!-- Destaque: hora normal -->
+                    <div class="hora-normal-box">
+                        <div class="hora-normal-box__label">
+                            Valor da Hora Normal
+                            <small id="horaFormula">Salário ÷ Jornada</small>
+                        </div>
+                        <span class="hora-normal-box__value" id="valHoraNormal">R$ 0,00</span>
+                    </div>
+
+                    <div id="resultadoLinhas"></div>
+
+                    <div class="result-total">
+                        <span class="result-total__label">Total Bruto de Acréscimos</span>
+                        <span class="result-total__value" id="resultadoTotal">R$ 0,00</span>
+                    </div>
+
+                    <p class="result-disclaimer">
+                        ⚠️ Valores estimados. O cálculo não considera o DSR (Descanso Semanal
+                        Remunerado) sobre as horas extras, nem a redução da hora noturna
+                        (52 min e 30 seg), servindo apenas como uma referência rápida. Para
+                        valores exatos, consulte o seu holerite ou fale com um contador.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =================================================== -->
+        <!-- 5. CONTEÚDO SEO                                       -->
+        <!-- =================================================== -->
+        <section class="article">
+            <div class="container">
+                <article class="article__wrapper">
+
+                    <h2>Como é feito o cálculo da hora extra?</h2>
+                    <p>
+                        A <strong>hora extra</strong> é toda hora de trabalho que ultrapassa a
+                        jornada regular do empregado. Na maioria dos contratos CLT com carga
+                        de 44 horas semanais, a jornada mensal padrão é de <strong>220 horas</strong>.
+                        Qualquer minuto trabalhado além disso dá direito ao pagamento de hora
+                        extra com acréscimo sobre o valor da hora normal.
+                    </p>
+                    <p>
+                        A Constituição Federal, no seu <strong>artigo 7º, inciso XVI</strong>,
+                        determina que a hora extra deve ser remunerada com, no mínimo, <strong>50%
+                        a mais</strong> do que a hora comum. Convenções coletivas podem
+                        estabelecer percentuais maiores, mas 50% é o piso constitucional.
+                    </p>
+
+                    <h3>Hora extra a 50% — dias úteis e sábados</h3>
+                    <p>
+                        O acréscimo de 50% é aplicado quando as horas extras são realizadas em
+                        <strong>dias úteis</strong> (segunda a sábado, conforme a jornada do
+                        empregado). A fórmula é:
+                    </p>
+                    <div class="highlight-box">
+                        <p>
+                            <strong>Hora Extra 50% =</strong> Valor da hora normal × 1,50<br><br>
+                            Exemplo: hora normal de R$ 15,00<br>
+                            Hora extra = 15,00 × 1,50 = <strong>R$ 22,50</strong>
+                        </p>
+                    </div>
+
+                    <h3>Hora extra a 100% — domingos e feriados</h3>
+                    <p>
+                        Quando o trabalho extraordinário ocorre em <strong>domingos ou feriados</strong>,
+                        o percentual sobe para <strong>100%</strong>, ou seja, a hora vale o dobro.
+                        Esse direito está previsto na <strong>Lei 605/49</strong> e é mantido
+                        pela jurisprudência pacificada do TST. A fórmula fica:
+                    </p>
+                    <div class="highlight-box">
+                        <p>
+                            <strong>Hora Extra 100% =</strong> Valor da hora normal × 2,00<br><br>
+                            Exemplo: hora normal de R$ 15,00<br>
+                            Hora extra = 15,00 × 2,00 = <strong>R$ 30,00</strong>
+                        </p>
+                    </div>
+
+                    <h3>Resumo rápido dos percentuais</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Situação</th>
+                                    <th>Percentual mínimo</th>
+                                    <th>Multiplicador</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Dias úteis / sábados</td>
+                                    <td><strong>50%</strong></td>
+                                    <td>× 1,50</td>
+                                </tr>
+                                <tr>
+                                    <td>Domingos e feriados</td>
+                                    <td><strong>100%</strong></td>
+                                    <td>× 2,00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2>O que é o Adicional Noturno?</h2>
+                    <p>
+                        O <strong>adicional noturno</strong> é um acréscimo salarial pago ao
+                        trabalhador que exerce sua atividade durante o período da noite. Para
+                        <strong>trabalhadores urbanos</strong>, a CLT define o <strong>período
+                        noturno como aquele compreendido entre as 22 horas de um dia e as 5 horas
+                        do dia seguinte</strong> (artigo 73, §2º).
+                    </p>
+                    <p>
+                        O percentual mínimo do adicional noturno para o trabalhador urbano é
+                        de <strong>20% sobre o valor da hora normal</strong>. Portanto, se a
+                        hora de trabalho vale R$ 15,00, cada hora trabalhada no período noturno
+                        gera um acréscimo de R$ 3,00 (20% de R$ 15,00), totalizando
+                        R$ 18,00 por hora noturna.
+                    </p>
+
+                    <h3>A hora noturna reduzida</h3>
+                    <p>
+                        A CLT também estabelece uma regra que beneficia o trabalhador noturno:
+                        a chamada <strong>hora noturna reduzida</strong>. Pelo artigo 73, §1º,
+                        cada hora de trabalho noturno equivale a <strong>52 minutos e 30
+                        segundos</strong> — e não a 60 minutos. Na prática, isso significa que
+                        quem trabalha 7 horas no período noturno tem registradas <strong>8 horas
+                        de trabalho</strong> na sua jornada.
+                    </p>
+                    <p>
+                        Essa redução impacta diretamente o cálculo da remuneração e pode gerar
+                        horas extras adicionais quando a jornada "convertida" ultrapassa o limite
+                        do contrato. É uma regra frequentemente ignorada por empregadores, mas
+                        é obrigatória por lei.
+                    </p>
+
+                    <h3>E o trabalhador rural?</h3>
+                    <p>
+                        Para <strong>trabalhadores rurais</strong>, as regras são diferentes:
+                        o período noturno vai das <strong>21h às 5h</strong> (na lavoura) ou
+                        das <strong>20h às 4h</strong> (na pecuária), e o percentual mínimo do
+                        adicional é de <strong>25%</strong> sobre a hora normal. A hora noturna
+                        reduzida, porém, <strong>não se aplica</strong> ao trabalho rural.
+                    </p>
+
+                    <h2>Como descobrir o valor da minha hora de trabalho?</h2>
+                    <p>
+                        O valor da hora de trabalho é o ponto de partida para todos os cálculos
+                        de hora extra e adicional noturno. A fórmula padrão é:
+                    </p>
+                    <div class="highlight-box">
+                        <p>
+                            <strong>Valor da Hora = Salário Bruto ÷ Jornada Mensal</strong><br><br>
+                            Para a jornada padrão CLT de 44 horas semanais:<br>
+                            Jornada mensal = 44h × 5 semanas = <strong>220 horas</strong><br><br>
+                            Exemplo: R$ 3.300 ÷ 220 = <strong>R$ 15,00 por hora</strong>
+                        </p>
+                    </div>
+                    <p>
+                        O número <strong>220</strong> vem da conta: 44 horas semanais ×
+                        (30 dias ÷ 6 dias da semana, incluindo o sábado como dia útil na CLT)
+                        = 220 horas mensais. Essa é a base para a maioria dos contratos de
+                        trabalho registrados no Brasil.
+                    </p>
+
+                    <h3>E se minha jornada for diferente?</h3>
+                    <p>
+                        Nem todos os contratos seguem a jornada de 220 horas. Profissionais da
+                        saúde que trabalham em regime de <strong>12×36</strong>, bancários com
+                        jornada de <strong>6 horas diárias (180h/mês)</strong>, profissionais
+                        com carga de <strong>36 horas semanais</strong> e trabalhadores em
+                        regime parcial possuem jornadas diferentes. Nesses casos, basta
+                        informar a jornada real na calculadora acima para obter o valor correto
+                        da hora.
+                    </p>
+
+                    <h2>Por que usar a calculadora do PodeCalcular?</h2>
+                    <p>
+                        A <strong>Calculadora de Hora Extra e Adicional Noturno</strong> do
+                        PodeCalcular permite que você descubra em poucos segundos quanto vale
+                        cada hora extra trabalhada e o adicional noturno a que tem direito.
+                        Basta informar o seu salário, a jornada mensal e as horas extras —
+                        o cálculo é feito instantaneamente no seu navegador, sem envio de dados
+                        para servidores externos.
+                    </p>
+                    <p>
+                        Lembre-se de que os valores calculados são <strong>estimativas brutas</strong>
+                        e não substituem a análise de um profissional. O cálculo não inclui o
+                        reflexo do DSR (Descanso Semanal Remunerado) sobre as horas extras, nem
+                        aplica a redução da hora noturna. Para valores exatos, consulte o
+                        departamento pessoal da sua empresa, o sindicato da sua categoria ou
+                        um contador.
+                    </p>
+
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =================================================== -->
+    <!-- 6. FOOTER                                             -->
+    <!-- =================================================== -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p>© 2026 <strong>PodeCalcular</strong>. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- =================================================== -->
+    <!-- JAVASCRIPT - LÓGICA HORA EXTRA + ADICIONAL NOTURNO    -->
+    <!-- =================================================== -->
+    <script>
+        /**
+         * PodeCalcular - Calculadora de Hora Extra e Adicional Noturno
+         * --------------------------------------------------------------
+         * Regras aplicadas (valores BRUTOS, sem descontos):
+         *
+         *   Hora normal       = salário ÷ jornada mensal
+         *   HE 50%            = hora normal × 1,50 × qtd horas
+         *   HE 100%           = hora normal × 2,00 × qtd horas
+         *   Adicional Noturno = hora normal × 0,20 × qtd horas noturnas
+         *
+         * Simplificações declaradas no disclaimer:
+         *   - Não inclui DSR sobre horas extras
+         *   - Não aplica a hora noturna reduzida (52min30s)
+         *   - Não aplica descontos de INSS/IRRF
+         */
+
+        (function() {
+            'use strict';
+
+            // =========== REFERÊNCIAS DOM ===========
+            const form = document.getElementById('formHoraExtra');
+            const resultadoEl = document.getElementById('resultado');
+            const resultadoLinhasEl = document.getElementById('resultadoLinhas');
+            const resultadoTotalEl = document.getElementById('resultadoTotal');
+            const valHoraNormal = document.getElementById('valHoraNormal');
+            const horaFormula = document.getElementById('horaFormula');
+
+            // =========== HELPERS ===========
+
+            function formatBRL(valor) {
+                return valor.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+            }
+
+            // =========== VALIDAÇÃO ===========
+
+            function limparErros() {
+                document.querySelectorAll('.form-field').forEach(f => f.classList.remove('has-error'));
+            }
+
+            function marcarErro(id) {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('has-error');
+            }
+
+            function validar(salario, jornada) {
+                let ok = true;
+
+                if (!salario || salario <= 0 || isNaN(salario)) {
+                    marcarErro('field-salario');
+                    ok = false;
+                }
+                if (!jornada || jornada <= 0 || isNaN(jornada)) {
+                    marcarErro('field-jornada');
+                    ok = false;
+                }
+                return ok;
+            }
+
+            // =========== RENDERIZAÇÃO ===========
+
+            function criarLinha(label, desc, valor) {
+                const div = document.createElement('div');
+                div.className = 'result-line';
+                const isZero = valor === 0;
+                div.innerHTML = `
+                    <div class="result-line__label">
+                        <strong>${label}</strong>
+                        <small>${desc}</small>
+                    </div>
+                    <div class="result-line__value ${isZero ? 'result-line__value--zero' : ''}">${formatBRL(valor)}</div>
+                `;
+                return div;
+            }
+
+            function renderizarResultado(dados) {
+                resultadoLinhasEl.innerHTML = '';
+
+                // Atualiza a caixa de hora normal
+                valHoraNormal.textContent = formatBRL(dados.horaNormal);
+                horaFormula.textContent = `${formatBRL(dados.salario)} ÷ ${dados.jornada}h`;
+
+                // Horas extras 50%
+                const descHE50 = dados.qtdHE50 > 0
+                    ? `${dados.qtdHE50}h × ${formatBRL(dados.horaNormal)} × 1,50`
+                    : 'Nenhuma hora informada';
+                resultadoLinhasEl.appendChild(criarLinha(
+                    'Horas Extras a 50%',
+                    descHE50,
+                    dados.totalHE50
+                ));
+
+                // Horas extras 100%
+                const descHE100 = dados.qtdHE100 > 0
+                    ? `${dados.qtdHE100}h × ${formatBRL(dados.horaNormal)} × 2,00`
+                    : 'Nenhuma hora informada';
+                resultadoLinhasEl.appendChild(criarLinha(
+                    'Horas Extras a 100%',
+                    descHE100,
+                    dados.totalHE100
+                ));
+
+                // Adicional noturno
+                const descNoturna = dados.qtdNoturna > 0
+                    ? `${dados.qtdNoturna}h × ${formatBRL(dados.horaNormal)} × 20%`
+                    : 'Nenhuma hora informada';
+                resultadoLinhasEl.appendChild(criarLinha(
+                    'Adicional Noturno (20%)',
+                    descNoturna,
+                    dados.totalNoturno
+                ));
+
+                // Total
+                resultadoTotalEl.textContent = formatBRL(dados.total);
+
+                resultadoEl.classList.add('is-visible');
+
+                setTimeout(() => {
+                    resultadoEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 80);
+            }
+
+            // =========== SUBMIT HANDLER ===========
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                limparErros();
+
+                const salario = parseFloat(document.getElementById('salario').value);
+                const jornada = parseFloat(document.getElementById('jornada').value);
+                const qtdHE50 = parseFloat(document.getElementById('he50').value) || 0;
+                const qtdHE100 = parseFloat(document.getElementById('he100').value) || 0;
+                const qtdNoturna = parseFloat(document.getElementById('noturna').value) || 0;
+
+                if (!validar(salario, jornada)) {
+                    return;
+                }
+
+                // --- Cálculos CLT ---
+                const horaNormal = salario / jornada;
+
+                // HE 50%: hora normal × 1.50
+                const valorHE50 = horaNormal * 1.50;
+                const totalHE50 = valorHE50 * qtdHE50;
+
+                // HE 100%: hora normal × 2.00
+                const valorHE100 = horaNormal * 2.00;
+                const totalHE100 = valorHE100 * qtdHE100;
+
+                // Adicional noturno: 20% da hora normal
+                const adicionalNoturno = horaNormal * 0.20;
+                const totalNoturno = adicionalNoturno * qtdNoturna;
+
+                const total = totalHE50 + totalHE100 + totalNoturno;
+
+                renderizarResultado({
+                    salario,
+                    jornada,
+                    horaNormal,
+                    qtdHE50,
+                    qtdHE100,
+                    qtdNoturna,
+                    totalHE50,
+                    totalHE100,
+                    totalNoturno,
+                    total
+                });
+            });
+
+            // Limpa estado de erro ao digitar
+            form.addEventListener('input', function(e) {
+                const field = e.target.closest('.form-field');
+                if (field) field.classList.remove('has-error');
+            });
+
+        })();
+    </script>
+
+</body>
+</html>

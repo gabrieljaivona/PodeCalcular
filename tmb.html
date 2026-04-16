@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- ============================================= -->
+    <!-- META TAGS DE SEO / ADSENSE                    -->
+    <!-- ============================================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1D4ED8">
+
+    <title>Calculadora de TMB e Gasto Calórico Diário 2026 | PodeCalcular</title>
+    <meta name="description" content="Calcule sua Taxa Metabólica Basal (TMB) e o gasto calórico diário usando a fórmula Mifflin-St Jeor. Descubra quantas calorias seu corpo queima por dia. Grátis e sem cadastro.">
+    <meta name="keywords" content="calculadora TMB, taxa metabólica basal, gasto calórico diário, calorias por dia, Mifflin-St Jeor, déficit calórico, calorias para emagrecer, metabolismo basal">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="PodeCalcular">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Calculadora de TMB e Gasto Calórico Diário | PodeCalcular">
+    <meta property="og:description" content="Descubra quantas calorias seu corpo queima por dia com a fórmula Mifflin-St Jeor. Resultado instantâneo, gratuito e sem cadastro.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Favicon SVG -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231D4ED8'/%3E%3Cpath d='M28 52 L44 68 L74 34' stroke='white' stroke-width='10' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+    <!-- Fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <!-- =================================================== -->
+    <!-- 1. HEADER                                             -->
+    <!-- =================================================== -->
+    <header class="header" role="banner">
+        <div class="container header__inner">
+            <a href="index.html" class="logo" aria-label="PodeCalcular - Página inicial">
+                <span class="logo__mark" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 20 7"></polyline></svg>
+                </span>
+                PodeCalcular
+            </a>
+            <a href="index.html" class="back-btn" aria-label="Voltar para a página inicial">
+                <svg class="back-btn__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span class="back-btn__text">Voltar para Início</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- =================================================== -->
+        <!-- 2. HERO                                               -->
+        <!-- =================================================== -->
+        <section class="hero">
+            <div class="container">
+                <nav class="hero__breadcrumb" aria-label="Trilha de navegação">
+                    <a href="index.html">Home</a> › <a href="#">Saúde</a> › <span>TMB e Gasto Calórico</span>
+                </nav>
+                <span class="hero__badge">🔥 Metabolismo e Nutrição</span>
+                <h1 class="hero__title">Calculadora de TMB e Gasto Calórico Diário</h1>
+                <p class="hero__subtitle">
+                    Descubra quantas calorias o seu corpo precisa por dia para funcionar,
+                    manter o peso ou atingir seus objetivos de emagrecimento e hipertrofia.
+                </p>
+            </div>
+        </section>
+
+        <!-- =================================================== -->
+        <!-- 3 e 4. FORMULÁRIO + RESULTADO                         -->
+        <!-- =================================================== -->
+        <section class="calc-section">
+            <div class="container">
+
+                <div class="calc-card">
+                    <h2 class="calc-card__title">Preencha seus dados</h2>
+                    <p class="calc-card__hint">Usamos a fórmula Mifflin-St Jeor, referência em nutrição clínica. Nenhum dado é armazenado.</p>
+
+                    <form id="formTMB" class="form-grid" novalidate>
+
+                        <!-- Gênero -->
+                        <div class="form-field">
+                            <label class="form-label">Gênero</label>
+                            <div class="radio-group" role="radiogroup" aria-label="Gênero biológico">
+                                <div class="radio-pill">
+                                    <input type="radio" id="genero-m" name="genero" value="masculino" checked>
+                                    <label for="genero-m">
+                                        <span class="radio-dot"></span>
+                                        Masculino
+                                    </label>
+                                </div>
+                                <div class="radio-pill">
+                                    <input type="radio" id="genero-f" name="genero" value="feminino">
+                                    <label for="genero-f">
+                                        <span class="radio-dot"></span>
+                                        Feminino
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Idade, Peso, Altura (3 colunas em tablet+) -->
+                        <div class="form-grid form-grid--3col">
+
+                            <div class="form-field" id="field-idade">
+                                <label for="idade" class="form-label">Idade</label>
+                                <div class="input-decorated input-decorated--suffix" data-suffix="anos">
+                                    <input type="number" id="idade" class="form-input" placeholder="Ex: 30" min="15" max="100" step="1" inputmode="numeric" required>
+                                </div>
+                                <span class="form-error">Informe sua idade (15 a 100).</span>
+                            </div>
+
+                            <div class="form-field" id="field-peso">
+                                <label for="peso" class="form-label">Peso</label>
+                                <div class="input-decorated input-decorated--suffix" data-suffix="kg">
+                                    <input type="number" id="peso" class="form-input" placeholder="Ex: 70" min="30" max="400" step="0.1" inputmode="decimal" required>
+                                </div>
+                                <span class="form-error">Informe um peso válido.</span>
+                            </div>
+
+                            <div class="form-field" id="field-altura">
+                                <label for="altura" class="form-label">Altura</label>
+                                <div class="input-decorated input-decorated--suffix" data-suffix="cm">
+                                    <input type="number" id="altura" class="form-input" placeholder="Ex: 175" min="120" max="250" step="1" inputmode="numeric" required>
+                                </div>
+                                <span class="form-error">Informe uma altura válida.</span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-separator"></div>
+
+                        <!-- Nível de atividade -->
+                        <div class="form-field" id="field-atividade">
+                            <label for="atividade" class="form-label">
+                                Nível de Atividade Física
+                                <span class="form-label-hint">(escolha o que mais representa sua rotina)</span>
+                            </label>
+                            <select id="atividade" class="form-select" required>
+                                <option value="1.2">Sedentário — pouco ou nenhum exercício</option>
+                                <option value="1.375">Levemente ativo — 1 a 3 dias/semana</option>
+                                <option value="1.55" selected>Moderadamente ativo — 3 a 5 dias/semana</option>
+                                <option value="1.725">Muito ativo — 6 a 7 dias/semana</option>
+                                <option value="1.9">Extremamente ativo — treino intenso diário ou atleta</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            Calcular Minhas Calorias
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+
+                    </form>
+                </div>
+
+                <!-- Resultado -->
+                <div id="resultado" class="result-card" aria-live="polite">
+                    <div class="result-card__header">
+                        <span class="result-card__kicker">🔥 Cálculo realizado</span>
+                        <h2 class="result-card__title">Seu metabolismo diário</h2>
+                    </div>
+
+                    <!-- Stat cards: TMB e TDEE -->
+                    <div class="stat-grid">
+                        <div class="stat-card stat-card--tmb">
+                            <div class="stat-card__icon" aria-hidden="true">💤</div>
+                            <div class="stat-card__label">Taxa Metabólica Basal</div>
+                            <div class="stat-card__value" id="valTMB">0</div>
+                            <div class="stat-card__unit">kcal/dia</div>
+                            <div class="stat-card__desc">Calorias para sobreviver em repouso absoluto</div>
+                        </div>
+                        <div class="stat-card stat-card--tdee">
+                            <div class="stat-card__icon" aria-hidden="true">🔥</div>
+                            <div class="stat-card__label">Gasto Calórico Total</div>
+                            <div class="stat-card__value" id="valTDEE">0</div>
+                            <div class="stat-card__unit">kcal/dia</div>
+                            <div class="stat-card__desc">Calorias para manter o peso atual</div>
+                        </div>
+                    </div>
+
+                    <!-- Barra visual comparativa -->
+                    <div class="calorie-bar">
+                        <div class="calorie-bar__label">Comparação visual</div>
+                        <div class="calorie-bar__track">
+                            <div class="calorie-bar__fill-tdee" id="barTDEE"></div>
+                            <div class="calorie-bar__fill-tmb" id="barTMB"></div>
+                        </div>
+                        <div class="calorie-bar__legends">
+                            <span class="calorie-bar__legend">
+                                <span class="calorie-bar__dot" style="background-color: var(--color-tmb);"></span>
+                                TMB (repouso)
+                            </span>
+                            <span class="calorie-bar__legend">
+                                <span class="calorie-bar__dot" style="background-color: var(--color-tdee);"></span>
+                                Gasto total (TDEE)
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Sugestões de metas -->
+                    <div class="goals-grid">
+                        <div class="goal-card goal-card--deficit">
+                            <div class="goal-card__label">
+                                Emagrecer
+                                <small>déficit de ~500 kcal</small>
+                            </div>
+                            <div class="goal-card__value" id="valDeficit">0 kcal</div>
+                        </div>
+                        <div class="goal-card goal-card--maintain">
+                            <div class="goal-card__label">
+                                Manter peso
+                                <small>equilíbrio calórico</small>
+                            </div>
+                            <div class="goal-card__value" id="valManter">0 kcal</div>
+                        </div>
+                        <div class="goal-card goal-card--surplus">
+                            <div class="goal-card__label">
+                                Ganhar massa
+                                <small>superávit de ~300 kcal</small>
+                            </div>
+                            <div class="goal-card__value" id="valSuperavit">0 kcal</div>
+                        </div>
+                    </div>
+
+                    <div class="health-notice">
+                        <strong>⚠️ Atenção:</strong> Os valores são estimativas baseadas em
+                        fórmulas matemáticas gerais (Mifflin-St Jeor). Para um plano alimentar
+                        focado em emagrecimento ou hipertrofia, consulte um nutricionista.
+                        Fatores como composição corporal, condições de saúde e medicamentos
+                        podem influenciar significativamente o seu metabolismo real.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =================================================== -->
+        <!-- 5. CONTEÚDO SEO                                       -->
+        <!-- =================================================== -->
+        <section class="article">
+            <div class="container">
+                <article class="article__wrapper">
+
+                    <h2>O que é a Taxa Metabólica Basal (TMB)?</h2>
+                    <p>
+                        A <strong>Taxa Metabólica Basal</strong> (TMB), também conhecida como
+                        BMR (<em>Basal Metabolic Rate</em>), representa a quantidade mínima de
+                        energia (calorias) que o seu organismo precisa para realizar as funções
+                        vitais em <strong>repouso absoluto</strong>. Estamos falando de processos
+                        como a respiração, a circulação sanguínea, a manutenção da temperatura
+                        corporal, a produção de hormônios e a atividade cerebral — coisas que
+                        acontecem 24 horas por dia, mesmo enquanto você dorme.
+                    </p>
+                    <p>
+                        Em termos práticos, a TMB responde pela maior parte do seu gasto
+                        calórico diário — geralmente entre <strong>60% e 75%</strong> do total.
+                        Isso significa que, mesmo que você passe o dia inteiro deitado sem se
+                        mover, seu corpo ainda estaria queimando uma quantidade considerável de
+                        energia apenas para se manter vivo. A TMB varia conforme o sexo, a
+                        idade, o peso e a altura de cada indivíduo.
+                    </p>
+
+                    <h3>A fórmula de Mifflin-St Jeor</h3>
+                    <p>
+                        Existem diversas fórmulas para estimar a TMB. A que utilizamos nesta
+                        calculadora é a <strong>Mifflin-St Jeor (1990)</strong>, considerada
+                        pela comunidade científica como a mais precisa para a população geral
+                        moderna. As equações são:
+                    </p>
+                    <div class="highlight-box">
+                        <p>
+                            <strong>Homens:</strong><br>
+                            TMB = (10 × peso em kg) + (6,25 × altura em cm) − (5 × idade) + 5<br><br>
+                            <strong>Mulheres:</strong><br>
+                            TMB = (10 × peso em kg) + (6,25 × altura em cm) − (5 × idade) − 161
+                        </p>
+                    </div>
+                    <p>
+                        Exemplo: um homem de 30 anos, 80 kg e 175 cm teria uma TMB de
+                        (10 × 80) + (6,25 × 175) − (5 × 30) + 5 = 800 + 1.093,75 − 150 + 5
+                        = <strong>1.748,75 kcal/dia</strong>.
+                    </p>
+
+                    <h2>Qual a diferença entre TMB e Gasto Calórico Total?</h2>
+                    <p>
+                        A TMB mede apenas as calorias que o corpo gasta em <strong>repouso
+                        absoluto</strong>. Porém, no dia a dia, você se levanta, caminha, trabalha,
+                        sobe escadas, faz exercícios e realiza centenas de outros movimentos que
+                        consomem energia adicional. A soma de tudo isso é chamada de <strong>TDEE</strong>
+                        (<em>Total Daily Energy Expenditure</em>), ou <strong>Gasto Calórico
+                        Total Diário</strong>.
+                    </p>
+                    <p>
+                        O TDEE é calculado multiplicando a TMB por um <strong>fator de atividade
+                        física</strong>. Os multiplicadores mais utilizados na literatura
+                        científica são:
+                    </p>
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nível de atividade</th>
+                                    <th>Descrição</th>
+                                    <th>Fator</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Sedentário</strong></td>
+                                    <td>Trabalho de escritório, sem exercício</td>
+                                    <td>× 1,20</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Levemente ativo</strong></td>
+                                    <td>Exercício leve 1 a 3 dias/semana</td>
+                                    <td>× 1,375</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Moderadamente ativo</strong></td>
+                                    <td>Exercício moderado 3 a 5 dias/semana</td>
+                                    <td>× 1,55</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Muito ativo</strong></td>
+                                    <td>Exercício intenso 6 a 7 dias/semana</td>
+                                    <td>× 1,725</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Extremamente ativo</strong></td>
+                                    <td>Treino intenso diário ou atleta profissional</td>
+                                    <td>× 1,90</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>
+                        Usando o exemplo anterior (TMB de 1.748,75 kcal): se esse homem for
+                        moderadamente ativo (fator 1,55), seu gasto diário total seria
+                        1.748,75 × 1,55 = <strong>2.710,56 kcal/dia</strong>. Esse é o número
+                        de calorias que ele precisa consumir para manter o peso atual.
+                    </p>
+
+                    <h2>Como usar esse resultado para emagrecer ou ganhar massa?</h2>
+                    <p>
+                        Com o TDEE em mãos, você tem a referência central para qualquer
+                        estratégia nutricional. A lógica é baseada no princípio do
+                        <strong>balanço energético</strong>:
+                    </p>
+
+                    <h3>Déficit calórico — para emagrecer</h3>
+                    <p>
+                        Se você quer perder gordura, precisa consumir <strong>menos calorias
+                        do que gasta</strong>. A recomendação mais segura e sustentável é um
+                        déficit de <strong>300 a 500 kcal por dia</strong>, o que leva a uma
+                        perda de aproximadamente 0,5 kg por semana. Déficits muito agressivos
+                        (superiores a 1.000 kcal) podem causar perda de massa muscular,
+                        fadiga, queda de cabelo e desregulação hormonal.
+                    </p>
+                    <div class="highlight-box--green highlight-box">
+                        <p>
+                            <strong>Exemplo — emagrecimento:</strong><br>
+                            TDEE: 2.710 kcal/dia<br>
+                            Déficit de 500 kcal → meta diária: <strong>2.210 kcal/dia</strong><br>
+                            Resultado esperado: ~0,5 kg de perda por semana
+                        </p>
+                    </div>
+
+                    <h3>Superávit calórico — para ganhar massa muscular</h3>
+                    <p>
+                        Para ganhar massa muscular (hipertrofia), o caminho é o oposto: consumir
+                        <strong>mais calorias do que gasta</strong>, sempre aliado a treinos de
+                        força. O superávit recomendado é mais modesto, geralmente entre
+                        <strong>200 e 400 kcal por dia</strong>, para minimizar o ganho de
+                        gordura junto com o músculo. Em ambos os casos, a distribuição de
+                        macronutrientes (proteínas, carboidratos e gorduras) é tão importante
+                        quanto o total calórico.
+                    </p>
+                    <div class="highlight-box">
+                        <p>
+                            <strong>Exemplo — ganho de massa:</strong><br>
+                            TDEE: 2.710 kcal/dia<br>
+                            Superávit de 300 kcal → meta diária: <strong>3.010 kcal/dia</strong><br>
+                            Priorizar ingestão de ~1,6 a 2,2g de proteína por kg de peso
+                        </p>
+                    </div>
+
+                    <h3>Manutenção de peso</h3>
+                    <p>
+                        Se o objetivo for simplesmente manter o peso e a composição corporal
+                        atuais, basta consumir uma quantidade de calorias próxima ao TDEE
+                        calculado. Pequenas variações de 50 a 100 kcal para mais ou para menos
+                        são normais e não causam mudanças significativas.
+                    </p>
+
+                    <h2>Por que usar a calculadora do PodeCalcular?</h2>
+                    <p>
+                        A <strong>Calculadora de TMB e Gasto Calórico</strong> do PodeCalcular
+                        utiliza a fórmula de Mifflin-St Jeor, considerada referência em nutrição
+                        clínica, para oferecer uma estimativa confiável do seu metabolismo
+                        diário. Além de mostrar a TMB e o TDEE, a ferramenta calcula
+                        automaticamente as metas calóricas para emagrecimento, manutenção e
+                        ganho de massa — tudo de forma visual, instantânea e sem necessidade
+                        de cadastro.
+                    </p>
+                    <p>
+                        Lembre-se: esta ferramenta é um <strong>ponto de partida informativo</strong>.
+                        Fatores como composição corporal, uso de medicamentos, condições
+                        hormonais e o efeito térmico dos alimentos podem fazer o seu metabolismo
+                        real diferir da estimativa. Para um planejamento alimentar personalizado,
+                        procure sempre a orientação de um <strong>nutricionista</strong>.
+                    </p>
+
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =================================================== -->
+    <!-- 6. FOOTER                                             -->
+    <!-- =================================================== -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p>© 2026 <strong>PodeCalcular</strong>. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- =================================================== -->
+    <!-- JAVASCRIPT - MIFFLIN-ST JEOR + TDEE                   -->
+    <!-- =================================================== -->
+    <script>
+        /**
+         * PodeCalcular - Calculadora de TMB e Gasto Calórico Diário
+         * -----------------------------------------------------------
+         * Fórmula de Mifflin-St Jeor (1990):
+         *   Homens:   TMB = (10 × peso) + (6.25 × altura) − (5 × idade) + 5
+         *   Mulheres: TMB = (10 × peso) + (6.25 × altura) − (5 × idade) − 161
+         *
+         * TDEE = TMB × Fator de Atividade
+         *   Sedentário:          1.200
+         *   Levemente ativo:     1.375
+         *   Moderadamente ativo: 1.550
+         *   Muito ativo:         1.725
+         *   Extremamente ativo:  1.900
+         *
+         * Metas sugeridas:
+         *   Emagrecer:     TDEE − 500 kcal
+         *   Manter:        TDEE
+         *   Ganhar massa:  TDEE + 300 kcal
+         */
+
+        (function() {
+            'use strict';
+
+            // =========== REFERÊNCIAS DOM ===========
+            var form = document.getElementById('formTMB');
+            var resultadoEl = document.getElementById('resultado');
+
+            var valTMB       = document.getElementById('valTMB');
+            var valTDEE      = document.getElementById('valTDEE');
+            var barTMB       = document.getElementById('barTMB');
+            var barTDEE      = document.getElementById('barTDEE');
+            var valDeficit   = document.getElementById('valDeficit');
+            var valManter    = document.getElementById('valManter');
+            var valSuperavit = document.getElementById('valSuperavit');
+
+            // =========== HELPERS ===========
+
+            function formatNum(num) {
+                return Math.round(num).toLocaleString('pt-BR');
+            }
+
+            // =========== VALIDAÇÃO ===========
+
+            function limparErros() {
+                document.querySelectorAll('.form-field').forEach(function(f) {
+                    f.classList.remove('has-error');
+                });
+            }
+
+            function marcarErro(id) {
+                var el = document.getElementById(id);
+                if (el) el.classList.add('has-error');
+            }
+
+            function validar(idade, peso, altura) {
+                var ok = true;
+
+                if (!idade || idade < 15 || idade > 100 || isNaN(idade)) {
+                    marcarErro('field-idade');
+                    ok = false;
+                }
+                if (!peso || peso < 30 || peso > 400 || isNaN(peso)) {
+                    marcarErro('field-peso');
+                    ok = false;
+                }
+                if (!altura || altura < 120 || altura > 250 || isNaN(altura)) {
+                    marcarErro('field-altura');
+                    ok = false;
+                }
+                return ok;
+            }
+
+            // =========== CÁLCULO MIFFLIN-ST JEOR ===========
+
+            function calcTMB(genero, peso, altura, idade) {
+                // TMB = (10 × peso) + (6.25 × altura) − (5 × idade) + constante
+                var base = (10 * peso) + (6.25 * altura) - (5 * idade);
+                return genero === 'masculino' ? base + 5 : base - 161;
+            }
+
+            // =========== RENDERIZAÇÃO ===========
+
+            function renderizarResultado(tmb, tdee) {
+                // Stat cards
+                valTMB.textContent = formatNum(tmb);
+                valTDEE.textContent = formatNum(tdee);
+
+                // Barra visual — TDEE = 100%, TMB é proporção
+                var maxRef = tdee * 1.15; // margem visual
+                var tmbPercent = Math.min((tmb / maxRef) * 100, 100);
+                var tdeePercent = Math.min((tdee / maxRef) * 100, 100);
+
+                // Resetamos para animar (removendo e re-adicionando)
+                barTMB.style.width = '0%';
+                barTDEE.style.width = '0%';
+
+                requestAnimationFrame(function() {
+                    requestAnimationFrame(function() {
+                        barTMB.style.width = tmbPercent + '%';
+                        barTDEE.style.width = tdeePercent + '%';
+                    });
+                });
+
+                // Metas
+                var deficit = Math.max(tdee - 500, tmb); // nunca abaixo da TMB
+                var manter = tdee;
+                var superavit = tdee + 300;
+
+                valDeficit.textContent = formatNum(deficit) + ' kcal';
+                valManter.textContent = formatNum(manter) + ' kcal';
+                valSuperavit.textContent = formatNum(superavit) + ' kcal';
+
+                resultadoEl.classList.add('is-visible');
+
+                setTimeout(function() {
+                    resultadoEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 80);
+            }
+
+            // =========== SUBMIT HANDLER ===========
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                limparErros();
+
+                var genero = document.querySelector('input[name="genero"]:checked').value;
+                var idade  = parseInt(document.getElementById('idade').value, 10);
+                var peso   = parseFloat(document.getElementById('peso').value);
+                var altura = parseFloat(document.getElementById('altura').value);
+                var fator  = parseFloat(document.getElementById('atividade').value);
+
+                if (!validar(idade, peso, altura)) {
+                    return;
+                }
+
+                var tmb  = calcTMB(genero, peso, altura, idade);
+                var tdee = tmb * fator;
+
+                renderizarResultado(tmb, tdee);
+            });
+
+            // Limpa erros ao interagir
+            form.addEventListener('input', function(e) {
+                var field = e.target.closest('.form-field');
+                if (field) field.classList.remove('has-error');
+            });
+            form.addEventListener('change', function(e) {
+                var field = e.target.closest('.form-field');
+                if (field) field.classList.remove('has-error');
+            });
+
+        })();
+    </script>
+
+</body>
+</html>

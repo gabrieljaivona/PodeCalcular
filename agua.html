@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- ============================================= -->
+    <!-- META TAGS DE SEO / ADSENSE                    -->
+    <!-- ============================================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0891B2">
+
+    <title>Calculadora de Água Diária — Quantos Litros Beber por Dia? | PodeCalcular</title>
+    <meta name="description" content="Descubra quantos litros de água você deve beber por dia com base no seu peso e nível de atividade física. Calculadora online, gratuita e sem cadastro.">
+    <meta name="keywords" content="calculadora de água, quanta água beber por dia, litros de água diário, hidratação, água por kg, ingestão de água, sinais de desidratação">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="PodeCalcular">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Calculadora de Água Diária | PodeCalcular">
+    <meta property="og:description" content="Descubra quantos litros de água seu corpo precisa por dia. Resultado com equivalência em copos. Grátis e sem cadastro.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Favicon SVG -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231D4ED8'/%3E%3Cpath d='M28 52 L44 68 L74 34' stroke='white' stroke-width='10' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+    <!-- CSS-->
+    <link rel="stylesheet" href="styles/agua.css">
+
+    <!-- Fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <!-- =================================================== -->
+    <!-- 1. HEADER                                             -->
+    <!-- =================================================== -->
+    <header class="header" role="banner">
+        <div class="container header__inner">
+            <a href="index.html" class="logo" aria-label="PodeCalcular - Página inicial">
+                <span class="logo__mark" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 20 7"></polyline></svg>
+                </span>
+                PodeCalcular
+            </a>
+            <a href="index.html" class="back-btn" aria-label="Voltar para a página inicial">
+                <svg class="back-btn__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span class="back-btn__text">Voltar para Início</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- =================================================== -->
+        <!-- 2. HERO                                               -->
+        <!-- =================================================== -->
+        <section class="hero">
+            <div class="container hero__content">
+                <nav class="hero__breadcrumb" aria-label="Trilha de navegação">
+                    <a href="index.html">Home</a> › <a href="#">Saúde</a> › <span>Água Diária</span>
+                </nav>
+                <span class="hero__badge">💧 Hidratação e Saúde</span>
+                <h1 class="hero__title">Calculadora de Água Diária</h1>
+                <p class="hero__subtitle">
+                    Você sabe quantos litros de água seu corpo realmente precisa por dia?
+                    Descubra agora com base no seu peso e nível de atividade.
+                </p>
+            </div>
+        </section>
+
+        <!-- =================================================== -->
+        <!-- 3 e 4. FORMULÁRIO + RESULTADO                         -->
+        <!-- =================================================== -->
+        <section class="calc-section">
+            <div class="container">
+
+                <div class="calc-card">
+                    <h2 class="calc-card__title">Informe seus dados</h2>
+                    <p class="calc-card__hint">O cálculo é feito no seu navegador — nenhuma informação é armazenada.</p>
+
+                    <form id="formAgua" class="form-grid" novalidate>
+
+                        <div class="form-grid form-grid--2col">
+
+                            <!-- Peso -->
+                            <div class="form-field" id="field-peso">
+                                <label for="peso" class="form-label">
+                                    Seu peso
+                                    <span class="form-label-hint">(em quilos)</span>
+                                </label>
+                                <div class="input-decorated input-decorated--suffix" data-suffix="kg">
+                                    <input
+                                        type="number"
+                                        id="peso"
+                                        class="form-input"
+                                        placeholder="Ex: 70"
+                                        min="20"
+                                        max="300"
+                                        step="0.1"
+                                        inputmode="decimal"
+                                        required>
+                                </div>
+                                <span class="form-error">Informe um peso válido em quilos.</span>
+                            </div>
+
+                            <!-- Atividade física -->
+                            <div class="form-field">
+                                <label class="form-label">
+                                    Atividade física intensa?
+                                    <span class="form-label-hint">(treino, corrida etc.)</span>
+                                </label>
+                                <div class="radio-group" role="radiogroup" aria-label="Atividade física">
+                                    <div class="radio-pill">
+                                        <input type="radio" id="ativ-nao" name="atividade" value="nao" checked>
+                                        <label for="ativ-nao">
+                                            <span class="radio-dot"></span>
+                                            Não
+                                        </label>
+                                    </div>
+                                    <div class="radio-pill">
+                                        <input type="radio" id="ativ-sim" name="atividade" value="sim">
+                                        <label for="ativ-sim">
+                                            <span class="radio-dot"></span>
+                                            Sim
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            Calcular Minha Meta
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+
+                    </form>
+                </div>
+
+                <!-- Resultado -->
+                <div id="resultado" class="result-card" aria-live="polite">
+
+                    <!-- Bloco central — litros -->
+                    <div class="water-display">
+                        <div class="water-display__icon" aria-hidden="true">💧</div>
+                        <div class="water-display__kicker">Sua meta diária de água</div>
+                        <div class="water-display__value" id="valLitros">0,0</div>
+                        <div class="water-display__unit">Litros por dia</div>
+                        <div class="water-display__ml" id="valMl">0 ml</div>
+                    </div>
+
+                    <!-- Copos visuais -->
+                    <div class="cups-section">
+                        <div class="cups-section__label" id="cupsLabel">
+                            Equivale a <strong>0 copos</strong> de 250 ml
+                        </div>
+                        <div class="cups-grid" id="cupsGrid" aria-hidden="true"></div>
+                    </div>
+
+                    <!-- Info rows -->
+                    <div class="info-row">
+                        <div class="info-row__icon info-row__icon--water" aria-hidden="true">⏰</div>
+                        <div class="info-row__text" id="infoFrequencia">
+                            Tente beber <strong>1 copo a cada 1h30</strong> ao longo do dia (das 7h às 22h).
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-row__icon info-row__icon--bottle" aria-hidden="true">🧴</div>
+                        <div class="info-row__text" id="infoGarrafas">
+                            Isso equivale a aproximadamente <strong>0 garrafas</strong> de 500 ml.
+                        </div>
+                    </div>
+
+                    <!-- Aviso -->
+                    <div class="health-notice">
+                        <strong>⚠️ Atenção:</strong> Esta é uma recomendação geral baseada no
+                        peso corporal. Pessoas com restrições renais, problemas cardíacos ou
+                        condições de saúde específicas devem seguir a orientação de um médico.
+                        A necessidade de água também pode variar com o clima, a alimentação e
+                        o uso de medicamentos.
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =================================================== -->
+        <!-- 5. CONTEÚDO SEO                                       -->
+        <!-- =================================================== -->
+        <section class="article">
+            <div class="container">
+                <article class="article__wrapper">
+
+                    <h2>Por que é importante calcular a ingestão de água?</h2>
+                    <p>
+                        A <strong>água</strong> é essencial para praticamente todas as funções
+                        do organismo: regulação da temperatura corporal, transporte de nutrientes,
+                        eliminação de toxinas pelos rins, lubrificação das articulações,
+                        funcionamento cerebral e até a aparência da pele. Mesmo uma
+                        <strong>desidratação leve</strong> (perda de 1% a 2% do peso em água)
+                        já é capaz de reduzir a concentração, causar dor de cabeça, aumentar
+                        a fadiga e prejudicar o desempenho físico.
+                    </p>
+                    <p>
+                        Apesar disso, pesquisas do Instituto Brasileiro de Geografia e
+                        Estatística (IBGE) e da Sociedade Brasileira de Alimentação e Nutrição
+                        indicam que a maioria dos brasileiros bebe menos água do que deveria.
+                        O problema não é a falta de acesso, mas sim o <strong>esquecimento</strong>:
+                        a correria do dia a dia faz com que muitas pessoas simplesmente não
+                        percebam a sede — especialmente em ambientes com ar-condicionado, onde
+                        a sensação de calor (principal gatilho da sede) é reduzida.
+                    </p>
+                    <p>
+                        Calcular a quantidade ideal de água para o seu perfil é o primeiro passo
+                        para criar um hábito de hidratação consistente. Com um número claro em
+                        mente, fica muito mais fácil distribuir os copos ao longo do dia e
+                        acompanhar se você está atingindo a meta.
+                    </p>
+
+                    <h2>Como é feito o cálculo de água por kg corporal?</h2>
+                    <p>
+                        A recomendação mais utilizada por nutricionistas e médicos no Brasil é
+                        baseada no <strong>peso corporal</strong>. A regra geral, adotada pela
+                        Sociedade Brasileira de Alimentação e Nutrição, é:
+                    </p>
+                    <div class="highlight-box">
+                        <p>
+                            <strong>Recomendação base:</strong> 35 ml de água por kg de peso corporal por dia<br><br>
+                            <strong>Com atividade física intensa:</strong> 40 a 50 ml por kg de peso (ou adicionar pelo menos 500 ml ao total)
+                        </p>
+                    </div>
+
+                    <h3>Exemplo prático</h3>
+                    <p>
+                        Uma pessoa de <strong>70 kg</strong> que não faz exercícios intensos
+                        deveria beber cerca de 70 × 35 ml = <strong>2.450 ml</strong> (ou
+                        aproximadamente <strong>2,4 litros</strong>) de água por dia. Se essa
+                        mesma pessoa fizer exercícios regulares, a recomendação sobe para
+                        cerca de 70 × 45 ml = <strong>3.150 ml</strong> (3,1 litros).
+                    </p>
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Peso</th>
+                                    <th>Sem atividade (35 ml/kg)</th>
+                                    <th>Com atividade (45 ml/kg)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>50 kg</strong></td>
+                                    <td>1,75 L (7 copos)</td>
+                                    <td>2,25 L (9 copos)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>60 kg</strong></td>
+                                    <td>2,10 L (8 copos)</td>
+                                    <td>2,70 L (11 copos)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>70 kg</strong></td>
+                                    <td>2,45 L (10 copos)</td>
+                                    <td>3,15 L (13 copos)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>80 kg</strong></td>
+                                    <td>2,80 L (11 copos)</td>
+                                    <td>3,60 L (14 copos)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>90 kg</strong></td>
+                                    <td>3,15 L (13 copos)</td>
+                                    <td>4,05 L (16 copos)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>100 kg</strong></td>
+                                    <td>3,50 L (14 copos)</td>
+                                    <td>4,50 L (18 copos)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>
+                        Essas quantidades incluem <strong>toda a água ingerida</strong>, seja
+                        pura, em sucos naturais, chás sem açúcar ou mesmo a água contida nos
+                        alimentos (frutas, legumes, sopas). A recomendação, porém, é que a
+                        <strong>maior parte venha de água pura</strong>, sem adição de açúcar
+                        ou sódio.
+                    </p>
+
+                    <h2>Quais são os principais sinais de desidratação?</h2>
+                    <p>
+                        A desidratação acontece quando o corpo perde mais líquido do que
+                        ingere. Na maioria das vezes, ela é leve e pode ser revertida
+                        simplesmente bebendo mais água. Porém, quando ignorada, a desidratação
+                        pode se agravar e causar complicações sérias. Fique atento aos
+                        seguintes sinais:
+                    </p>
+
+                    <h3>Sinais leves a moderados</h3>
+                    <ul>
+                        <li><strong>Boca e lábios secos:</strong> é o sinal mais evidente e geralmente o primeiro a aparecer.</li>
+                        <li><strong>Urina escura e com odor forte:</strong> a cor ideal da urina é amarelo claro. Tons de amarelo escuro ou âmbar indicam que você precisa beber mais água.</li>
+                        <li><strong>Dor de cabeça:</strong> a desidratação reduz o volume de sangue, o que pode diminuir o fornecimento de oxigênio ao cérebro.</li>
+                        <li><strong>Fadiga e sonolência:</strong> a falta de água reduz o desempenho celular e causa sensação de cansaço generalizado.</li>
+                        <li><strong>Tontura ao se levantar:</strong> especialmente em dias quentes ou após exercícios.</li>
+                        <li><strong>Pele ressecada e sem elasticidade:</strong> o teste simples é apertar a pele no dorso da mão — se demorar para voltar ao normal, pode ser um sinal de desidratação.</li>
+                    </ul>
+
+                    <h3>Sinais graves (procure atendimento médico)</h3>
+                    <ul>
+                        <li>Ausência de urina por mais de 8 horas.</li>
+                        <li>Batimentos cardíacos acelerados sem esforço.</li>
+                        <li>Confusão mental ou desorientação.</li>
+                        <li>Desmaio.</li>
+                    </ul>
+
+                    <h2>Dicas práticas para lembrar de beber mais água</h2>
+                    <p>
+                        Saber a quantidade ideal é o primeiro passo, mas transformar isso em
+                        hábito é o verdadeiro desafio. Aqui estão estratégias simples que
+                        funcionam no dia a dia:
+                    </p>
+                    <ol>
+                        <li><strong>Tenha uma garrafa sempre por perto.</strong> Escolha uma garrafa de 500 ml ou 1 litro e mantenha-a na mesa de trabalho, no carro ou na bolsa. A presença visual do recipiente é o melhor lembrete.</li>
+                        <li><strong>Beba um copo ao acordar.</strong> Após 6 a 8 horas dormindo, seu corpo acorda desidratado. Um copo de água logo ao levantar é uma das melhores práticas de saúde que existem.</li>
+                        <li><strong>Use alarmes ou aplicativos.</strong> Configurar um lembrete a cada 1h30 no celular pode parecer simples, mas funciona muito bem nas primeiras semanas até o hábito se consolidar.</li>
+                        <li><strong>Beba um copo antes de cada refeição.</strong> Além de ajudar na hidratação, essa prática melhora a digestão e pode contribuir para o controle de peso.</li>
+                        <li><strong>Adicione sabor natural.</strong> Se achar água pura sem graça, experimente rodelas de limão, folhas de hortelã, fatias de pepino ou gengibre. São opções sem calorias que tornam o hábito mais agradável.</li>
+                        <li><strong>Acompanhe a cor da urina.</strong> É o indicador mais prático que existe: amarelo claro significa boa hidratação; amarelo escuro significa que é hora de beber mais.</li>
+                    </ol>
+
+                    <h2>Por que usar a calculadora do PodeCalcular?</h2>
+                    <p>
+                        A <strong>Calculadora de Água Diária</strong> do PodeCalcular oferece
+                        uma estimativa personalizada com base no seu peso e nível de atividade
+                        física. Além do valor em litros e mililitros, mostramos a equivalência
+                        visual em copos de 250 ml, garrafas de 500 ml e a frequência ideal de
+                        ingestão ao longo do dia. Todo o cálculo é feito localmente no seu
+                        navegador, sem necessidade de cadastro.
+                    </p>
+                    <p>
+                        Lembre-se de que estas são <strong>recomendações gerais</strong>.
+                        Pessoas com doenças renais, insuficiência cardíaca ou outras condições
+                        específicas podem precisar de limites diferentes. Consulte sempre o
+                        seu <strong>médico ou nutricionista</strong> para orientações
+                        individualizadas.
+                    </p>
+
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =================================================== -->
+    <!-- 6. FOOTER                                             -->
+    <!-- =================================================== -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p>© 2026 <strong>PodeCalcular</strong>. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- =================================================== -->
+    <!-- JAVASCRIPT - LÓGICA DA CALCULADORA DE ÁGUA            -->
+    <!-- =================================================== -->
+    <script>
+        /**
+         * PodeCalcular - Calculadora de Água Diária
+         * -------------------------------------------
+         * Regra base:
+         *   Sem atividade intensa: 35 ml × peso (kg)
+         *   Com atividade intensa: 45 ml × peso (kg)
+         *
+         * Equivalências:
+         *   Copos de 250 ml
+         *   Garrafas de 500 ml
+         *   Frequência ao longo do dia (≈ 15h acordado)
+         */
+
+        (function() {
+            'use strict';
+
+            // =========== REFERÊNCIAS DOM ===========
+            var form = document.getElementById('formAgua');
+            var resultadoEl = document.getElementById('resultado');
+            var valLitros = document.getElementById('valLitros');
+            var valMl = document.getElementById('valMl');
+            var cupsLabel = document.getElementById('cupsLabel');
+            var cupsGrid = document.getElementById('cupsGrid');
+            var infoFrequencia = document.getElementById('infoFrequencia');
+            var infoGarrafas = document.getElementById('infoGarrafas');
+
+            // =========== HELPERS ===========
+
+            /**
+             * Cria o SVG de um copo de água com delay de animação.
+             */
+            function criarCopoSVG(index) {
+                var cup = document.createElement('div');
+                cup.className = 'cup';
+                cup.style.animationDelay = (index * 0.04) + 's';
+                cup.innerHTML =
+                    '<svg viewBox="0 0 32 44" xmlns="http://www.w3.org/2000/svg">' +
+                        '<path d="M4 4 L6 38 C6 40 8 42 10 42 L22 42 C24 42 26 40 26 38 L28 4 Z" ' +
+                              'fill="#ECFEFF" stroke="#0891B2" stroke-width="1.5" stroke-linejoin="round"/>' +
+                        '<path d="M6.5 16 L7.5 38 C7.5 39.5 9 41 10.5 41 L21.5 41 C23 41 24.5 39.5 24.5 38 L25.5 16 Z" ' +
+                              'fill="#22D3EE" opacity="0.5"/>' +
+                        '<line x1="4" y1="4" x2="28" y2="4" stroke="#0891B2" stroke-width="2" stroke-linecap="round"/>' +
+                    '</svg>';
+                return cup;
+            }
+
+            /**
+             * Calcula a frequência ideal (horas acordado ÷ copos).
+             * Considera ~15 horas acordado (das 7h às 22h).
+             */
+            function calcFrequencia(copos) {
+                if (copos <= 0) return '—';
+                var horasAcordado = 15;
+                var minutosTotal = horasAcordado * 60;
+                var intervalo = minutosTotal / copos;
+
+                if (intervalo >= 60) {
+                    var horas = Math.floor(intervalo / 60);
+                    var minutos = Math.round(intervalo % 60);
+                    if (minutos === 0) return horas + 'h';
+                    return horas + 'h' + (minutos < 10 ? '0' : '') + minutos;
+                }
+                return Math.round(intervalo) + ' min';
+            }
+
+            // =========== VALIDAÇÃO ===========
+
+            function limparErros() {
+                document.querySelectorAll('.form-field').forEach(function(f) {
+                    f.classList.remove('has-error');
+                });
+            }
+
+            function marcarErro(id) {
+                var el = document.getElementById(id);
+                if (el) el.classList.add('has-error');
+            }
+
+            function validar(peso) {
+                if (!peso || peso < 20 || peso > 300 || isNaN(peso)) {
+                    marcarErro('field-peso');
+                    return false;
+                }
+                return true;
+            }
+
+            // =========== RENDERIZAÇÃO ===========
+
+            function renderizarResultado(totalMl, peso) {
+                var litros = totalMl / 1000;
+                var copos = Math.ceil(totalMl / 250);
+                var garrafas = (totalMl / 500).toFixed(1).replace('.', ',');
+                var freq = calcFrequencia(copos);
+
+                // Valores principais
+                valLitros.textContent = litros.toFixed(1).replace('.', ',');
+                valMl.textContent = Math.round(totalMl).toLocaleString('pt-BR') + ' ml';
+
+                // Copos
+                cupsLabel.innerHTML = 'Equivale a <strong>' + copos + ' copos</strong> de 250 ml';
+                cupsGrid.innerHTML = '';
+                for (var i = 0; i < copos; i++) {
+                    cupsGrid.appendChild(criarCopoSVG(i));
+                }
+
+                // Info rows
+                infoFrequencia.innerHTML = 'Tente beber <strong>1 copo a cada ' + freq + '</strong> ao longo do dia (das 7h às 22h).';
+                infoGarrafas.innerHTML = 'Isso equivale a aproximadamente <strong>' + garrafas + ' garrafas</strong> de 500 ml.';
+
+                resultadoEl.classList.add('is-visible');
+
+                setTimeout(function() {
+                    resultadoEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 80);
+            }
+
+            // =========== SUBMIT HANDLER ===========
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                limparErros();
+
+                var peso = parseFloat(document.getElementById('peso').value);
+                var ativo = document.querySelector('input[name="atividade"]:checked').value === 'sim';
+
+                if (!validar(peso)) return;
+
+                // Cálculo: 35 ml/kg (sedentário) ou 45 ml/kg (ativo)
+                var mlPorKg = ativo ? 45 : 35;
+                var totalMl = mlPorKg * peso;
+
+                renderizarResultado(totalMl, peso);
+            });
+
+            // Limpa erros ao interagir
+            form.addEventListener('input', function(e) {
+                var field = e.target.closest('.form-field');
+                if (field) field.classList.remove('has-error');
+            });
+
+        })();
+    </script>
+
+</body>
+</html>
