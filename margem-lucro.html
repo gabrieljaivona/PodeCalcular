@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- ============================================= -->
+    <!-- META TAGS DE SEO / ADSENSE                    -->
+    <!-- ============================================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1D4ED8">
+
+    <title>Calculadora de Margem de Lucro e Markup 2026 | PodeCalcular</title>
+    <meta name="description" content="Calcule a margem de lucro e o markup do seu produto ou serviço. Descubra se o seu preço de venda está gerando lucro ou prejuízo. Online, grátis e sem cadastro.">
+    <meta name="keywords" content="calculadora margem de lucro, margem de lucro, markup, calcular lucro produto, margem de lucro ideal, diferença margem e markup, precificação produto">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="PodeCalcular">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Calculadora de Margem de Lucro e Markup | PodeCalcular">
+    <meta property="og:description" content="Descubra o lucro real do seu produto. Calcule margem de lucro e markup em segundos. Grátis e sem cadastro.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Favicon SVG -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231D4ED8'/%3E%3Cpath d='M28 52 L44 68 L74 34' stroke='white' stroke-width='10' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+    <!-- CSS-->
+    <link rel="stylesheet" href="styles/margem-lucro.css">
+
+    <!-- Fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <!-- =================================================== -->
+    <!-- 1. HEADER                                             -->
+    <!-- =================================================== -->
+    <header class="header" role="banner">
+        <div class="container header__inner">
+            <a href="index.html" class="logo" aria-label="PodeCalcular - Página inicial">
+                <span class="logo__mark" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 20 7"></polyline></svg>
+                </span>
+                PodeCalcular
+            </a>
+            <a href="index.html" class="back-btn" aria-label="Voltar para a página inicial">
+                <svg class="back-btn__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span class="back-btn__text">Voltar para Início</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- =================================================== -->
+        <!-- 2. HERO                                               -->
+        <!-- =================================================== -->
+        <section class="hero">
+            <div class="container">
+                <nav class="hero__breadcrumb" aria-label="Trilha de navegação">
+                    <a href="index.html">Home</a> › <a href="#">Empreendedor</a> › <span>Margem de Lucro</span>
+                </nav>
+                <span class="hero__badge">📊 Precificação e Lucro</span>
+                <h1 class="hero__title">Calculadora de Margem de Lucro</h1>
+                <p class="hero__subtitle">
+                    Descubra o lucro real do seu produto ou serviço e evite prejuízos
+                    nas suas vendas. Veja sua margem e seu markup em segundos.
+                </p>
+            </div>
+        </section>
+
+        <!-- =================================================== -->
+        <!-- 3 e 4. FORMULÁRIO + RESULTADO                         -->
+        <!-- =================================================== -->
+        <section class="calc-section">
+            <div class="container">
+
+                <div class="calc-card">
+                    <h2 class="calc-card__title">Informe os valores do produto</h2>
+                    <p class="calc-card__hint">Inclua frete, embalagem e todos os custos no valor do custo total. Nenhum dado é enviado — o cálculo é local.</p>
+
+                    <form id="formMargem" class="form-grid" novalidate>
+
+                        <div class="form-grid form-grid--2col">
+
+                            <div class="form-field" id="field-custo">
+                                <label for="custo" class="form-label">
+                                    Custo Total
+                                    <span class="form-label-hint">(produto + frete + embalagem)</span>
+                                </label>
+                                <div class="input-decorated input-decorated--prefix" data-prefix="R$">
+                                    <input type="number" id="custo" class="form-input" placeholder="Ex: 50.00" step="0.01" min="0.01" inputmode="decimal" required>
+                                </div>
+                                <span class="form-error">Informe o custo total do produto.</span>
+                            </div>
+
+                            <div class="form-field" id="field-venda">
+                                <label for="venda" class="form-label">
+                                    Preço de Venda
+                                </label>
+                                <div class="input-decorated input-decorated--prefix" data-prefix="R$">
+                                    <input type="number" id="venda" class="form-input" placeholder="Ex: 100.00" step="0.01" min="0.01" inputmode="decimal" required>
+                                </div>
+                                <span class="form-error">Informe o preço de venda.</span>
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            Calcular Margem
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+
+                    </form>
+                </div>
+
+                <!-- Resultado -->
+                <div id="resultado" class="result-card" aria-live="polite">
+                    <div class="result-card__header">
+                        <span class="result-card__kicker" id="resultKicker">✓ Cálculo realizado</span>
+                        <h2 class="result-card__title" id="resultTitle">Análise da sua operação</h2>
+                    </div>
+
+                    <!-- Cards de métricas (3 colunas em tablet+) -->
+                    <div class="metrics-grid" id="metricsGrid">
+                        <div class="metric-card" id="cardLucro">
+                            <div class="metric-card__label">Lucro Bruto</div>
+                            <div class="metric-card__value" id="valLucro">R$ 0</div>
+                            <div class="metric-card__sub">por unidade</div>
+                        </div>
+                        <div class="metric-card" id="cardMargem">
+                            <div class="metric-card__label">Margem de Lucro</div>
+                            <div class="metric-card__value" id="valMargem">0%</div>
+                            <div class="metric-card__sub">lucro ÷ preço de venda</div>
+                        </div>
+                        <div class="metric-card" id="cardMarkup">
+                            <div class="metric-card__label">Markup</div>
+                            <div class="metric-card__value" id="valMarkup">0%</div>
+                            <div class="metric-card__sub">lucro ÷ custo</div>
+                        </div>
+                    </div>
+
+                    <!-- Barra visual custo vs lucro -->
+                    <div class="composition-bar">
+                        <div class="composition-bar__label">Composição do preço de venda</div>
+                        <div class="composition-bar__track">
+                            <div class="composition-bar__segment composition-bar__segment--cost" id="barCost"></div>
+                            <div class="composition-bar__segment" id="barProfit"></div>
+                        </div>
+                        <div class="composition-bar__legends">
+                            <span class="composition-bar__legend">
+                                <span class="composition-bar__dot" style="background-color: #64748B;"></span>
+                                <span id="legendCost">Custo: R$ 0</span>
+                            </span>
+                            <span class="composition-bar__legend">
+                                <span class="composition-bar__dot" id="legendProfitDot" style="background-color: var(--color-profit);"></span>
+                                <span id="legendProfit">Lucro: R$ 0</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Alerta contextual -->
+                    <div class="alert-box" id="alertBox" role="alert"></div>
+
+                    <p class="result-disclaimer">
+                        ⚠️ Este cálculo considera apenas o custo direto informado. Para
+                        uma análise completa, inclua impostos, comissões de marketplace,
+                        taxas de cartão e custos operacionais fixos no campo de custo.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =================================================== -->
+        <!-- 5. CONTEÚDO SEO                                       -->
+        <!-- =================================================== -->
+        <section class="article">
+            <div class="container">
+                <article class="article__wrapper">
+
+                    <h2>O que é Margem de Lucro?</h2>
+                    <p>
+                        A <strong>margem de lucro</strong> é o indicador financeiro que mostra
+                        qual porcentagem do <strong>preço de venda</strong> de um produto ou
+                        serviço corresponde ao lucro. Em outras palavras, ela responde à
+                        pergunta: "De cada real que entra no meu caixa, quantos centavos
+                        realmente ficam comigo após cobrir os custos?"
+                    </p>
+                    <p>
+                        A fórmula é simples:
+                    </p>
+                    <div class="highlight-box">
+                        <p>
+                            <strong>Margem de Lucro (%) = (Lucro Bruto ÷ Preço de Venda) × 100</strong><br><br>
+                            Onde: <strong>Lucro Bruto = Preço de Venda − Custo Total</strong>
+                        </p>
+                    </div>
+                    <p>
+                        A margem de lucro é o indicador mais importante para a saúde
+                        financeira de qualquer negócio porque ela revela a <strong>eficiência
+                        real</strong> da operação. Uma empresa pode faturar milhões e ainda
+                        assim ter prejuízo se a margem for negativa ou muito baixa.
+                    </p>
+
+                    <h2>Qual a diferença crucial entre Margem de Lucro e Markup?</h2>
+                    <p>
+                        Essa é a confusão mais comum entre empreendedores — e misturar os
+                        dois conceitos pode levar a erros graves de precificação. Embora
+                        ambos envolvam custo e lucro, eles usam <strong>bases de cálculo
+                        diferentes</strong>:
+                    </p>
+                    <ul>
+                        <li><strong>Margem de Lucro:</strong> o lucro dividido pelo <strong>preço de venda</strong>.</li>
+                        <li><strong>Markup:</strong> o lucro dividido pelo <strong>custo</strong>.</li>
+                    </ul>
+                    <p>
+                        A margem olha "de cima para baixo" (do faturamento para o lucro),
+                        enquanto o markup olha "de baixo para cima" (do custo para o lucro).
+                        Veja na prática com um exemplo claro:
+                    </p>
+
+                    <h3>Exemplo: produto de R$ 50 vendido por R$ 100</h3>
+                    <div class="highlight-box--blue highlight-box">
+                        <p>
+                            Custo: <strong>R$ 50</strong> | Preço de venda: <strong>R$ 100</strong><br>
+                            Lucro bruto: R$ 100 − R$ 50 = <strong>R$ 50</strong><br><br>
+                            <strong>Margem de Lucro</strong> = (50 ÷ 100) × 100 = <strong>50%</strong><br>
+                            → "50% do preço de venda é lucro"<br><br>
+                            <strong>Markup</strong> = (50 ÷ 50) × 100 = <strong>100%</strong><br>
+                            → "O lucro equivale a 100% do custo"
+                        </p>
+                    </div>
+                    <p>
+                        Perceba: o <strong>mesmo produto</strong> tem margem de 50% e markup
+                        de 100%. São números completamente diferentes que medem coisas
+                        diferentes. O erro fatal acontece quando alguém diz "quero uma margem
+                        de 100%" achando que está falando de markup — e acaba cobrando muito
+                        mais do que o mercado pratica.
+                    </p>
+
+                    <h3>Quando usar cada um?</h3>
+                    <p>
+                        Na prática, a <strong>margem de lucro</strong> é o indicador mais
+                        usado para analisar resultados financeiros, comparar com concorrentes
+                        e avaliar a saúde do negócio. Já o <strong>markup</strong> é mais
+                        usado no processo de <strong>formação de preço</strong> — quando
+                        você parte do custo e quer definir quanto cobrar.
+                    </p>
+
+                    <h2>Qual é a margem de lucro ideal para um negócio?</h2>
+                    <p>
+                        Não existe uma margem de lucro "universal" — ela varia conforme o
+                        <strong>setor de atuação</strong>, o volume de vendas, a
+                        concorrência e o modelo de negócio. Porém, algumas faixas de
+                        referência são amplamente aceitas:
+                    </p>
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Setor</th>
+                                    <th>Margem típica</th>
+                                    <th>Observação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Comércio (varejo)</strong></td>
+                                    <td>15% a 30%</td>
+                                    <td>Alto volume, margens menores</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Comércio (atacado)</strong></td>
+                                    <td>5% a 15%</td>
+                                    <td>Volume altíssimo compensa</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Indústria</strong></td>
+                                    <td>8% a 20%</td>
+                                    <td>Depende do setor e da escala</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Serviços</strong></td>
+                                    <td>20% a 50%+</td>
+                                    <td>Custos variáveis baixos</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Alimentação</strong></td>
+                                    <td>10% a 25%</td>
+                                    <td>Perecíveis elevam o risco</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tecnologia / SaaS</strong></td>
+                                    <td>60% a 80%+</td>
+                                    <td>Custo marginal próximo de zero</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Margem baixa não é sinônimo de negócio ruim</h3>
+                    <p>
+                        Supermercados, por exemplo, operam com margens de <strong>2% a 5%</strong>
+                        e são negócios extremamente lucrativos — porque o <strong>volume de
+                        vendas</strong> é gigantesco. Já um consultório odontológico pode ter
+                        margem de 50%, mas atende poucos clientes por dia. O que importa no
+                        final é o <strong>lucro absoluto em reais</strong>, que depende da
+                        combinação entre margem e volume.
+                    </p>
+
+                    <h3>Quando se preocupar</h3>
+                    <p>
+                        Você deve acender um alerta se:
+                    </p>
+                    <ul>
+                        <li>A margem de lucro for <strong>menor que 10%</strong> no varejo ou <strong>menor que 15%</strong> em serviços — pode significar que você não está cobrando o suficiente.</li>
+                        <li>A margem for <strong>negativa</strong> — você está literalmente pagando para vender. É urgente rever a precificação.</li>
+                        <li>A margem estiver <strong>caindo mês a mês</strong> — indica aumento de custos não repassado ao preço.</li>
+                    </ul>
+
+                    <h2>Por que usar a calculadora do PodeCalcular?</h2>
+                    <p>
+                        A <strong>Calculadora de Margem de Lucro</strong> do PodeCalcular
+                        mostra em um único resultado os três indicadores mais importantes
+                        para qualquer empreendedor: o <strong>lucro bruto em reais</strong>,
+                        a <strong>margem de lucro percentual</strong> e o <strong>markup</strong>.
+                        Além disso, a barra visual de composição do preço deixa claro quanto
+                        do valor cobrado é custo e quanto é lucro. Se a operação estiver
+                        gerando prejuízo, um alerta vermelho aparece automaticamente.
+                    </p>
+                    <p>
+                        Todo o cálculo é feito localmente no seu navegador, sem cadastro e
+                        sem armazenamento de dados. Para uma análise mais completa, lembre-se
+                        de incluir no campo de custo todos os gastos: matéria-prima, frete,
+                        embalagem, impostos, comissões de marketplace e taxas de cartão.
+                    </p>
+
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =================================================== -->
+    <!-- 6. FOOTER                                             -->
+    <!-- =================================================== -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p>© 2026 <strong>PodeCalcular</strong>. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- =================================================== -->
+    <!-- JAVASCRIPT - LÓGICA DE MARGEM DE LUCRO E MARKUP       -->
+    <!-- =================================================== -->
+    <script>
+        /**
+         * PodeCalcular - Calculadora de Margem de Lucro
+         * -----------------------------------------------
+         * Fórmulas:
+         *   Lucro Bruto       = Preço de Venda − Custo Total
+         *   Margem de Lucro   = (Lucro Bruto / Preço de Venda) × 100
+         *   Markup            = (Lucro Bruto / Custo Total) × 100
+         *
+         * Feedback visual:
+         *   Margem > 0  → verde (lucro)
+         *   Margem = 0  → amarelo (equilíbrio)
+         *   Margem < 0  → vermelho (prejuízo)
+         */
+
+        (function() {
+            'use strict';
+
+            // =========== REFERÊNCIAS DOM ===========
+            var form = document.getElementById('formMargem');
+            var resultadoEl = document.getElementById('resultado');
+            var resultKicker = document.getElementById('resultKicker');
+            var resultTitle = document.getElementById('resultTitle');
+
+            var cardLucro = document.getElementById('cardLucro');
+            var cardMargem = document.getElementById('cardMargem');
+            var cardMarkup = document.getElementById('cardMarkup');
+            var valLucro = document.getElementById('valLucro');
+            var valMargem = document.getElementById('valMargem');
+            var valMarkup = document.getElementById('valMarkup');
+
+            var barCost = document.getElementById('barCost');
+            var barProfit = document.getElementById('barProfit');
+            var legendCost = document.getElementById('legendCost');
+            var legendProfit = document.getElementById('legendProfit');
+            var legendProfitDot = document.getElementById('legendProfitDot');
+
+            var alertBox = document.getElementById('alertBox');
+
+            // =========== HELPERS ===========
+
+            function formatBRL(v) {
+                return v.toLocaleString('pt-BR', {
+                    style: 'currency', currency: 'BRL',
+                    minimumFractionDigits: 2, maximumFractionDigits: 2
+                });
+            }
+
+            function formatPct(v) {
+                return v.toFixed(2).replace('.', ',') + '%';
+            }
+
+            // =========== VALIDAÇÃO ===========
+
+            function limparErros() {
+                document.querySelectorAll('.form-field').forEach(function(f) {
+                    f.classList.remove('has-error');
+                });
+            }
+
+            function marcarErro(id) {
+                var el = document.getElementById(id);
+                if (el) el.classList.add('has-error');
+            }
+
+            function validar(custo, venda) {
+                var ok = true;
+                if (!custo || custo <= 0 || isNaN(custo)) {
+                    marcarErro('field-custo');
+                    ok = false;
+                }
+                if (!venda || venda <= 0 || isNaN(venda)) {
+                    marcarErro('field-venda');
+                    ok = false;
+                }
+                return ok;
+            }
+
+            // =========== RENDERIZAÇÃO ===========
+
+            function renderizarResultado(custo, venda) {
+                var lucro = venda - custo;
+                var margem = (lucro / venda) * 100;
+                var markup = (lucro / custo) * 100;
+
+                var isPrejuizo = margem < 0;
+                var isEquilibrio = margem === 0;
+
+                // --- Kicker e título ---
+                if (isPrejuizo) {
+                    resultKicker.textContent = '⚠️ Atenção';
+                    resultKicker.style.cssText = 'color: var(--color-loss-vivid); background-color: var(--color-loss-bg);';
+                    resultTitle.textContent = 'Você está tendo prejuízo';
+                } else if (isEquilibrio) {
+                    resultKicker.textContent = '⚖️ Ponto de equilíbrio';
+                    resultKicker.style.cssText = 'color: #92400E; background-color: var(--color-neutral-bg);';
+                    resultTitle.textContent = 'Nenhum lucro nesta operação';
+                } else {
+                    resultKicker.textContent = '✓ Operação lucrativa';
+                    resultKicker.style.cssText = 'color: var(--color-profit-vivid); background-color: var(--color-profit-bg);';
+                    resultTitle.textContent = 'Análise da sua operação';
+                }
+
+                // --- Cards de métricas ---
+                valLucro.textContent = formatBRL(lucro);
+                valMargem.textContent = formatPct(margem);
+                valMarkup.textContent = formatPct(markup);
+
+                // Cores dinâmicas dos cards
+                var lucroStyle = isPrejuizo ? 'metric-card--prejuizo' : 'metric-card--lucro';
+                var margemStyle = isPrejuizo ? 'metric-card--prejuizo' : 'metric-card--margem';
+
+                cardLucro.className = 'metric-card ' + lucroStyle;
+                cardMargem.className = 'metric-card ' + margemStyle;
+                cardMarkup.className = 'metric-card metric-card--markup';
+
+                // --- Barra de composição ---
+                var costPct, profitPct;
+
+                if (isPrejuizo) {
+                    // O custo ultrapassa o preço de venda
+                    costPct = 100;
+                    profitPct = 0;
+                    barProfit.className = 'composition-bar__segment composition-bar__segment--loss';
+                    // Mostra a barra de custo preenchendo tudo e o "prejuízo" como excedente visual
+                    var overflowPct = ((custo - venda) / custo) * 100;
+                    barCost.style.width = (100 - overflowPct) + '%';
+                    barProfit.style.width = overflowPct + '%';
+                    barCost.textContent = '';
+                    barProfit.textContent = '';
+                    legendProfitDot.style.backgroundColor = 'var(--color-loss)';
+                    legendProfit.textContent = 'Prejuízo: ' + formatBRL(Math.abs(lucro));
+                } else {
+                    costPct = (custo / venda) * 100;
+                    profitPct = 100 - costPct;
+                    barProfit.className = 'composition-bar__segment composition-bar__segment--profit';
+
+                    barCost.style.width = '0%';
+                    barProfit.style.width = '0%';
+
+                    requestAnimationFrame(function() {
+                        requestAnimationFrame(function() {
+                            barCost.style.width = costPct + '%';
+                            barProfit.style.width = profitPct + '%';
+                        });
+                    });
+
+                    barCost.textContent = costPct > 15 ? Math.round(costPct) + '%' : '';
+                    barProfit.textContent = profitPct > 15 ? Math.round(profitPct) + '%' : '';
+                    legendProfitDot.style.backgroundColor = 'var(--color-profit)';
+                    legendProfit.textContent = 'Lucro: ' + formatBRL(lucro);
+                }
+
+                legendCost.textContent = 'Custo: ' + formatBRL(custo);
+
+                // --- Alerta contextual ---
+                alertBox.classList.remove('is-visible', 'alert-box--loss', 'alert-box--profit', 'alert-box--warn');
+
+                if (isPrejuizo) {
+                    alertBox.classList.add('is-visible', 'alert-box--loss');
+                    alertBox.innerHTML = '<span aria-hidden="true">🚨</span> <span><strong>Atenção: Você está tendo prejuízo!</strong> Seu custo de ' + formatBRL(custo) + ' é maior que o preço de venda de ' + formatBRL(venda) + '. Você perde ' + formatBRL(Math.abs(lucro)) + ' a cada unidade vendida. Revise urgentemente a sua precificação.</span>';
+                } else if (isEquilibrio) {
+                    alertBox.classList.add('is-visible', 'alert-box--warn');
+                    alertBox.innerHTML = '<span aria-hidden="true">⚖️</span> <span><strong>Ponto de equilíbrio.</strong> Você não está lucrando nem perdendo — o custo é igual ao preço de venda. Qualquer imprevisto gerará prejuízo.</span>';
+                } else if (margem < 10) {
+                    alertBox.classList.add('is-visible', 'alert-box--warn');
+                    alertBox.innerHTML = '<span aria-hidden="true">⚠️</span> <span><strong>Margem muito baixa (' + formatPct(margem) + ').</strong> Margens abaixo de 10% deixam pouca margem de manobra para imprevistos, devoluções e variações de custo. Considere rever o preço.</span>';
+                } else {
+                    alertBox.classList.add('is-visible', 'alert-box--profit');
+                    alertBox.innerHTML = '<span aria-hidden="true">✅</span> <span><strong>Margem saudável!</strong> A cada venda de ' + formatBRL(venda) + ', você lucra ' + formatBRL(lucro) + '. Seu markup de ' + formatPct(markup) + ' significa que o lucro equivale a ' + formatPct(markup) + ' do custo.</span>';
+                }
+
+                resultadoEl.classList.add('is-visible');
+
+                setTimeout(function() {
+                    resultadoEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 80);
+            }
+
+            // =========== SUBMIT HANDLER ===========
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                limparErros();
+
+                var custo = parseFloat(document.getElementById('custo').value);
+                var venda = parseFloat(document.getElementById('venda').value);
+
+                if (!validar(custo, venda)) return;
+
+                renderizarResultado(custo, venda);
+            });
+
+            form.addEventListener('input', function(e) {
+                var field = e.target.closest('.form-field');
+                if (field) field.classList.remove('has-error');
+            });
+
+        })();
+    </script>
+
+</body>
+</html>

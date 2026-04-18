@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- ============================================= -->
+    <!-- META TAGS DE SEO / ADSENSE                    -->
+    <!-- ============================================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1D4ED8">
+
+    <title>Calculadora de Valor da Hora de Trabalho (Freelancer) 2026 | PodeCalcular</title>
+    <meta name="description" content="Descubra quanto cobrar por hora como freelancer ou autônomo. Calcule seu valor da hora incluindo custos fixos, impostos e margem de segurança. Online, grátis e sem cadastro.">
+    <meta name="keywords" content="calculadora valor hora, valor hora freelancer, quanto cobrar por hora, precificação freelancer, valor hora autônomo, calcular hora de trabalho, preço hora MEI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="PodeCalcular">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Calculadora de Valor da Hora de Trabalho | PodeCalcular">
+    <meta property="og:description" content="Descubra quanto cobrar por hora como freelancer. Inclui custos fixos e margem de segurança. Grátis e sem cadastro.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Favicon SVG -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231D4ED8'/%3E%3Cpath d='M28 52 L44 68 L74 34' stroke='white' stroke-width='10' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+    <!-- CSS-->
+    <link rel="stylesheet" href="styles/valor-hora.css">
+
+    <!-- Fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- ============================================= -->
+    <!-- CSS - MOBILE-FIRST                            -->
+    <!-- ============================================= -->
+</head>
+<body>
+
+    <!-- =================================================== -->
+    <!-- 1. HEADER                                             -->
+    <!-- =================================================== -->
+    <header class="header" role="banner">
+        <div class="container header__inner">
+            <a href="index.html" class="logo" aria-label="PodeCalcular - Página inicial">
+                <span class="logo__mark" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 20 7"></polyline></svg>
+                </span>
+                PodeCalcular
+            </a>
+            <a href="index.html" class="back-btn" aria-label="Voltar para a página inicial">
+                <svg class="back-btn__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span class="back-btn__text">Voltar para Início</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- =================================================== -->
+        <!-- 2. HERO                                               -->
+        <!-- =================================================== -->
+        <section class="hero">
+            <div class="container">
+                <nav class="hero__breadcrumb" aria-label="Trilha de navegação">
+                    <a href="index.html">Home</a> › <a href="#">Empreendedor</a> › <span>Valor da Hora</span>
+                </nav>
+                <span class="hero__badge">⏱️ Precificação Profissional</span>
+                <h1 class="hero__title">Calculadora de Valor da Hora de Trabalho</h1>
+                <p class="hero__subtitle">
+                    Descubra quanto você realmente deve cobrar por hora como freelancer
+                    ou autônomo para ter lucro e pagar suas contas com tranquilidade.
+                </p>
+            </div>
+        </section>
+
+        <!-- =================================================== -->
+        <!-- 3 e 4. FORMULÁRIO + RESULTADO                         -->
+        <!-- =================================================== -->
+        <section class="calc-section">
+            <div class="container">
+
+                <div class="calc-card">
+                    <h2 class="calc-card__title">Preencha sua realidade financeira</h2>
+                    <p class="calc-card__hint">Tudo é calculado no seu navegador — nenhuma informação é enviada ou armazenada.</p>
+
+                    <form id="formValorHora" class="form-grid" novalidate>
+
+                        <!-- Bloco 1: Ganho desejado + custos -->
+                        <div class="form-grid form-grid--2col">
+
+                            <div class="form-field" id="field-ganho">
+                                <label for="ganho" class="form-label">
+                                    Quanto quer ganhar livre por mês?
+                                    <span class="form-label-hint">(seu "salário")</span>
+                                </label>
+                                <div class="input-decorated input-decorated--prefix" data-prefix="R$">
+                                    <input type="number" id="ganho" class="form-input" placeholder="Ex: 5000" step="0.01" min="1" inputmode="decimal" required>
+                                </div>
+                                <span class="form-error">Informe o valor que deseja receber.</span>
+                            </div>
+
+                            <div class="form-field" id="field-custos">
+                                <label for="custos" class="form-label">
+                                    Custos fixos mensais
+                                    <span class="form-label-hint">(internet, luz, software, MEI…)</span>
+                                </label>
+                                <div class="input-decorated input-decorated--prefix" data-prefix="R$">
+                                    <input type="number" id="custos" class="form-input" placeholder="Ex: 800" step="0.01" min="0" value="0" inputmode="decimal">
+                                </div>
+                                <span class="form-error">Informe seus custos (ou zero).</span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-separator"></div>
+                        <span class="form-section-label">Sua rotina de trabalho</span>
+
+                        <!-- Bloco 2: Dias + Horas -->
+                        <div class="form-grid form-grid--2col">
+
+                            <div class="form-field" id="field-dias">
+                                <label for="dias" class="form-label">
+                                    Dias por semana
+                                    <span class="form-label-hint">(1 a 7)</span>
+                                </label>
+                                <div class="input-decorated input-decorated--suffix" data-suffix="dias">
+                                    <input type="number" id="dias" class="form-input" placeholder="5" min="1" max="7" step="1" value="5" inputmode="numeric" required>
+                                </div>
+                                <span class="form-error">Informe entre 1 e 7 dias.</span>
+                            </div>
+
+                            <div class="form-field" id="field-horas">
+                                <label for="horas" class="form-label">
+                                    Horas por dia
+                                    <span class="form-label-hint">(1 a 16)</span>
+                                </label>
+                                <div class="input-decorated input-decorated--suffix" data-suffix="horas">
+                                    <input type="number" id="horas" class="form-input" placeholder="8" min="1" max="16" step="0.5" value="8" inputmode="decimal" required>
+                                </div>
+                                <span class="form-error">Informe entre 1 e 16 horas.</span>
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            Calcular Meu Valor por Hora
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+
+                    </form>
+                </div>
+
+                <!-- Resultado -->
+                <div id="resultado" class="result-card" aria-live="polite">
+                    <div class="result-card__header">
+                        <span class="result-card__kicker">⏱️ Resultado do cálculo</span>
+                        <h2 class="result-card__title">Seu valor por hora de trabalho</h2>
+                    </div>
+
+                    <!-- Valor da hora em destaque -->
+                    <div class="rate-display">
+                        <div class="rate-display__kicker">Valor mínimo da hora</div>
+                        <div class="rate-display__value" id="valHora">R$ 0</div>
+                        <div class="rate-display__unit">por hora trabalhada</div>
+                        <div class="rate-display__sub" id="rateSub">base: 0h/mês</div>
+                    </div>
+
+                    <!-- Métricas secundárias -->
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-item__label">
+                                <strong>Faturamento bruto</strong>
+                                ganho + custos
+                            </div>
+                            <div class="stat-item__value" id="valBruto">R$ 0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-item__label">
+                                <strong>Horas por mês</strong>
+                                dias × horas × 4 sem.
+                            </div>
+                            <div class="stat-item__value" id="valHorasMes">0h</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-item__label">
+                                <strong>Custos fixos</strong>
+                                % do faturamento
+                            </div>
+                            <div class="stat-item__value" id="valCustoPct">0%</div>
+                        </div>
+                    </div>
+
+                    <!-- Barra de composição -->
+                    <div class="breakdown">
+                        <div class="breakdown__label">Composição do faturamento</div>
+                        <div class="breakdown__bar">
+                            <div class="breakdown__segment breakdown__segment--income" id="barIncome"></div>
+                            <div class="breakdown__segment breakdown__segment--costs" id="barCosts"></div>
+                        </div>
+                        <div class="breakdown__legends">
+                            <span class="breakdown__legend">
+                                <span class="breakdown__dot" style="background-color: var(--color-pro);"></span>
+                                <span id="legendIncome">Seu ganho: R$ 0</span>
+                            </span>
+                            <span class="breakdown__legend">
+                                <span class="breakdown__dot" style="background-color: var(--color-warning-border);"></span>
+                                <span id="legendCosts">Custos fixos: R$ 0</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Sugestão com margem de segurança (+25%) -->
+                    <div class="margin-tip">
+                        <div class="margin-tip__title">💡 Sugestão: valor com margem de segurança (+25%)</div>
+                        <div class="margin-tip__row">
+                            <span>Cobre pelo menos</span>
+                            <span class="margin-tip__value" id="valComMargem">R$ 0</span>
+                        </div>
+                    </div>
+
+                    <p class="result-disclaimer">
+                        ⚠️ Esta é uma base matemática. Lembre-se de adicionar uma margem de
+                        segurança para férias, dias de doença, impostos variáveis e os
+                        períodos em que você estará prospectando clientes em vez de trabalhando
+                        em projetos remunerados.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =================================================== -->
+        <!-- 5. CONTEÚDO SEO                                       -->
+        <!-- =================================================== -->
+        <section class="article">
+            <div class="container">
+                <article class="article__wrapper">
+
+                    <h2>Como calcular o valor da hora de trabalho autônomo?</h2>
+                    <p>
+                        A maioria dos freelancers e profissionais autônomos no Brasil
+                        começa a trabalhar sem saber exatamente quanto cobrar. Muitos olham
+                        para o mercado, copiam o preço de um concorrente ou simplesmente
+                        "chutam" um número que parece razoável. O problema é que essa abordagem
+                        ignora a realidade financeira individual — e quase sempre leva a um
+                        valor <strong>abaixo do necessário para sobreviver</strong>.
+                    </p>
+                    <p>
+                        A forma correta de precificar a hora começa com uma pergunta simples:
+                        <strong>quanto dinheiro precisa sobrar na minha conta no final do mês?</strong>
+                        A partir daí, soma-se os custos e divide-se pelas horas disponíveis.
+                        A fórmula base é:
+                    </p>
+                    <div class="highlight-box">
+                        <p>
+                            <strong>Valor da Hora = (Ganho Desejado + Custos Fixos) ÷ Horas Trabalhadas por Mês</strong><br><br>
+                            Exemplo:<br>
+                            Ganho desejado: R$ 5.000 | Custos fixos: R$ 1.000<br>
+                            Dias por semana: 5 | Horas por dia: 8<br>
+                            Horas/mês: 5 × 8 × 4 = 160 horas<br><br>
+                            Valor da hora = (5.000 + 1.000) ÷ 160 = <strong>R$ 37,50/hora</strong>
+                        </p>
+                    </div>
+                    <p>
+                        Esse é o valor <strong>mínimo</strong> que você deve cobrar para cobrir
+                        todas as suas despesas e receber o "salário" desejado. Na prática,
+                        porém, é aconselhável adicionar uma margem de pelo menos 20% a 30%
+                        sobre esse valor — como explicaremos nos próximos tópicos.
+                    </p>
+
+                    <h2>Por que é importante incluir os custos fixos na precificação?</h2>
+                    <p>
+                        Um dos erros mais comuns entre profissionais autônomos é pensar no
+                        valor da hora apenas em termos de <strong>"quanto eu quero ganhar"</strong>,
+                        ignorando completamente os custos necessários para trabalhar. Quando
+                        você é CLT, a empresa paga a internet, o computador, o software, o
+                        espaço físico e os impostos. Quando você é autônomo, <strong>todos
+                        esses custos saem do seu bolso</strong>.
+                    </p>
+                    <p>
+                        Alguns custos fixos típicos de um freelancer incluem:
+                    </p>
+                    <ul>
+                        <li><strong>Internet e telefone:</strong> R$ 100 a R$ 200/mês</li>
+                        <li><strong>Energia elétrica (proporção home office):</strong> R$ 50 a R$ 150/mês</li>
+                        <li><strong>Softwares e assinaturas:</strong> R$ 50 a R$ 500/mês (Adobe, Figma, domínios, hospedagem, etc.)</li>
+                        <li><strong>Contribuição MEI ou INSS:</strong> R$ 75 a R$ 200/mês</li>
+                        <li><strong>Contador:</strong> R$ 100 a R$ 300/mês</li>
+                        <li><strong>Depreciação de equipamento:</strong> se seu notebook custou R$ 6.000 e dura 3 anos, você gasta R$ 167/mês em depreciação</li>
+                        <li><strong>Coworking ou aluguel de espaço:</strong> R$ 300 a R$ 1.500/mês (se aplicável)</li>
+                    </ul>
+                    <p>
+                        Quando somados, esses custos podem facilmente chegar a
+                        <strong>R$ 800 a R$ 2.000 por mês</strong>. Se você não incluí-los
+                        na conta da hora, está efetivamente pagando para trabalhar — cada
+                        real que vai para a internet ou para o MEI sai do dinheiro que você
+                        achava que era "lucro".
+                    </p>
+
+                    <h3>O impacto real nos números</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Cenário</th>
+                                    <th>Ganho desejado</th>
+                                    <th>Custos</th>
+                                    <th>160h/mês</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Sem custos (errado)</strong></td>
+                                    <td>R$ 5.000</td>
+                                    <td>R$ 0</td>
+                                    <td>R$ 31,25/h</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Com custos (correto)</strong></td>
+                                    <td>R$ 5.000</td>
+                                    <td>R$ 1.200</td>
+                                    <td>R$ 38,75/h</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Com custos + margem 25%</strong></td>
+                                    <td>R$ 5.000</td>
+                                    <td>R$ 1.200</td>
+                                    <td><strong>R$ 48,44/h</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>
+                        A diferença entre o cenário "sem custos" e o "com margem" é de
+                        <strong>R$ 17,19 por hora</strong>. Em 160 horas de trabalho, isso
+                        representa <strong>R$ 2.750 a mais por mês</strong> — dinheiro que
+                        você perderia simplesmente por não ter feito a conta direito.
+                    </p>
+
+                    <h2>O erro de esquecer as férias e os dias improdutivos</h2>
+                    <p>
+                        Mesmo depois de incluir os custos fixos, muitos freelancers cometem
+                        um segundo erro crítico: calcular como se fossem trabalhar
+                        <strong>todos os meses do ano, todos os dias da semana, sem faltar
+                        um único dia</strong>. Na realidade, isso não acontece.
+                    </p>
+                    <p>
+                        Ao longo de um ano, um profissional autônomo enfrenta:
+                    </p>
+                    <ul>
+                        <li><strong>Férias:</strong> mesmo que informais, você precisa descansar. Separe pelo menos 15 a 30 dias por ano sem faturar.</li>
+                        <li><strong>Dias de doença:</strong> diferente do CLT, freelancer doente não recebe. Estime 5 a 10 dias por ano.</li>
+                        <li><strong>Prospecção e administrativo:</strong> tempo gasto em propostas, reuniões não remuneradas, cobrança, impostos e marketing. Alguns especialistas estimam que até <strong>30% do tempo do freelancer</strong> é gasto em atividades não faturáveis.</li>
+                        <li><strong>Feriados:</strong> 10 a 15 dias por ano em que o mercado para.</li>
+                        <li><strong>Lacunas entre projetos:</strong> nem sempre há trabalho contínuo. Períodos de "bancada" são comuns.</li>
+                    </ul>
+
+                    <div class="highlight-box--warn highlight-box">
+                        <p>
+                            <strong>⚠️ Conta rápida:</strong><br>
+                            Se você trabalha 12 meses no papel, mas na prática
+                            fatura apenas 10 (desconte férias, doenças e lacunas),
+                            precisa ganhar em 10 meses o que planejou para 12.<br><br>
+                            Isso significa um <strong>acréscimo mínimo de 20%</strong> no
+                            valor da hora para compensar os 2 meses "perdidos".
+                        </p>
+                    </div>
+
+                    <h3>A margem de segurança recomendada</h3>
+                    <p>
+                        Para um freelancer iniciante que ainda não tem previsibilidade de
+                        receita, a recomendação é adicionar uma margem de
+                        <strong>25% a 30%</strong> sobre o valor da hora calculado. Para
+                        profissionais mais experientes com carteira estável de clientes,
+                        uma margem de <strong>15% a 20%</strong> pode ser suficiente.
+                    </p>
+                    <div class="highlight-box--green highlight-box">
+                        <p>
+                            <strong>✅ Fórmula final recomendada:</strong><br><br>
+                            Valor da Hora (com segurança) = Valor Base × 1,25<br><br>
+                            Se o valor base é R$ 37,50 → cobre <strong>R$ 46,88</strong> ou mais
+                        </p>
+                    </div>
+
+                    <h2>Por que usar a calculadora do PodeCalcular?</h2>
+                    <p>
+                        A <strong>Calculadora de Valor da Hora</strong> do PodeCalcular foi
+                        feita especialmente para freelancers, autônomos, prestadores de serviço
+                        e profissionais MEI que precisam de uma referência rápida e confiável
+                        para precificar o seu trabalho. Basta informar quanto deseja ganhar,
+                        seus custos fixos e a sua rotina de trabalho — a ferramenta calcula
+                        instantaneamente o valor mínimo da hora, o faturamento bruto necessário
+                        e, como bônus, sugere um valor com margem de segurança de 25%.
+                    </p>
+                    <p>
+                        Lembre-se: o valor da hora é um <strong>ponto de partida</strong>,
+                        e não um teto. Ele deve ser ajustado conforme a complexidade do
+                        projeto, a urgência do prazo, a experiência que você acumulou e o
+                        valor percebido pelo cliente. Profissionais que resolvem problemas
+                        de alto impacto podem — e devem — cobrar acima do mínimo calculado.
+                    </p>
+
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =================================================== -->
+    <!-- 6. FOOTER                                             -->
+    <!-- =================================================== -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p>© 2026 <strong>PodeCalcular</strong>. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- =================================================== -->
+    <!-- JAVASCRIPT - LÓGICA DO VALOR DA HORA                  -->
+    <!-- =================================================== -->
+    <script>
+        /**
+         * PodeCalcular - Calculadora de Valor da Hora (Freelancer)
+         * ----------------------------------------------------------
+         * Fórmula:
+         *   Faturamento bruto = ganhoDesejado + custosFixos
+         *   Horas mensais     = diasPorSemana × horasPorDia × 4
+         *   Valor da hora     = faturamentoBruto / horasMensais
+         *   Valor com margem  = valorHora × 1.25 (margem de 25%)
+         */
+
+        (function() {
+            'use strict';
+
+            // =========== REFERÊNCIAS DOM ===========
+            var form = document.getElementById('formValorHora');
+            var resultadoEl = document.getElementById('resultado');
+
+            var valHora = document.getElementById('valHora');
+            var rateSub = document.getElementById('rateSub');
+            var valBruto = document.getElementById('valBruto');
+            var valHorasMes = document.getElementById('valHorasMes');
+            var valCustoPct = document.getElementById('valCustoPct');
+
+            var barIncome = document.getElementById('barIncome');
+            var barCosts = document.getElementById('barCosts');
+            var legendIncome = document.getElementById('legendIncome');
+            var legendCosts = document.getElementById('legendCosts');
+
+            var valComMargem = document.getElementById('valComMargem');
+
+            // =========== HELPERS ===========
+
+            function formatBRL(valor) {
+                return valor.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+            }
+
+            // =========== VALIDAÇÃO ===========
+
+            function limparErros() {
+                document.querySelectorAll('.form-field').forEach(function(f) {
+                    f.classList.remove('has-error');
+                });
+            }
+
+            function marcarErro(id) {
+                var el = document.getElementById(id);
+                if (el) el.classList.add('has-error');
+            }
+
+            function validar(ganho, custos, dias, horas) {
+                var ok = true;
+
+                if (!ganho || ganho <= 0 || isNaN(ganho)) {
+                    marcarErro('field-ganho');
+                    ok = false;
+                }
+                if (isNaN(custos) || custos < 0) {
+                    marcarErro('field-custos');
+                    ok = false;
+                }
+                if (!dias || dias < 1 || dias > 7 || isNaN(dias)) {
+                    marcarErro('field-dias');
+                    ok = false;
+                }
+                if (!horas || horas < 1 || horas > 16 || isNaN(horas)) {
+                    marcarErro('field-horas');
+                    ok = false;
+                }
+                return ok;
+            }
+
+            // =========== RENDERIZAÇÃO ===========
+
+            function renderizarResultado(dados) {
+                // Valor da hora em destaque
+                valHora.textContent = formatBRL(dados.valorHora);
+                rateSub.textContent = 'base: ' + dados.horasMes + 'h/mês (' + dados.dias + ' dias × ' + dados.horas + 'h × 4 semanas)';
+
+                // Métricas
+                valBruto.textContent = formatBRL(dados.bruto);
+                valHorasMes.textContent = dados.horasMes + 'h';
+
+                var custoPct = dados.bruto > 0 ? ((dados.custos / dados.bruto) * 100).toFixed(1) : 0;
+                valCustoPct.textContent = custoPct + '%';
+
+                // Barra de composição
+                var incomePct = dados.bruto > 0 ? (dados.ganho / dados.bruto) * 100 : 100;
+                var costsPct = 100 - incomePct;
+
+                barIncome.style.width = '0%';
+                barCosts.style.width = '0%';
+
+                requestAnimationFrame(function() {
+                    requestAnimationFrame(function() {
+                        barIncome.style.width = incomePct + '%';
+                        barCosts.style.width = costsPct + '%';
+                    });
+                });
+
+                legendIncome.textContent = 'Seu ganho: ' + formatBRL(dados.ganho);
+                legendCosts.textContent = 'Custos fixos: ' + formatBRL(dados.custos);
+
+                // Valor com margem (+25%)
+                valComMargem.textContent = formatBRL(dados.valorHora * 1.25) + '/hora';
+
+                resultadoEl.classList.add('is-visible');
+
+                setTimeout(function() {
+                    resultadoEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 80);
+            }
+
+            // =========== SUBMIT HANDLER ===========
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                limparErros();
+
+                var ganho = parseFloat(document.getElementById('ganho').value);
+                var custos = parseFloat(document.getElementById('custos').value) || 0;
+                var dias = parseInt(document.getElementById('dias').value, 10);
+                var horas = parseFloat(document.getElementById('horas').value);
+
+                if (!validar(ganho, custos, dias, horas)) return;
+
+                // --- Cálculos ---
+                var bruto = ganho + custos;
+                var horasMes = dias * horas * 4;
+                var valorHora = bruto / horasMes;
+
+                renderizarResultado({
+                    ganho: ganho,
+                    custos: custos,
+                    dias: dias,
+                    horas: horas,
+                    bruto: bruto,
+                    horasMes: horasMes,
+                    valorHora: valorHora
+                });
+            });
+
+            // Limpa erros ao interagir
+            form.addEventListener('input', function(e) {
+                var field = e.target.closest('.form-field');
+                if (field) field.classList.remove('has-error');
+            });
+
+        })();
+    </script>
+
+</body>
+</html>

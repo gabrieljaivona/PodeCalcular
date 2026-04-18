@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- ============================================= -->
+    <!-- META TAGS DE SEO / ADSENSE                    -->
+    <!-- ============================================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1D4ED8">
+
+    <title>Simulador de Taxas de Maquininha de Cartão 2026 | PodeCalcular</title>
+    <meta name="description" content="Calcule a taxa da maquininha de cartão: descubra o valor líquido que vai receber ou quanto cobrar do cliente para não perder dinheiro. Online, grátis e sem cadastro.">
+    <meta name="keywords" content="simulador maquininha, taxa maquininha cartão, calcular taxa cartão, repassar taxa maquininha, valor líquido maquininha, taxa débito crédito, calculadora maquininha">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="PodeCalcular">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Simulador de Taxas de Maquininha de Cartão | PodeCalcular">
+    <meta property="og:description" content="Descubra quanto vai receber de verdade ou quanto cobrar para não perder na taxa. Simulador grátis e sem cadastro.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Favicon SVG -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231D4ED8'/%3E%3Cpath d='M28 52 L44 68 L74 34' stroke='white' stroke-width='10' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+    <!-- CSS-->
+    <link rel="stylesheet" href="styles/maquininha.css">
+
+    <!-- Fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <!-- =================================================== -->
+    <!-- 1. HEADER                                             -->
+    <!-- =================================================== -->
+    <header class="header" role="banner">
+        <div class="container header__inner">
+            <a href="index.html" class="logo" aria-label="PodeCalcular - Página inicial">
+                <span class="logo__mark" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 20 7"></polyline></svg>
+                </span>
+                PodeCalcular
+            </a>
+            <a href="index.html" class="back-btn" aria-label="Voltar para a página inicial">
+                <svg class="back-btn__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span class="back-btn__text">Voltar para Início</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- =================================================== -->
+        <!-- 2. HERO                                               -->
+        <!-- =================================================== -->
+        <section class="hero">
+            <div class="container">
+                <nav class="hero__breadcrumb" aria-label="Trilha de navegação">
+                    <a href="index.html">Home</a> › <a href="#">Empreendedor</a> › <span>Maquininha de Cartão</span>
+                </nav>
+                <span class="hero__badge">💳 Finanças do Negócio</span>
+                <h1 class="hero__title">Simulador de Taxas de Maquininha de Cartão</h1>
+                <p class="hero__subtitle">
+                    Descubra quanto você vai receber de verdade após a taxa da operadora
+                    ou quanto deve cobrar do seu cliente para não perder dinheiro.
+                </p>
+            </div>
+        </section>
+
+        <!-- =================================================== -->
+        <!-- 3 e 4. FORMULÁRIO + RESULTADO                         -->
+        <!-- =================================================== -->
+        <section class="calc-section">
+            <div class="container">
+
+                <div class="calc-card">
+                    <h2 class="calc-card__title">Preencha os dados da venda</h2>
+                    <p class="calc-card__hint">O cálculo é feito no seu navegador — nenhuma informação é enviada para nós.</p>
+
+                    <form id="formMaquininha" class="form-grid" novalidate>
+
+                        <!-- O que deseja fazer? (Radio cards — vem primeiro para contexto) -->
+                        <div class="form-field">
+                            <label class="form-label">O que você deseja fazer?</label>
+                            <div class="radio-cards" role="radiogroup" aria-label="Tipo de cálculo">
+                                <div class="radio-card">
+                                    <input type="radio" id="modo-assumir" name="modo" value="assumir" checked>
+                                    <label for="modo-assumir">
+                                        <span class="radio-card__dot"></span>
+                                        <div class="radio-card__content">
+                                            <div class="radio-card__title">Assumir a taxa</div>
+                                            <div class="radio-card__desc">Descobrir quanto vou receber líquido</div>
+                                        </div>
+                                        <span class="radio-card__icon" aria-hidden="true">📉</span>
+                                    </label>
+                                </div>
+                                <div class="radio-card">
+                                    <input type="radio" id="modo-repassar" name="modo" value="repassar">
+                                    <label for="modo-repassar">
+                                        <span class="radio-card__dot"></span>
+                                        <div class="radio-card__content">
+                                            <div class="radio-card__title">Repassar a taxa</div>
+                                            <div class="radio-card__desc">Descobrir quanto cobrar do cliente</div>
+                                        </div>
+                                        <span class="radio-card__icon" aria-hidden="true">📈</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Valor + Taxa lado a lado -->
+                        <div class="form-grid form-grid--2col">
+
+                            <div class="form-field" id="field-valor">
+                                <label for="valor" class="form-label" id="labelValor">
+                                    Valor da venda
+                                </label>
+                                <div class="input-decorated input-decorated--prefix" data-prefix="R$">
+                                    <input
+                                        type="number"
+                                        id="valor"
+                                        class="form-input"
+                                        placeholder="0,00"
+                                        step="0.01"
+                                        min="0.01"
+                                        inputmode="decimal"
+                                        required>
+                                </div>
+                                <span class="form-error">Informe um valor válido.</span>
+                            </div>
+
+                            <div class="form-field" id="field-taxa">
+                                <label for="taxa" class="form-label">
+                                    Taxa da maquininha
+                                </label>
+                                <div class="input-decorated input-decorated--suffix" data-suffix="%">
+                                    <input
+                                        type="number"
+                                        id="taxa"
+                                        class="form-input"
+                                        placeholder="Ex: 4.99"
+                                        step="0.01"
+                                        min="0.01"
+                                        max="99"
+                                        inputmode="decimal"
+                                        required>
+                                </div>
+                                <span class="form-error">Informe uma taxa válida (ex: 4.99).</span>
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            Calcular Taxas
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+
+                    </form>
+                </div>
+
+                <!-- Resultado -->
+                <div id="resultado" class="result-card" aria-live="polite">
+                    <div class="result-card__header">
+                        <span class="result-card__kicker result-card__kicker--green" id="resultKicker">✓ Simulação realizada</span>
+                        <h2 class="result-card__title" id="resultTitle">Detalhamento da operação</h2>
+                    </div>
+
+                    <!-- Fluxo visual (preenchido via JS) -->
+                    <div class="flow" id="flowContainer"></div>
+
+                    <p class="result-disclaimer">
+                        ⚠️ Cálculo base. Algumas operadoras podem ter pequenas variações de
+                        arredondamento ou taxas fixas por transação (como tarifa de antecipação).
+                        Consulte sempre as condições do seu contrato.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =================================================== -->
+        <!-- 5. CONTEÚDO SEO                                       -->
+        <!-- =================================================== -->
+        <section class="article">
+            <div class="container">
+                <article class="article__wrapper">
+
+                    <h2>Como calcular a taxa da maquininha de cartão corretamente?</h2>
+                    <p>
+                        Toda vez que um cliente paga com cartão de débito ou crédito, a
+                        <strong>operadora da maquininha</strong> cobra uma porcentagem sobre o
+                        valor da venda. Essa porcentagem — a chamada <strong>MDR (Merchant
+                        Discount Rate)</strong> — varia de acordo com a operadora, o plano
+                        contratado e a bandeira do cartão. Taxas de débito costumam ficar entre
+                        1,5% e 2,5%, enquanto as de crédito à vista variam de 3% a 6%, podendo
+                        ser ainda maiores no crédito parcelado.
+                    </p>
+                    <p>
+                        Quando você <strong>assume a taxa</strong> (ou seja, não repassa para o
+                        cliente), o cálculo para saber o valor líquido é direto:
+                    </p>
+                    <div class="highlight-box">
+                        <p>
+                            <strong>Valor Líquido = Valor da Venda − (Valor da Venda × Taxa ÷ 100)</strong><br><br>
+                            Exemplo: venda de R$ 100,00 com taxa de 5%<br>
+                            Desconto = 100 × 0,05 = R$ 5,00<br>
+                            Valor líquido = 100 − 5 = <strong>R$ 95,00</strong>
+                        </p>
+                    </div>
+                    <p>
+                        A operadora retém os R$ 5,00 e deposita R$ 95,00 na sua conta. Em
+                        operações de crédito, esse depósito geralmente ocorre em 30 dias (ou
+                        em 1 dia útil se você contratar a <strong>antecipação de recebíveis</strong>,
+                        que cobra uma taxa adicional).
+                    </p>
+
+                    <h2>Qual a diferença entre assumir a taxa e repassar para o cliente?</h2>
+                    <p>
+                        São duas estratégias comerciais opostas, e cada uma se aplica a
+                        contextos diferentes:
+                    </p>
+
+                    <h3>Assumir a taxa — "eu pago"</h3>
+                    <p>
+                        O preço do produto ou serviço não muda, independentemente da forma de
+                        pagamento. Você absorve o custo da taxa como uma despesa do negócio.
+                        Essa estratégia é mais comum em estabelecimentos com <strong>margens
+                        de lucro maiores</strong>, como restaurantes, lojas de roupas e serviços
+                        profissionais. A vantagem é a simplicidade: o cliente paga o preço
+                        anunciado e pronto.
+                    </p>
+
+                    <h3>Repassar a taxa — "o cliente paga"</h3>
+                    <p>
+                        Você ajusta o valor cobrado para que, após o desconto da operadora, o
+                        valor que cai na sua conta seja exatamente o preço do produto. Essa
+                        prática é comum em prestadores de serviço, profissionais liberais e
+                        comércios com <strong>margens apertadas</strong>. Aqui, porém, entra
+                        uma armadilha matemática que a maioria dos empreendedores comete — e
+                        que explicamos no próximo tópico.
+                    </p>
+
+                    <h2>O erro mais comum na hora de repassar a taxa</h2>
+                    <p>
+                        Este é provavelmente o <strong>erro financeiro mais cometido</strong>
+                        por pequenos empreendedores no Brasil. O raciocínio errado é o seguinte:
+                    </p>
+                    <div class="highlight-box--red highlight-box">
+                        <p>
+                            <strong>❌ Pensamento errado:</strong><br>
+                            "Meu produto custa R$ 100 e a taxa é 5%. Então vou cobrar R$ 105."<br><br>
+                            <strong>O que acontece na prática:</strong><br>
+                            A operadora cobra 5% sobre R$ 105 = R$ 5,25 de desconto.<br>
+                            Você recebe: R$ 105 − R$ 5,25 = <strong>R$ 99,75</strong><br>
+                            Resultado: você <strong>perdeu R$ 0,25</strong>. Não recebeu os R$ 100 desejados.
+                        </p>
+                    </div>
+                    <p>
+                        O erro acontece porque a taxa <strong>incide sobre o valor total cobrado</strong>,
+                        e não sobre o valor original. Quando você soma 5% em cima de R$ 100,
+                        o resultado (R$ 105) se torna a nova base de cálculo, e 5% de 105 é
+                        maior do que 5% de 100.
+                    </p>
+
+                    <h3>A fórmula correta para repassar a taxa</h3>
+                    <p>
+                        Para receber exatamente o valor desejado após o desconto da taxa, a
+                        fórmula correta usa uma <strong>divisão</strong>, e não uma soma:
+                    </p>
+                    <div class="highlight-box">
+                        <p>
+                            <strong>✅ Valor a cobrar = Valor desejado ÷ (1 − Taxa ÷ 100)</strong><br><br>
+                            Exemplo: quero receber R$ 100 e a taxa é 5%<br>
+                            Valor a cobrar = 100 ÷ (1 − 0,05) = 100 ÷ 0,95 = <strong>R$ 105,26</strong><br><br>
+                            Conferência: 5% de 105,26 = R$ 5,26<br>
+                            105,26 − 5,26 = <strong>R$ 100,00</strong> ✓
+                        </p>
+                    </div>
+                    <p>
+                        Perceba que a diferença é pequena (R$ 105,26 vs R$ 105,00), mas ela
+                        se acumula. Em um negócio que fatura R$ 50.000 por mês em cartão com
+                        taxa média de 5%, o erro de "somar em cima" representa uma perda de
+                        aproximadamente <strong>R$ 125 por mês</strong> — ou
+                        <strong>R$ 1.500 por ano</strong> — que simplesmente desaparece sem
+                        que o empreendedor perceba.
+                    </p>
+
+                    <h3>Tabela comparativa: soma errada vs. divisão correta</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Valor desejado</th>
+                                    <th>Taxa</th>
+                                    <th>❌ Soma errada</th>
+                                    <th>✅ Divisão correta</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>R$ 100</td>
+                                    <td>3%</td>
+                                    <td>R$ 103,00 → recebe R$ 99,91</td>
+                                    <td>R$ 103,09 → recebe R$ 100,00</td>
+                                </tr>
+                                <tr>
+                                    <td>R$ 100</td>
+                                    <td>5%</td>
+                                    <td>R$ 105,00 → recebe R$ 99,75</td>
+                                    <td>R$ 105,26 → recebe R$ 100,00</td>
+                                </tr>
+                                <tr>
+                                    <td>R$ 500</td>
+                                    <td>5%</td>
+                                    <td>R$ 525,00 → recebe R$ 498,75</td>
+                                    <td>R$ 526,32 → recebe R$ 500,00</td>
+                                </tr>
+                                <tr>
+                                    <td>R$ 1.000</td>
+                                    <td>6%</td>
+                                    <td>R$ 1.060,00 → recebe R$ 996,40</td>
+                                    <td>R$ 1.063,83 → recebe R$ 1.000,00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2>Por que usar o simulador do PodeCalcular?</h2>
+                    <p>
+                        O <strong>Simulador de Taxas de Maquininha</strong> do PodeCalcular
+                        resolve os dois cenários em uma única ferramenta: se você quer
+                        <strong>assumir a taxa</strong>, ele mostra exatamente quanto vai cair
+                        na sua conta; se quer <strong>repassar a taxa</strong>, ele calcula o
+                        valor correto para cobrar do cliente usando a fórmula de divisão — e
+                        não a soma errada. Todo o processamento acontece localmente no seu
+                        navegador, sem cadastro e sem armazenamento de dados.
+                    </p>
+                    <p>
+                        Lembre-se de que cada operadora pode ter particularidades: taxas
+                        diferentes para débito, crédito à vista e crédito parcelado, além de
+                        tarifas fixas por transação ou custos de antecipação de recebíveis.
+                        Consulte sempre as condições do seu contrato para valores precisos.
+                    </p>
+
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =================================================== -->
+    <!-- 6. FOOTER                                             -->
+    <!-- =================================================== -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p>© 2026 <strong>PodeCalcular</strong>. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- =================================================== -->
+    <!-- JAVASCRIPT - LÓGICA DO SIMULADOR DE MAQUININHA        -->
+    <!-- =================================================== -->
+    <script>
+        /**
+         * PodeCalcular - Simulador de Taxas de Maquininha
+         * -------------------------------------------------
+         * Dois modos de cálculo:
+         *
+         * 1) ASSUMIR A TAXA (descobrir o valor líquido):
+         *    Desconto    = valorVenda × (taxa / 100)
+         *    Líquido     = valorVenda − desconto
+         *
+         * 2) REPASSAR A TAXA (descobrir quanto cobrar):
+         *    Cobrar      = valorDesejado / (1 − taxa / 100)
+         *    Desconto    = cobrar × (taxa / 100)
+         *    Conferência = cobrar − desconto === valorDesejado
+         */
+
+        (function() {
+            'use strict';
+
+            // =========== REFERÊNCIAS DOM ===========
+            var form = document.getElementById('formMaquininha');
+            var resultadoEl = document.getElementById('resultado');
+            var flowContainer = document.getElementById('flowContainer');
+            var resultTitle = document.getElementById('resultTitle');
+            var resultKicker = document.getElementById('resultKicker');
+            var labelValor = document.getElementById('labelValor');
+
+            // =========== ATUALIZAR LABEL DO CAMPO DE VALOR ===========
+            // Muda o label dinamicamente conforme a opção selecionada
+            var radios = document.querySelectorAll('input[name="modo"]');
+            radios.forEach(function(radio) {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'assumir') {
+                        labelValor.textContent = 'Valor da venda';
+                    } else {
+                        labelValor.textContent = 'Valor que deseja receber';
+                    }
+                });
+            });
+
+            // =========== HELPERS ===========
+
+            function formatBRL(valor) {
+                return valor.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+            }
+
+            function criarFlowStep(cls, label, sublabel, valor) {
+                var div = document.createElement('div');
+                div.className = 'flow-step ' + cls;
+                div.innerHTML =
+                    '<div class="flow-step__label">' +
+                        '<strong>' + label + '</strong>' +
+                        (sublabel ? '<small>' + sublabel + '</small>' : '') +
+                    '</div>' +
+                    '<div class="flow-step__value">' + valor + '</div>';
+                return div;
+            }
+
+            function criarArrow() {
+                var div = document.createElement('div');
+                div.className = 'flow-arrow';
+                div.setAttribute('aria-hidden', 'true');
+                div.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>';
+                return div;
+            }
+
+            // =========== VALIDAÇÃO ===========
+
+            function limparErros() {
+                document.querySelectorAll('.form-field').forEach(function(f) {
+                    f.classList.remove('has-error');
+                });
+            }
+
+            function marcarErro(id) {
+                var el = document.getElementById(id);
+                if (el) el.classList.add('has-error');
+            }
+
+            function validar(valor, taxa) {
+                var ok = true;
+                if (!valor || valor <= 0 || isNaN(valor)) {
+                    marcarErro('field-valor');
+                    ok = false;
+                }
+                if (!taxa || taxa <= 0 || taxa >= 100 || isNaN(taxa)) {
+                    marcarErro('field-taxa');
+                    ok = false;
+                }
+                return ok;
+            }
+
+            // =========== RENDERIZAÇÃO ===========
+
+            function renderAssumirTaxa(valor, taxa) {
+                var desconto = valor * (taxa / 100);
+                var liquido = valor - desconto;
+
+                resultKicker.textContent = '📉 Você assume a taxa';
+                resultTitle.textContent = 'Quanto vai cair na sua conta';
+
+                flowContainer.innerHTML = '';
+                flowContainer.appendChild(criarFlowStep(
+                    'flow-step--input',
+                    'Valor da venda',
+                    'O que o cliente paga',
+                    formatBRL(valor)
+                ));
+                flowContainer.appendChild(criarArrow());
+                flowContainer.appendChild(criarFlowStep(
+                    'flow-step--loss',
+                    'Desconto da operadora',
+                    taxa.toFixed(2).replace('.', ',') + '% de taxa',
+                    '− ' + formatBRL(desconto)
+                ));
+                flowContainer.appendChild(criarArrow());
+                flowContainer.appendChild(criarFlowStep(
+                    'flow-step--result',
+                    'Valor líquido',
+                    'O que você recebe de verdade',
+                    formatBRL(liquido)
+                ));
+            }
+
+            function renderRepassarTaxa(valorDesejado, taxa) {
+                var cobrar = valorDesejado / (1 - taxa / 100);
+                var desconto = cobrar * (taxa / 100);
+
+                resultKicker.textContent = '📈 Você repassa a taxa';
+                resultTitle.textContent = 'Quanto cobrar do cliente';
+
+                flowContainer.innerHTML = '';
+                flowContainer.appendChild(criarFlowStep(
+                    'flow-step--input',
+                    'Valor que quer receber',
+                    'Seu preço real',
+                    formatBRL(valorDesejado)
+                ));
+                flowContainer.appendChild(criarArrow());
+                flowContainer.appendChild(criarFlowStep(
+                    'flow-step--result',
+                    'Cobrar do cliente',
+                    'Preço com taxa embutida',
+                    formatBRL(cobrar)
+                ));
+                flowContainer.appendChild(criarArrow());
+                flowContainer.appendChild(criarFlowStep(
+                    'flow-step--loss',
+                    'Desconto da operadora',
+                    taxa.toFixed(2).replace('.', ',') + '% de ' + formatBRL(cobrar),
+                    '− ' + formatBRL(desconto)
+                ));
+                flowContainer.appendChild(criarArrow());
+                flowContainer.appendChild(criarFlowStep(
+                    'flow-step--input',
+                    'Você recebe',
+                    'Conferência: exatamente o que desejou',
+                    formatBRL(valorDesejado)
+                ));
+            }
+
+            // =========== SUBMIT HANDLER ===========
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                limparErros();
+
+                var valor = parseFloat(document.getElementById('valor').value);
+                var taxa = parseFloat(document.getElementById('taxa').value);
+                var modo = document.querySelector('input[name="modo"]:checked').value;
+
+                if (!validar(valor, taxa)) return;
+
+                if (modo === 'assumir') {
+                    renderAssumirTaxa(valor, taxa);
+                } else {
+                    renderRepassarTaxa(valor, taxa);
+                }
+
+                resultadoEl.classList.add('is-visible');
+
+                setTimeout(function() {
+                    resultadoEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 80);
+            });
+
+            // Limpa erros ao interagir
+            form.addEventListener('input', function(e) {
+                var field = e.target.closest('.form-field');
+                if (field) field.classList.remove('has-error');
+            });
+
+        })();
+    </script>
+
+</body>
+</html>
