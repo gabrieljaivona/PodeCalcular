@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1D4ED8">
+    <title>Política de Privacidade | PodeCalcular</title>
+    <meta name="description" content="Política de Privacidade do portal PodeCalcular. Saiba como tratamos seus dados pessoais, uso de cookies, Google AdSense e seus direitos conforme a LGPD.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="PodeCalcular">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231D4ED8'/%3E%3Cpath d='M28 52 L44 68 L74 34' stroke='white' stroke-width='10' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --color-primary: #1D4ED8;
+            --color-primary-light: #3B82F6;
+            --color-accent: #0EA5E9;
+            --color-bg: #F8FAFC;
+            --color-surface: #FFFFFF;
+            --color-border: #E2E8F0;
+            --color-text: #0F172A;
+            --color-text-muted: #475569;
+            --color-text-light: #94A3B8;
+            --color-highlight-bg: #EFF6FF;
+            --color-highlight-border: #3B82F6;
+            --shadow-sm: 0 1px 2px 0 rgba(15,23,42,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(15,23,42,0.08), 0 2px 4px -2px rgba(15,23,42,0.05);
+            --radius-sm: 8px;
+            --radius-lg: 16px;
+            --container-max: 800px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 16px; line-height: 1.6;
+            color: var(--color-text); background-color: var(--color-bg);
+            -webkit-font-smoothing: antialiased; min-height: 100vh;
+        }
+
+        a { color: var(--color-primary); text-decoration: none; transition: color var(--transition); }
+        a:hover { text-decoration: underline; }
+
+        .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 20px; }
+
+        /* =========== HEADER =========== */
+        .header {
+            position: sticky; top: 0; background-color: var(--color-surface);
+            border-bottom: 1px solid var(--color-border); box-shadow: var(--shadow-sm); z-index: 50;
+        }
+        .header__inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .logo {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 1.25rem; font-weight: 800; color: var(--color-primary); letter-spacing: -0.02em;
+        }
+        .logo__mark {
+            width: 34px; height: 34px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+            border-radius: 10px; display: grid; place-items: center; color: #fff;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px;
+            border-radius: 999px; font-size: 0.875rem; font-weight: 600;
+            color: var(--color-text-muted); background-color: var(--color-bg); transition: all var(--transition);
+        }
+        .back-btn:hover { background-color: var(--color-primary); color: #fff; text-decoration: none; }
+        .back-btn__icon { transition: transform var(--transition); }
+        .back-btn:hover .back-btn__icon { transform: translateX(-3px); }
+        @media (max-width: 380px) { .back-btn__text { display: none; } .back-btn { padding: 8px 12px; } }
+
+        /* =========== HERO =========== */
+        .hero {
+            padding: 40px 0 32px; text-align: center;
+            background: linear-gradient(180deg, #FFFFFF 0%, var(--color-highlight-bg) 100%);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .hero__icon {
+            width: 56px; height: 56px; margin: 0 auto 16px;
+            background-color: var(--color-highlight-bg); border-radius: var(--radius-sm);
+            display: grid; place-items: center; font-size: 1.5rem;
+        }
+        .hero__title {
+            font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 800;
+            line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 8px;
+        }
+        .hero__subtitle { font-size: 0.9375rem; color: var(--color-text-muted); }
+
+        /* =========== CONTEÚDO LEGAL =========== */
+        .legal-section { padding: 40px 0 60px; }
+
+        .legal-card {
+            background-color: var(--color-surface); border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg); padding: 28px 24px; box-shadow: var(--shadow-md);
+        }
+
+        .legal-card .last-update {
+            font-size: 0.8125rem; color: var(--color-text-light); font-weight: 500;
+            margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--color-border);
+        }
+
+        .legal-card h2 {
+            font-size: 1.25rem; font-weight: 800; color: var(--color-text);
+            margin-top: 32px; margin-bottom: 12px; line-height: 1.3;
+            padding-top: 16px; border-top: 1px solid var(--color-border);
+        }
+        .legal-card h2:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+        .legal-card h3 {
+            font-size: 1.0625rem; font-weight: 700; color: var(--color-text);
+            margin-top: 20px; margin-bottom: 8px;
+        }
+
+        .legal-card p {
+            color: var(--color-text-muted); margin-bottom: 14px; line-height: 1.8;
+        }
+
+        .legal-card ul, .legal-card ol {
+            margin: 0 0 16px 0; padding-left: 22px; color: var(--color-text-muted);
+        }
+
+        .legal-card li { margin-bottom: 8px; line-height: 1.7; }
+
+        .legal-card strong { color: var(--color-text); font-weight: 600; }
+
+        /* Caixa de destaque para cláusulas importantes */
+        .legal-highlight {
+            background-color: var(--color-highlight-bg);
+            border-left: 4px solid var(--color-highlight-border);
+            padding: 16px 18px; border-radius: var(--radius-sm); margin: 16px 0;
+        }
+        .legal-highlight p { margin-bottom: 0; color: var(--color-text); }
+
+        /* Link de navegação interna */
+        .legal-toc {
+            background-color: var(--color-bg); border-radius: var(--radius-sm);
+            padding: 16px 18px; margin-bottom: 24px;
+        }
+        .legal-toc__title {
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.1em; color: var(--color-text-light); margin-bottom: 8px;
+        }
+        .legal-toc ol { margin: 0; padding-left: 20px; }
+        .legal-toc li { margin-bottom: 4px; font-size: 0.9375rem; }
+        .legal-toc a { font-weight: 500; }
+
+        /* =========== FOOTER =========== */
+        .footer {
+            background-color: #0F172A; color: #94A3B8; padding: 28px 0;
+            text-align: center; font-size: 0.875rem;
+        }
+        .footer strong { color: #FFFFFF; font-weight: 600; }
+        .footer a { color: #CBD5E1; }
+
+        /* =========== UTILS =========== */
+        :focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; border-radius: 4px; }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+        @media (min-width: 640px) { .container { padding: 0 32px; } .legal-card { padding: 36px 40px; } .hero { padding: 56px 0 40px; } }
+    </style>
+</head>
+<body>
+
+    <header class="header" role="banner">
+        <div class="container header__inner">
+            <a href="index.html" class="logo" aria-label="PodeCalcular - Página inicial">
+                <span class="logo__mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 20 7"></polyline></svg></span>
+                PodeCalcular
+            </a>
+            <a href="index.html" class="back-btn" aria-label="Voltar para a página inicial">
+                <svg class="back-btn__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span class="back-btn__text">Voltar para Início</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero__icon" aria-hidden="true">🔒</div>
+                <h1 class="hero__title">Política de Privacidade</h1>
+                <p class="hero__subtitle">Como o PodeCalcular trata os seus dados pessoais</p>
+            </div>
+        </section>
+
+        <section class="legal-section">
+            <div class="container">
+                <div class="legal-card">
+
+                    <p class="last-update">Última atualização: 20 de abril de 2026</p>
+
+                    <nav class="legal-toc" aria-label="Índice da política">
+                        <div class="legal-toc__title">Índice</div>
+                        <ol>
+                            <li><a href="#introducao">Introdução</a></li>
+                            <li><a href="#coleta">Coleta de dados pessoais</a></li>
+                            <li><a href="#cookies">Cookies e tecnologias de rastreamento</a></li>
+                            <li><a href="#adsense">Google AdSense e publicidade</a></li>
+                            <li><a href="#analytics">Google Analytics</a></li>
+                            <li><a href="#terceiros">Links para sites de terceiros</a></li>
+                            <li><a href="#lgpd">Seus direitos (LGPD)</a></li>
+                            <li><a href="#menores">Proteção de menores</a></li>
+                            <li><a href="#alteracoes">Alterações nesta política</a></li>
+                            <li><a href="#contato">Contato</a></li>
+                        </ol>
+                    </nav>
+
+                    <!-- 1. Introdução -->
+                    <h2 id="introducao">1. Introdução</h2>
+                    <p>
+                        O <strong>PodeCalcular</strong> ("nós", "nosso" ou "portal") é um portal brasileiro
+                        de calculadoras online gratuitas voltadas para as áreas trabalhista, financeira e de
+                        saúde. Esta Política de Privacidade descreve como coletamos, utilizamos, armazenamos
+                        e protegemos as informações dos nossos visitantes ("você" ou "usuário"), em
+                        conformidade com a <strong>Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018
+                        — LGPD)</strong> e demais normas aplicáveis.
+                    </p>
+                    <p>
+                        Ao acessar e utilizar o portal PodeCalcular, você concorda com as práticas descritas
+                        nesta Política. Se não concordar com algum ponto, recomendamos que não continue a
+                        utilizar o site.
+                    </p>
+
+                    <!-- 2. Coleta de dados -->
+                    <h2 id="coleta">2. Coleta de dados pessoais</h2>
+
+                    <h3>2.1. Dados informados nas calculadoras</h3>
+                    <div class="legal-highlight">
+                        <p>
+                            <strong>Importante:</strong> Todas as calculadoras do PodeCalcular funcionam
+                            inteiramente no navegador do usuário (lado do cliente), por meio de JavaScript.
+                            Os dados que você informa nos formulários — como salário, peso, altura, custos
+                            de produtos ou qualquer outro valor — <strong>não são enviados, coletados,
+                            armazenados ou transmitidos para nenhum servidor do PodeCalcular</strong>.
+                            Todo o processamento ocorre localmente no seu dispositivo, e os dados
+                            desaparecem ao fechar a página.
+                        </p>
+                    </div>
+                    <p>
+                        Não mantemos banco de dados com informações pessoais dos usuários relacionadas
+                        ao uso das calculadoras. Não temos acesso aos valores que você digita, e não
+                        conseguimos recuperá-los sob nenhuma circunstância.
+                    </p>
+
+                    <h3>2.2. Dados coletados automaticamente</h3>
+                    <p>
+                        Ao navegar pelo PodeCalcular, podemos coletar automaticamente as seguintes
+                        informações de caráter técnico, que não identificam você pessoalmente de forma
+                        direta:
+                    </p>
+                    <ul>
+                        <li><strong>Endereço IP</strong> (anonimizado quando possível).</li>
+                        <li><strong>Tipo e versão do navegador</strong> (ex: Chrome 120, Safari 17).</li>
+                        <li><strong>Sistema operacional</strong> (ex: Android 14, Windows 11).</li>
+                        <li><strong>Páginas visitadas, data e horário de acesso</strong>.</li>
+                        <li><strong>Origem do tráfego</strong> (qual site ou busca trouxe você até nós).</li>
+                        <li><strong>Resolução de tela e idioma do navegador</strong>.</li>
+                    </ul>
+                    <p>
+                        Esses dados são coletados por meio de cookies e ferramentas de análise (como o
+                        Google Analytics) com o objetivo exclusivo de melhorar a experiência do site,
+                        entender quais páginas são mais populares e corrigir problemas técnicos.
+                    </p>
+
+                    <h3>2.3. Dados que não coletamos</h3>
+                    <p>
+                        O PodeCalcular <strong>não exige cadastro, não solicita nome, e-mail, CPF, telefone
+                        ou qualquer dado de identificação pessoal</strong> para o uso das calculadoras. Não
+                        realizamos login, não enviamos newsletters e não armazenamos dados financeiros ou
+                        de saúde.
+                    </p>
+
+                    <!-- 3. Cookies -->
+                    <h2 id="cookies">3. Cookies e tecnologias de rastreamento</h2>
+                    <p>
+                        <strong>Cookies</strong> são pequenos arquivos de texto armazenados no seu navegador
+                        quando você visita um site. <strong>Web beacons</strong> (ou "pixels de rastreamento")
+                        são imagens invisíveis incorporadas em páginas ou e-mails que permitem registrar
+                        interações do usuário. O PodeCalcular utiliza essas tecnologias para os seguintes fins:
+                    </p>
+
+                    <h3>3.1. Cookies essenciais</h3>
+                    <p>
+                        Necessários para o funcionamento básico do site. Não coletam informações pessoais
+                        e não podem ser desativados sem prejuízo da navegação.
+                    </p>
+
+                    <h3>3.2. Cookies de análise (Google Analytics)</h3>
+                    <p>
+                        Utilizamos o Google Analytics para entender como os visitantes utilizam o portal.
+                        Esses cookies coletam informações de forma agregada e anônima, como número de
+                        visitas, páginas mais acessadas e tempo de permanência. O Google pode transferir
+                        essas informações a terceiros quando exigido por lei ou quando terceiros processam
+                        dados em nome do Google. Para mais informações, consulte a
+                        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de Privacidade do Google</a>.
+                    </p>
+
+                    <h3>3.3. Cookies de publicidade (Google AdSense)</h3>
+                    <p>
+                        Este site exibe anúncios fornecidos pelo <strong>Google AdSense</strong>, um serviço
+                        de publicidade do Google LLC. O Google AdSense utiliza cookies — incluindo o
+                        <strong>cookie DART</strong> e outros identificadores — para veicular anúncios
+                        com base nas visitas anteriores do usuário a este portal e a outros sites na Internet.
+                        Mais detalhes na seção seguinte.
+                    </p>
+
+                    <h3>3.4. Como gerenciar seus cookies</h3>
+                    <p>
+                        Você pode configurar seu navegador para recusar cookies, apagar cookies existentes
+                        ou receber um aviso antes que um cookie seja armazenado. Consulte as configurações
+                        do seu navegador. Observe que a desativação de cookies pode afetar a funcionalidade
+                        de algumas áreas do site.
+                    </p>
+
+                    <!-- 4. Google AdSense -->
+                    <h2 id="adsense">4. Google AdSense e publicidade</h2>
+                    <div class="legal-highlight">
+                        <p>
+                            <strong>Aviso obrigatório sobre publicidade personalizada:</strong>
+                        </p>
+                    </div>
+                    <p>
+                        O PodeCalcular utiliza o <strong>Google AdSense</strong> para exibir anúncios
+                        publicitários em suas páginas. O Google, como fornecedor terceirizado de anúncios,
+                        utiliza <strong>cookies</strong> para veicular anúncios neste site.
+                    </p>
+                    <p>
+                        O uso do <strong>cookie DART</strong> pelo Google permite que ele exiba anúncios
+                        aos visitantes com base nas suas visitas ao PodeCalcular e a outros sites na Internet.
+                        Esses cookies permitem que o Google e seus parceiros veiculem anúncios baseados nos
+                        <strong>interesses do usuário</strong>, inferidos a partir do histórico de navegação.
+                    </p>
+                    <p>
+                        <strong>É importante que você saiba:</strong>
+                    </p>
+                    <ul>
+                        <li>
+                            O PodeCalcular <strong>não tem acesso nem controle</strong> sobre os cookies
+                            utilizados pelo Google AdSense e por seus parceiros de publicidade.
+                        </li>
+                        <li>
+                            Os anúncios podem ser personalizados com base no seu histórico de navegação
+                            em qualquer site da rede do Google (não apenas neste portal).
+                        </li>
+                        <li>
+                            Fornecedores terceirizados, incluindo o Google, utilizam cookies para veicular
+                            anúncios com base em visitas anteriores do usuário a websites.
+                        </li>
+                        <li>
+                            Você pode <strong>desativar a publicidade personalizada</strong> visitando as
+                            <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Configurações de Anúncios do Google</a>.
+                        </li>
+                        <li>
+                            Alternativamente, você pode desativar o uso de cookies por fornecedores
+                            terceirizados acessando a página de desativação da
+                            <a href="https://www.networkadvertising.org/managing/opt_out.asp" target="_blank" rel="noopener noreferrer">Network Advertising Initiative (NAI)</a>.
+                        </li>
+                    </ul>
+                    <p>
+                        Para mais informações sobre como o Google coleta e utiliza dados na publicidade,
+                        consulte a página
+                        <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">"Como o Google usa dados de sites ou apps que utilizam nossos serviços"</a>.
+                    </p>
+
+                    <!-- 5. Google Analytics -->
+                    <h2 id="analytics">5. Google Analytics</h2>
+                    <p>
+                        O PodeCalcular pode utilizar o <strong>Google Analytics</strong>, um serviço de
+                        análise de tráfego fornecido pelo Google LLC. O Google Analytics utiliza cookies
+                        para coletar informações sobre o uso do site de forma agregada — como o número de
+                        visitantes, as páginas mais acessadas, o tempo médio de permanência e a taxa de
+                        rejeição. Essas informações nos ajudam a melhorar o conteúdo e a experiência do
+                        portal.
+                    </p>
+                    <p>
+                        As informações geradas pelo cookie sobre o uso do site são transmitidas ao Google
+                        e armazenadas em servidores nos Estados Unidos. O Google pode utilizar essas
+                        informações para avaliar o uso do site, compilar relatórios de atividade e fornecer
+                        outros serviços relacionados à atividade do site e ao uso da Internet.
+                    </p>
+                    <p>
+                        Você pode impedir o Google Analytics de coletar dados instalando o
+                        <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">complemento de navegador para desativação do Google Analytics</a>.
+                    </p>
+
+                    <!-- 6. Links terceiros -->
+                    <h2 id="terceiros">6. Links para sites de terceiros</h2>
+                    <p>
+                        O PodeCalcular pode conter links para sites externos que não são operados por nós.
+                        Esses links são fornecidos apenas para conveniência e referência do usuário.
+                        <strong>Não temos controle sobre o conteúdo, as práticas de privacidade ou as
+                        políticas de segurança desses sites</strong>. Recomendamos que você leia a política
+                        de privacidade de cada site que visitar.
+                    </p>
+                    <p>
+                        A inclusão de um link externo no PodeCalcular não implica endosso, recomendação
+                        ou garantia de qualquer produto, serviço ou informação oferecida pelo site de destino.
+                    </p>
+
+                    <!-- 7. Direitos LGPD -->
+                    <h2 id="lgpd">7. Seus direitos conforme a LGPD</h2>
+                    <p>
+                        A <strong>Lei Geral de Proteção de Dados (Lei nº 13.709/2018)</strong> garante ao
+                        titular dos dados pessoais uma série de direitos. Embora o PodeCalcular não colete
+                        dados pessoais diretamente através das suas calculadoras, reconhecemos e respeitamos
+                        os seguintes direitos em relação a quaisquer dados que possam ser coletados
+                        automaticamente (cookies, logs de acesso):
+                    </p>
+                    <ul>
+                        <li><strong>Confirmação da existência de tratamento</strong> de dados pessoais.</li>
+                        <li><strong>Acesso</strong> aos dados pessoais tratados.</li>
+                        <li><strong>Correção</strong> de dados incompletos, inexatos ou desatualizados.</li>
+                        <li><strong>Anonimização, bloqueio ou eliminação</strong> de dados desnecessários ou excessivos.</li>
+                        <li><strong>Portabilidade</strong> dos dados a outro fornecedor de serviço.</li>
+                        <li><strong>Eliminação</strong> dos dados pessoais tratados com o consentimento do titular.</li>
+                        <li><strong>Informação</strong> sobre as entidades públicas e privadas com as quais realizamos uso compartilhado de dados.</li>
+                        <li><strong>Revogação do consentimento</strong> a qualquer momento.</li>
+                    </ul>
+                    <p>
+                        Para exercer qualquer um desses direitos, entre em contato conosco através dos
+                        canais indicados na seção "Contato" abaixo.
+                    </p>
+
+                    <!-- 8. Menores -->
+                    <h2 id="menores">8. Proteção de menores</h2>
+                    <p>
+                        O PodeCalcular não se destina a menores de 18 anos sem acompanhamento de pais ou
+                        responsáveis. Não coletamos intencionalmente dados pessoais de crianças e
+                        adolescentes. Se você é pai ou responsável e acredita que um menor forneceu dados
+                        pessoais através deste site, entre em contato conosco para que possamos tomar as
+                        providências necessárias.
+                    </p>
+
+                    <!-- 9. Alterações -->
+                    <h2 id="alteracoes">9. Alterações nesta Política de Privacidade</h2>
+                    <p>
+                        O PodeCalcular reserva-se o direito de atualizar esta Política de Privacidade a
+                        qualquer momento, sem aviso prévio, para refletir mudanças na legislação, nas
+                        práticas do site ou nos serviços de terceiros que utilizamos. A data da última
+                        atualização será sempre indicada no topo desta página. Recomendamos que você
+                        consulte esta página periodicamente para estar ciente de eventuais alterações.
+                    </p>
+
+                    <!-- 10. Contato -->
+                    <h2 id="contato">10. Contato</h2>
+                    <p>
+                        Se você tiver dúvidas, solicitações ou reclamações relacionadas a esta Política de
+                        Privacidade ou ao tratamento dos seus dados, entre em contato conosco:
+                    </p>
+                    <ul>
+                        <li><strong>Portal:</strong> PodeCalcular</li>
+                        <li><strong>E-mail:</strong> contato@podecalcular.com.br</li>
+                    </ul>
+                    <p>
+                        Nos comprometemos a responder a todas as solicitações dentro do prazo legal de
+                        <strong>15 (quinze) dias úteis</strong>, conforme estabelecido pela LGPD.
+                    </p>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p>© 2026 <strong>PodeCalcular</strong>. Todos os direitos reservados.</p>
+            <p style="margin-top: 8px;"><a href="termos-de-uso.html">Termos de Uso</a></p>
+        </div>
+    </footer>
+</body>
+</html>

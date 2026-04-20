@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1D4ED8">
+    <title>Termos de Uso | PodeCalcular</title>
+    <meta name="description" content="Termos e Condições de Uso do portal PodeCalcular. Isenção de responsabilidade, direitos autorais e regras de utilização das calculadoras.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="PodeCalcular">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231D4ED8'/%3E%3Cpath d='M28 52 L44 68 L74 34' stroke='white' stroke-width='10' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --color-primary: #1D4ED8;
+            --color-primary-light: #3B82F6;
+            --color-accent: #0EA5E9;
+            --color-bg: #F8FAFC;
+            --color-surface: #FFFFFF;
+            --color-border: #E2E8F0;
+            --color-text: #0F172A;
+            --color-text-muted: #475569;
+            --color-text-light: #94A3B8;
+            --color-highlight-bg: #EFF6FF;
+            --color-highlight-border: #3B82F6;
+            --color-warning-bg: #FEF3C7;
+            --color-warning-border: #F59E0B;
+            --color-warning-text: #92400E;
+            --color-danger-bg: #FEF2F2;
+            --color-danger-border: #DC2626;
+            --color-danger-text: #991B1B;
+            --shadow-sm: 0 1px 2px 0 rgba(15,23,42,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(15,23,42,0.08), 0 2px 4px -2px rgba(15,23,42,0.05);
+            --radius-sm: 8px;
+            --radius-lg: 16px;
+            --container-max: 800px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 16px; line-height: 1.6;
+            color: var(--color-text); background-color: var(--color-bg);
+            -webkit-font-smoothing: antialiased; min-height: 100vh;
+        }
+
+        a { color: var(--color-primary); text-decoration: none; transition: color var(--transition); }
+        a:hover { text-decoration: underline; }
+
+        .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 20px; }
+
+        /* =========== HEADER =========== */
+        .header {
+            position: sticky; top: 0; background-color: var(--color-surface);
+            border-bottom: 1px solid var(--color-border); box-shadow: var(--shadow-sm); z-index: 50;
+        }
+        .header__inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .logo {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 1.25rem; font-weight: 800; color: var(--color-primary); letter-spacing: -0.02em;
+        }
+        .logo__mark {
+            width: 34px; height: 34px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+            border-radius: 10px; display: grid; place-items: center; color: #fff;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px;
+            border-radius: 999px; font-size: 0.875rem; font-weight: 600;
+            color: var(--color-text-muted); background-color: var(--color-bg); transition: all var(--transition);
+        }
+        .back-btn:hover { background-color: var(--color-primary); color: #fff; text-decoration: none; }
+        .back-btn__icon { transition: transform var(--transition); }
+        .back-btn:hover .back-btn__icon { transform: translateX(-3px); }
+        @media (max-width: 380px) { .back-btn__text { display: none; } .back-btn { padding: 8px 12px; } }
+
+        /* =========== HERO =========== */
+        .hero {
+            padding: 40px 0 32px; text-align: center;
+            background: linear-gradient(180deg, #FFFFFF 0%, var(--color-highlight-bg) 100%);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .hero__icon {
+            width: 56px; height: 56px; margin: 0 auto 16px;
+            background-color: var(--color-highlight-bg); border-radius: var(--radius-sm);
+            display: grid; place-items: center; font-size: 1.5rem;
+        }
+        .hero__title {
+            font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 800;
+            line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 8px;
+        }
+        .hero__subtitle { font-size: 0.9375rem; color: var(--color-text-muted); }
+
+        /* =========== CONTEÚDO LEGAL =========== */
+        .legal-section { padding: 40px 0 60px; }
+
+        .legal-card {
+            background-color: var(--color-surface); border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg); padding: 28px 24px; box-shadow: var(--shadow-md);
+        }
+
+        .legal-card .last-update {
+            font-size: 0.8125rem; color: var(--color-text-light); font-weight: 500;
+            margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--color-border);
+        }
+
+        .legal-card h2 {
+            font-size: 1.25rem; font-weight: 800; color: var(--color-text);
+            margin-top: 32px; margin-bottom: 12px; line-height: 1.3;
+            padding-top: 16px; border-top: 1px solid var(--color-border);
+        }
+        .legal-card h2:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+        .legal-card h3 {
+            font-size: 1.0625rem; font-weight: 700; color: var(--color-text);
+            margin-top: 20px; margin-bottom: 8px;
+        }
+
+        .legal-card p {
+            color: var(--color-text-muted); margin-bottom: 14px; line-height: 1.8;
+        }
+
+        .legal-card ul, .legal-card ol {
+            margin: 0 0 16px 0; padding-left: 22px; color: var(--color-text-muted);
+        }
+
+        .legal-card li { margin-bottom: 8px; line-height: 1.7; }
+
+        .legal-card strong { color: var(--color-text); font-weight: 600; }
+
+        /* Destaques */
+        .legal-highlight {
+            background-color: var(--color-highlight-bg);
+            border-left: 4px solid var(--color-highlight-border);
+            padding: 16px 18px; border-radius: var(--radius-sm); margin: 16px 0;
+        }
+        .legal-highlight p { margin-bottom: 0; color: var(--color-text); }
+
+        /* Alerta crítico — disclaimer */
+        .legal-alert {
+            padding: 20px;
+            border-radius: var(--radius-sm); margin: 20px 0;
+            border-width: 2px; border-style: solid;
+        }
+        .legal-alert--danger {
+            background-color: var(--color-danger-bg);
+            border-color: var(--color-danger-border);
+        }
+        .legal-alert--warning {
+            background-color: var(--color-warning-bg);
+            border-color: var(--color-warning-border);
+        }
+        .legal-alert__title {
+            font-size: 1rem; font-weight: 800;
+            margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+        }
+        .legal-alert--danger .legal-alert__title { color: var(--color-danger-text); }
+        .legal-alert--warning .legal-alert__title { color: var(--color-warning-text); }
+        .legal-alert p {
+            margin-bottom: 10px; line-height: 1.7;
+        }
+        .legal-alert--danger p { color: var(--color-danger-text); }
+        .legal-alert--warning p { color: var(--color-warning-text); }
+        .legal-alert p:last-child { margin-bottom: 0; }
+        .legal-alert ul { color: inherit; }
+        .legal-alert--danger ul { color: var(--color-danger-text); }
+        .legal-alert--warning ul { color: var(--color-warning-text); }
+
+        /* Índice */
+        .legal-toc {
+            background-color: var(--color-bg); border-radius: var(--radius-sm);
+            padding: 16px 18px; margin-bottom: 24px;
+        }
+        .legal-toc__title {
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.1em; color: var(--color-text-light); margin-bottom: 8px;
+        }
+        .legal-toc ol { margin: 0; padding-left: 20px; }
+        .legal-toc li { margin-bottom: 4px; font-size: 0.9375rem; }
+        .legal-toc a { font-weight: 500; }
+
+        /* =========== FOOTER =========== */
+        .footer {
+            background-color: #0F172A; color: #94A3B8; padding: 28px 0;
+            text-align: center; font-size: 0.875rem;
+        }
+        .footer strong { color: #FFFFFF; font-weight: 600; }
+        .footer a { color: #CBD5E1; }
+
+        /* =========== UTILS =========== */
+        :focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; border-radius: 4px; }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+        @media (min-width: 640px) { .container { padding: 0 32px; } .legal-card { padding: 36px 40px; } .hero { padding: 56px 0 40px; } }
+    </style>
+</head>
+<body>
+
+    <header class="header" role="banner">
+        <div class="container header__inner">
+            <a href="index.html" class="logo" aria-label="PodeCalcular - Página inicial">
+                <span class="logo__mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 20 7"></polyline></svg></span>
+                PodeCalcular
+            </a>
+            <a href="index.html" class="back-btn" aria-label="Voltar para a página inicial">
+                <svg class="back-btn__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span class="back-btn__text">Voltar para Início</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero__icon" aria-hidden="true">📜</div>
+                <h1 class="hero__title">Termos de Uso</h1>
+                <p class="hero__subtitle">Condições para utilização do portal PodeCalcular</p>
+            </div>
+        </section>
+
+        <section class="legal-section">
+            <div class="container">
+                <div class="legal-card">
+
+                    <p class="last-update">Última atualização: 20 de abril de 2026</p>
+
+                    <nav class="legal-toc" aria-label="Índice dos termos">
+                        <div class="legal-toc__title">Índice</div>
+                        <ol>
+                            <li><a href="#aceitacao">Aceitação dos termos</a></li>
+                            <li><a href="#descricao">Descrição do serviço</a></li>
+                            <li><a href="#disclaimer">Isenção de responsabilidade (Disclaimer)</a></li>
+                            <li><a href="#saude">Aviso específico — calculadoras de saúde</a></li>
+                            <li><a href="#financeiro">Aviso específico — calculadoras financeiras</a></li>
+                            <li><a href="#trabalhista">Aviso específico — calculadoras trabalhistas</a></li>
+                            <li><a href="#propriedade">Propriedade intelectual e direitos autorais</a></li>
+                            <li><a href="#conduta">Conduta do usuário</a></li>
+                            <li><a href="#disponibilidade">Disponibilidade do serviço</a></li>
+                            <li><a href="#alteracoes">Alterações nos termos</a></li>
+                            <li><a href="#legislacao">Legislação aplicável</a></li>
+                            <li><a href="#contato">Contato</a></li>
+                        </ol>
+                    </nav>
+
+                    <!-- 1. Aceitação -->
+                    <h2 id="aceitacao">1. Aceitação dos termos</h2>
+                    <p>
+                        Ao acessar e utilizar o portal <strong>PodeCalcular</strong> ("site", "portal" ou
+                        "plataforma"), você declara ter lido, compreendido e concordado integralmente com
+                        estes Termos de Uso. Se você não concordar com qualquer disposição aqui descrita,
+                        deve interromper o uso do site imediatamente.
+                    </p>
+                    <p>
+                        O uso continuado do PodeCalcular após qualquer alteração nestes Termos constitui
+                        aceitação tácita das modificações realizadas. Estes Termos aplicam-se a todos os
+                        visitantes, usuários e quaisquer outras pessoas que acessem o portal.
+                    </p>
+
+                    <!-- 2. Descrição -->
+                    <h2 id="descricao">2. Descrição do serviço</h2>
+                    <p>
+                        O PodeCalcular é um portal de <strong>calculadoras online gratuitas</strong>
+                        voltadas para as áreas trabalhista (CLT), financeira (precificação, margem de lucro,
+                        taxas) e de saúde (IMC, metabolismo, hidratação). Todas as ferramentas funcionam
+                        inteiramente no navegador do usuário, utilizando JavaScript para realizar os
+                        cálculos de forma local, sem transmissão de dados para servidores.
+                    </p>
+                    <p>
+                        O serviço é oferecido "no estado em que se encontra" (<em>as is</em>), sem
+                        garantias de qualquer espécie — expressas ou implícitas — quanto à precisão,
+                        completude, atualização ou adequação dos resultados a qualquer finalidade específica.
+                    </p>
+
+                    <!-- 3. Disclaimer central -->
+                    <h2 id="disclaimer">3. Isenção de responsabilidade (Disclaimer)</h2>
+
+                    <div class="legal-alert legal-alert--danger">
+                        <div class="legal-alert__title">
+                            <span aria-hidden="true">⚠️</span>
+                            AVISO IMPORTANTE — LEIA COM ATENÇÃO
+                        </div>
+                        <p>
+                            Todas as calculadoras disponíveis no PodeCalcular — sejam elas trabalhistas,
+                            financeiras ou de saúde — fornecem <strong>exclusivamente estimativas
+                            matemáticas baseadas em fórmulas gerais</strong>. Os resultados apresentados:
+                        </p>
+                        <ul>
+                            <li><strong>NÃO possuem validade legal</strong>, jurídica, contábil, fiscal ou médica.</li>
+                            <li><strong>NÃO substituem</strong> a consulta a profissionais qualificados como contadores, advogados trabalhistas, médicos, nutricionistas, educadores físicos ou consultores financeiros.</li>
+                            <li><strong>NÃO consideram</strong> todas as variáveis individuais que podem afetar os resultados em situações reais (como descontos de INSS/IRRF, convenções coletivas, condições de saúde preexistentes, regimes tributários específicos, entre outros).</li>
+                            <li>São oferecidos <strong>apenas para fins informativos e educacionais</strong>.</li>
+                        </ul>
+                        <p>
+                            <strong>O portal PodeCalcular, seus administradores, colaboradores e afiliados
+                            não se responsabilizam, em nenhuma hipótese, por decisões financeiras, jurídicas,
+                            trabalhistas ou de saúde tomadas com base exclusivamente nos resultados das
+                            ferramentas disponibilizadas neste site.</strong>
+                        </p>
+                        <p>
+                            O usuário assume integralmente a responsabilidade pela utilização dos resultados
+                            e reconhece que deve sempre buscar orientação profissional especializada antes
+                            de tomar qualquer decisão com impacto financeiro, jurídico ou sobre a sua saúde.
+                        </p>
+                    </div>
+
+                    <!-- 4. Saúde -->
+                    <h2 id="saude">4. Aviso específico — calculadoras de saúde</h2>
+                    <div class="legal-alert legal-alert--warning">
+                        <div class="legal-alert__title">
+                            <span aria-hidden="true">🏥</span>
+                            Aviso de saúde
+                        </div>
+                        <p>
+                            As calculadoras de saúde do PodeCalcular (IMC, Taxa Metabólica Basal, Gasto
+                            Calórico e Água Diária) utilizam fórmulas matemáticas gerais reconhecidas pela
+                            comunidade científica (como a tabela da OMS e a fórmula de Mifflin-St Jeor),
+                            mas <strong>não constituem diagnóstico médico nem prescrição nutricional</strong>.
+                        </p>
+                        <p>
+                            Os resultados não consideram condições individuais como doenças crônicas,
+                            uso de medicamentos, gravidez, distúrbios hormonais, composição corporal
+                            detalhada ou histórico médico. <strong>Consulte sempre um médico ou
+                            nutricionista</strong> antes de iniciar qualquer dieta, programa de exercícios
+                            ou mudança significativa nos hábitos alimentares.
+                        </p>
+                        <p>
+                            Pessoas com restrições renais, insuficiência cardíaca, transtornos alimentares
+                            ou qualquer condição de saúde específica devem seguir exclusivamente as
+                            orientações do seu profissional de saúde.
+                        </p>
+                    </div>
+
+                    <!-- 5. Financeiro -->
+                    <h2 id="financeiro">5. Aviso específico — calculadoras financeiras</h2>
+                    <p>
+                        As calculadoras financeiras e de precificação (Margem de Lucro, Preço de Venda,
+                        Valor da Hora, Simulador de Maquininha) fornecem estimativas baseadas em fórmulas
+                        matemáticas padrão de administração financeira. Os resultados <strong>não
+                        consideram</strong> as particularidades de cada negócio, como:
+                    </p>
+                    <ul>
+                        <li>Regime tributário específico (Simples Nacional, Lucro Presumido, Lucro Real).</li>
+                        <li>Alíquotas de impostos estaduais e municipais.</li>
+                        <li>Custos variáveis sazonais ou inflação.</li>
+                        <li>Condições contratuais específicas com operadoras de cartão.</li>
+                    </ul>
+                    <p>
+                        <strong>Não nos responsabilizamos por prejuízos financeiros</strong> decorrentes
+                        de decisões de precificação, investimento ou gestão baseadas exclusivamente nos
+                        resultados dessas ferramentas. Consulte um <strong>contador</strong> ou
+                        <strong>consultor financeiro</strong> para análises detalhadas.
+                    </p>
+
+                    <!-- 6. Trabalhista -->
+                    <h2 id="trabalhista">6. Aviso específico — calculadoras trabalhistas</h2>
+                    <p>
+                        As calculadoras trabalhistas (Rescisão, Férias, 13º Salário, Hora Extra e Adicional
+                        Noturno) seguem as regras gerais da CLT e da Constituição Federal, mas
+                        <strong>não substituem o cálculo oficial</strong> realizado pelo departamento
+                        pessoal da empresa ou por profissionais habilitados. Os resultados apresentados:
+                    </p>
+                    <ul>
+                        <li>Não incluem descontos obrigatórios de INSS e IRRF.</li>
+                        <li>Não consideram convenções coletivas de trabalho (que podem estabelecer
+                            percentuais diferentes para hora extra, adicional noturno etc.).</li>
+                        <li>Não consideram aviso prévio indenizado, faltas, horas extras habituais,
+                            pensão alimentícia ou outros fatores específicos do contrato individual.</li>
+                        <li>Não possuem validade como prova em ações trabalhistas.</li>
+                    </ul>
+                    <p>
+                        Para valores oficiais, consulte o <strong>departamento pessoal</strong> da sua
+                        empresa, o <strong>sindicato</strong> da sua categoria ou um <strong>advogado
+                        trabalhista</strong>.
+                    </p>
+
+                    <!-- 7. Propriedade intelectual -->
+                    <h2 id="propriedade">7. Propriedade intelectual e direitos autorais</h2>
+                    <p>
+                        Todo o conteúdo presente no portal PodeCalcular — incluindo, mas não se limitando a,
+                        textos, artigos, layout, design, identidade visual, logotipo, ícones, código-fonte
+                        (HTML, CSS e JavaScript), fórmulas implementadas, estrutura de dados e a
+                        organização das ferramentas — é de <strong>propriedade exclusiva do PodeCalcular</strong>
+                        e está protegido pela <strong>Lei de Direitos Autorais (Lei nº 9.610/1998)</strong>
+                        e pela <strong>Lei de Software (Lei nº 9.609/1998)</strong>.
+                    </p>
+                    <p>
+                        <strong>É expressamente proibido</strong>, sem autorização prévia por escrito do
+                        PodeCalcular:
+                    </p>
+                    <ul>
+                        <li>Copiar, reproduzir, duplicar ou clonar as calculadoras, seus códigos-fonte
+                            ou parte deles.</li>
+                        <li>Modificar, adaptar, traduzir ou criar obras derivadas baseadas no conteúdo
+                            ou nas ferramentas do portal.</li>
+                        <li>Distribuir, publicar, licenciar, vender ou disponibilizar o conteúdo do
+                            portal em qualquer outro site, aplicativo ou meio digital.</li>
+                        <li>Utilizar técnicas de <em>scraping</em>, <em>crawling</em> automatizado ou
+                            qualquer outro método para extrair conteúdo de forma sistemática.</li>
+                        <li>Remover, alterar ou ocultar avisos de direitos autorais, marcas registradas
+                            ou qualquer outra indicação de propriedade intelectual.</li>
+                    </ul>
+                    <p>
+                        O uso não autorizado de qualquer conteúdo do PodeCalcular poderá resultar em
+                        medidas judiciais cabíveis, incluindo ação de reparação por danos morais e
+                        materiais.
+                    </p>
+
+                    <h3>7.1. Uso permitido</h3>
+                    <p>
+                        O usuário pode utilizar as calculadoras para fins pessoais e não comerciais,
+                        compartilhar links das páginas em redes sociais e referenciar o portal em conteúdos
+                        editoriais, desde que seja dado o devido crédito com link para o site
+                        <strong>podecalcular.com.br</strong>.
+                    </p>
+
+                    <!-- 8. Conduta -->
+                    <h2 id="conduta">8. Conduta do usuário</h2>
+                    <p>
+                        Ao utilizar o PodeCalcular, o usuário compromete-se a:
+                    </p>
+                    <ul>
+                        <li>Utilizar o portal de boa-fé e em conformidade com a legislação brasileira.</li>
+                        <li>Não tentar acessar áreas restritas do servidor, explorar vulnerabilidades
+                            ou interferir no funcionamento do site.</li>
+                        <li>Não utilizar as calculadoras para fins ilícitos, fraudulentos ou que
+                            possam causar dano a terceiros.</li>
+                        <li>Não sobrecarregar os servidores com requisições automatizadas em massa.</li>
+                    </ul>
+
+                    <!-- 9. Disponibilidade -->
+                    <h2 id="disponibilidade">9. Disponibilidade do serviço</h2>
+                    <p>
+                        O PodeCalcular se esforça para manter o portal disponível 24 horas por dia,
+                        7 dias por semana. No entanto, <strong>não garantimos disponibilidade
+                        ininterrupta</strong>. O acesso pode ser temporariamente suspenso para manutenção,
+                        atualização, correções de segurança ou por motivos de força maior.
+                    </p>
+                    <p>
+                        O PodeCalcular não se responsabiliza por eventuais prejuízos decorrentes da
+                        indisponibilidade temporária do serviço.
+                    </p>
+
+                    <!-- 10. Alterações -->
+                    <h2 id="alteracoes">10. Alterações nos Termos de Uso</h2>
+                    <p>
+                        O PodeCalcular reserva-se o direito de modificar estes Termos de Uso a qualquer
+                        momento, sem necessidade de notificação prévia. A data da última atualização será
+                        sempre indicada no topo desta página. É responsabilidade do usuário consultar esta
+                        página periodicamente para estar ciente de eventuais alterações.
+                    </p>
+
+                    <!-- 11. Legislação -->
+                    <h2 id="legislacao">11. Legislação aplicável e foro</h2>
+                    <p>
+                        Estes Termos de Uso são regidos pelas leis da <strong>República Federativa do
+                        Brasil</strong>. Qualquer controvérsia ou litígio decorrente da interpretação ou
+                        aplicação destes Termos será submetido ao foro da comarca de domicílio do
+                        administrador do portal, com exclusão de qualquer outro, por mais privilegiado
+                        que seja.
+                    </p>
+
+                    <!-- 12. Contato -->
+                    <h2 id="contato">12. Contato</h2>
+                    <p>
+                        Se você tiver dúvidas ou sugestões sobre estes Termos de Uso, entre em contato:
+                    </p>
+                    <ul>
+                        <li><strong>Portal:</strong> PodeCalcular</li>
+                        <li><strong>E-mail:</strong> contato@podecalcular.com.br</li>
+                    </ul>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p>© 2026 <strong>PodeCalcular</strong>. Todos os direitos reservados.</p>
+            <p style="margin-top: 8px;"><a href="politica-privacidade.html">Política de Privacidade</a></p>
+        </div>
+    </footer>
+</body>
+</html>
