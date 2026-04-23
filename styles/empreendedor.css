@@ -39,7 +39,7 @@
         .header { position: sticky; top: 0; background-color: var(--color-surface); border-bottom: 1px solid var(--color-border); box-shadow: var(--shadow-sm); z-index: 50; }
         .header__inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
         .logo { display: flex; align-items: center; gap: 10px; font-size: 1.25rem; font-weight: 800; color: var(--color-primary); letter-spacing: -0.02em; }
-        .logo__mark { width: 34px; height: 34px; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%); border-radius: 10px; display: grid; place-items: center; color: #fff; }
+        .logo__icon { width: 34px; height: 34px; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%); border-radius: 10px; display: grid; place-items: center; color: #fff; font-size: 1.1rem; font-weight: 700; }
         .back-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; font-size: 0.875rem; font-weight: 600; color: var(--color-text-muted); background-color: var(--color-bg); transition: all var(--transition); }
         .back-btn:hover { background-color: var(--color-primary); color: #fff; }
         .back-btn__icon { transition: transform var(--transition); }

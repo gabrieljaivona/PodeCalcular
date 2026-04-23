@@ -233,7 +233,6 @@
             padding: 56px 0 48px;
             text-align: center;
             background: linear-gradient(180deg, #FFFFFF 0%, #EFF6FF 100%);
-            overflow: hidden;
         }
 
         /* Padrão decorativo sutil no fundo (pontilhado) */
@@ -687,4 +686,86 @@
                 transition-duration: 0.01ms !important;
             }
             html { scroll-behavior: auto; }
+        }
+
+        /* =========== 11. SEARCH DROPDOWN =========== */
+        .search-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background-color: var(--color-surface);
+            border: 1.5px solid var(--color-border);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            z-index: 200;
+            list-style: none;
+            overflow: hidden;
+            display: none;
+            text-align: left;
+        }
+
+        .search-dropdown.is-visible {
+            display: block;
+        }
+
+        .search-dropdown__item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            min-height: 52px;
+            color: var(--color-text);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            border-bottom: 1px solid var(--color-border);
+            text-decoration: none;
+            transition: background-color var(--transition), color var(--transition);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .search-dropdown li:last-child .search-dropdown__item {
+            border-bottom: none;
+        }
+
+        .search-dropdown__item:hover,
+        .search-dropdown__item.is-focused {
+            background-color: #EFF6FF;
+            color: var(--color-primary);
+        }
+
+        .search-dropdown__emoji {
+            flex-shrink: 0;
+            font-size: 1.25rem;
+            width: 28px;
+            text-align: center;
+        }
+
+        .search-dropdown__name {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .search-dropdown__category {
+            flex-shrink: 0;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            color: var(--color-text-light);
+            background-color: var(--color-bg);
+            padding: 3px 8px;
+            border-radius: 999px;
+            letter-spacing: 0.02em;
+        }
+
+        .search-dropdown__item:hover .search-dropdown__category,
+        .search-dropdown__item.is-focused .search-dropdown__category {
+            background-color: rgba(30, 64, 175, 0.1);
+            color: var(--color-primary);
+        }
+
+        .search-dropdown__empty {
+            padding: 18px 20px;
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+            text-align: center;
         }

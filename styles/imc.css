@@ -108,7 +108,7 @@
             letter-spacing: -0.02em;
         }
 
-        .logo__mark {
+        .logo__icon {
             width: 34px;
             height: 34px;
             background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
@@ -116,6 +116,8 @@
             display: grid;
             place-items: center;
             color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
         }
 
         .back-btn {
