@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1D4ED8">
+    <title>Sobre o PodeCalcular | Calculadoras online gratuitas</title>
+    <meta name="description" content="Conheça o PodeCalcular: quem somos, como fazemos os cálculos trabalhistas, financeiros e de saúde, limitações dos resultados e como corrigir erros.">
+    <link rel="canonical" href="https://podecalcular.com.br/sobre.html">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="PodeCalcular">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --color-primary: #1D4ED8;
+            --color-primary-light: #3B82F6;
+            --color-accent: #0EA5E9;
+            --color-bg: #F8FAFC;
+            --color-surface: #FFFFFF;
+            --color-border: #E2E8F0;
+            --color-text: #0F172A;
+            --color-text-muted: #475569;
+            --color-text-light: #94A3B8;
+            --color-highlight-bg: #EFF6FF;
+            --color-highlight-border: #3B82F6;
+            --shadow-sm: 0 1px 2px 0 rgba(15,23,42,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(15,23,42,0.08), 0 2px 4px -2px rgba(15,23,42,0.05);
+            --radius-sm: 8px;
+            --radius-lg: 16px;
+            --container-max: 800px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 16px; line-height: 1.6;
+            color: var(--color-text); background-color: var(--color-bg);
+            -webkit-font-smoothing: antialiased; min-height: 100vh;
+        }
+
+        a { color: var(--color-primary); text-decoration: none; transition: color var(--transition); }
+        a:hover { text-decoration: underline; }
+
+        .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 20px; }
+
+        /* =========== HEADER =========== */
+        .header {
+            position: sticky; top: 0; background-color: var(--color-surface);
+            border-bottom: 1px solid var(--color-border); box-shadow: var(--shadow-sm); z-index: 50;
+        }
+        .header__inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .logo {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 1.25rem; font-weight: 800; color: var(--color-primary); letter-spacing: -0.02em;
+        }
+        .logo__icon {
+            width: 34px; height: 34px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+            border-radius: 10px; display: grid; place-items: center; color: #fff;
+            font-size: 1.1rem; font-weight: 700;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px;
+            border-radius: 999px; font-size: 0.875rem; font-weight: 600;
+            color: var(--color-text-muted); background-color: var(--color-bg); transition: all var(--transition);
+        }
+        .back-btn:hover { background-color: var(--color-primary); color: #fff; text-decoration: none; }
+        .back-btn__icon { transition: transform var(--transition); }
+        .back-btn:hover .back-btn__icon { transform: translateX(-3px); }
+        @media (max-width: 380px) { .back-btn__text { display: none; } .back-btn { padding: 8px 12px; } }
+
+        /* =========== HERO =========== */
+        .hero {
+            padding: 40px 0 32px; text-align: center;
+            background: linear-gradient(180deg, #FFFFFF 0%, var(--color-highlight-bg) 100%);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .hero__icon {
+            width: 56px; height: 56px; margin: 0 auto 16px;
+            background-color: var(--color-highlight-bg); border-radius: var(--radius-sm);
+            display: grid; place-items: center; font-size: 1.5rem;
+        }
+        .hero__title {
+            font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 800;
+            line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 8px;
+        }
+        .hero__subtitle { font-size: 0.9375rem; color: var(--color-text-muted); }
+
+        /* =========== CONTEÚDO LEGAL =========== */
+        .legal-section { padding: 40px 0 60px; }
+
+        .legal-card {
+            background-color: var(--color-surface); border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg); padding: 28px 24px; box-shadow: var(--shadow-md);
+        }
+
+        .legal-card .last-update {
+            font-size: 0.8125rem; color: var(--color-text-light); font-weight: 500;
+            margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--color-border);
+        }
+
+        .legal-card h2 {
+            font-size: 1.25rem; font-weight: 800; color: var(--color-text);
+            margin-top: 32px; margin-bottom: 12px; line-height: 1.3;
+            padding-top: 16px; border-top: 1px solid var(--color-border);
+        }
+        .legal-card h2:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+        .legal-card h3 {
+            font-size: 1.0625rem; font-weight: 700; color: var(--color-text);
+            margin-top: 20px; margin-bottom: 8px;
+        }
+
+        .legal-card p {
+            color: var(--color-text-muted); margin-bottom: 14px; line-height: 1.8;
+        }
+
+        .legal-card ul, .legal-card ol {
+            margin: 0 0 16px 0; padding-left: 22px; color: var(--color-text-muted);
+        }
+
+        .legal-card li { margin-bottom: 8px; line-height: 1.7; }
+
+        .legal-card strong { color: var(--color-text); font-weight: 600; }
+
+        /* Caixa de destaque para cláusulas importantes */
+        .legal-highlight {
+            background-color: var(--color-highlight-bg);
+            border-left: 4px solid var(--color-highlight-border);
+            padding: 16px 18px; border-radius: var(--radius-sm); margin: 16px 0;
+        }
+        .legal-highlight p { margin-bottom: 0; color: var(--color-text); }
+
+        /* Link de navegação interna */
+        .legal-toc {
+            background-color: var(--color-bg); border-radius: var(--radius-sm);
+            padding: 16px 18px; margin-bottom: 24px;
+        }
+        .legal-toc__title {
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.1em; color: var(--color-text-light); margin-bottom: 8px;
+        }
+        .legal-toc ol { margin: 0; padding-left: 20px; }
+        .legal-toc li { margin-bottom: 4px; font-size: 0.9375rem; }
+        .legal-toc a { font-weight: 500; }
+
+        /* =========== FOOTER =========== */
+        .footer {
+            background-color: #0F172A; color: #94A3B8; padding: 28px 0;
+            text-align: center; font-size: 0.875rem;
+        }
+        .footer strong { color: #FFFFFF; font-weight: 600; }
+        .footer a { color: #CBD5E1; }
+
+        /* =========== UTILS =========== */
+        :focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; border-radius: 4px; }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+        @media (min-width: 640px) { .container { padding: 0 32px; } .legal-card { padding: 36px 40px; } .hero { padding: 56px 0 40px; } }
+    </style>
+    <link rel="stylesheet" href="styles/footer.css">
+</head>
+<body>
+
+    <header class="header" role="banner">
+        <div class="container header__inner">
+            <a href="index.html" class="logo" aria-label="PodeCalcular - Página inicial">
+                <span class="logo__icon" aria-hidden="true">=</span>
+                PodeCalcular
+            </a>
+            <a href="index.html" class="back-btn" aria-label="Voltar para a página inicial">
+                <svg class="back-btn__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span class="back-btn__text">Voltar para Início</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero__icon" aria-hidden="true">ℹ️</div>
+                <h1 class="hero__title">Sobre o PodeCalcular</h1>
+                <p class="hero__subtitle">Calculadoras gratuitas, claras e transparentes</p>
+            </div>
+        </section>
+        <section class="legal-section">
+            <div class="container">
+                <div class="legal-card">
+<h2>Quem somos</h2>
+<p>O <strong>PodeCalcular</strong> é um portal brasileiro de calculadoras online gratuitas, criado para que qualquer pessoa consiga fazer contas do dia a dia sem planilhas complicadas: direitos trabalhistas, finanças de pequenos negócios e indicadores de saúde. Tudo roda no seu navegador, sem cadastro.</p>
+<h2>O que oferecemos</h2>
+<ul>
+<li><strong>Trabalhador:</strong> <a href="rescisao.html">rescisão</a>, <a href="ferias.html">férias</a>, <a href="decimo-terceiro.html">13º salário</a> e <a href="hora-extra.html">hora extra e adicional noturno</a>.</li>
+<li><strong>Empreendedor:</strong> <a href="valor-hora.html">valor da hora</a>, <a href="margem-lucro.html">margem de lucro</a>, <a href="preco-venda.html">preço de venda</a> e <a href="maquininha.html">taxas de maquininha</a>.</li>
+<li><strong>Saúde:</strong> <a href="imc.html">IMC</a>, <a href="tmb.html">taxa metabólica basal</a> e <a href="agua.html">ingestão diária de água</a>.</li>
+</ul>
+<h2>Como fazemos os cálculos</h2>
+<p>Cada calculadora traz, na própria página, a explicação da fórmula, exemplos e as premissas utilizadas. Os cálculos trabalhistas seguem a CLT e a legislação previdenciária e tributária vigente; os de saúde usam referências amplamente aceitas, como a classificação de IMC da Organização Mundial da Saúde e a equação de Mifflin-St Jeor para a TMB.</p>
+<h2>Limitações importantes</h2>
+<p>Os resultados são <strong>estimativas informativas</strong> e não substituem a orientação de um contador, advogado trabalhista, nutricionista ou médico. Convenções coletivas, acordos individuais e situações específicas podem alterar valores. Consulte também nossos <a href="termos-de-uso.html">Termos de Uso</a>.</p>
+<h2>Correções e sugestões</h2>
+<p>Encontrou um erro ou quer sugerir uma nova calculadora? Fale conosco pela página de <a href="contato.html">contato</a>. Avaliamos cada mensagem e corrigimos problemas assim que confirmados.</p>
+<h2>Publicidade e privacidade</h2>
+<p>O portal é mantido de forma independente e pode exibir anúncios para cobrir seus custos. Os anúncios são claramente separados do conteúdo. Saiba mais na <a href="politica-privacidade.html">Política de Privacidade</a>.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <ul class="footer__nav"><li><a href="sobre.html">Sobre</a></li><li><a href="contato.html">Contato</a></li><li><a href="politica-privacidade.html">Política de Privacidade</a></li><li><a href="termos-de-uso.html">Termos de Uso</a></li></ul>
+            <p class="footer__calcs"><a href="rescisao.html">Rescisão</a> ·<a href="ferias.html">Férias</a> ·<a href="decimo-terceiro.html">13º Salário</a> ·<a href="hora-extra.html">Hora Extra</a> ·<a href="valor-hora.html">Valor da Hora</a> ·<a href="margem-lucro.html">Margem de Lucro</a> ·<a href="preco-venda.html">Preço de Venda</a> ·<a href="maquininha.html">Maquininha</a> ·<a href="imc.html">IMC</a> ·<a href="tmb.html">TMB</a> ·<a href="agua.html">Água Diária</a></p>
+            <p>© 2026 <strong>PodeCalcular</strong>. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
