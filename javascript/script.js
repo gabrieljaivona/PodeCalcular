@@ -1,5 +1,5 @@
 /**
-         * Calculei Portal - Scripts principais
+         * PodeCalcular Portal - Scripts principais
          * ------------------------------------
          * 1. Controle do Menu Hambúrguer (abrir/fechar + overlay + tecla ESC)
          * 2. Handler do formulário de busca (demo)
@@ -82,7 +82,7 @@
                 // Por enquanto apenas uma demonstração.
                 // Em produção, redirecionar para a página de resultados:
                 // window.location.href = '/buscar?q=' + encodeURIComponent(query);
-                console.log('[Calculei] Busca solicitada:', query);
+                console.log('[PodeCalcular] Busca solicitada:', query);
                 alert('Busca por: "' + query + '"\n\n(Integração real com o backend de busca acontecerá nesta etapa.)');
             });
 

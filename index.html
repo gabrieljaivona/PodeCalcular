@@ -12,7 +12,8 @@
     <meta name="description" content="O PodeCalcular reúne as melhores calculadoras online gratuitas do Brasil: trabalhista, financeira, saúde e empreendedorismo. Faça seus cálculos de forma rápida, simples e confiável.">
     <meta name="keywords" content="calculadora online, calculadora grátis, calculadora de rescisão, calculadora IMC, calculadora margem de lucro, simulador trabalhista, calculadoras">
     <meta name="google-adsense-account" content="ca-pub-3557846309993827">
-    <meta name="author" content="Calculei">
+    <meta name="author" content="PodeCalcular">
+    <link rel="canonical" href="https://podecalcular.com.br/">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph (compartilhamento em redes sociais) -->
@@ -32,6 +33,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="styles/footer.css">
 </head>
 <body>
 
@@ -42,7 +44,7 @@
         <div class="container header__inner">
 
             <!-- Logo em texto (à esquerda) -->
-            <a href="#" class="logo" aria-label="Calculei - Página inicial">
+            <a href="index.html" class="logo" aria-label="PodeCalcular - Página inicial">
                 <span class="logo__icon" aria-hidden="true">=</span>
                 PodeCalcular
             </a>
@@ -97,7 +99,7 @@
         <section class="hero" aria-labelledby="heroTitle">
             <div class="container hero__content">
 
-                <span class="hero__badge">✨ Mais de 10 calculadoras gratuitas</span>
+                <span class="hero__badge">✨ 11 calculadoras gratuitas</span>
 
                 <h1 class="hero__title" id="heroTitle">
                     Todas as contas da sua vida em um <span>só lugar</span>
@@ -154,7 +156,7 @@
                         <div class="category-card__icon" aria-hidden="true">👷</div>
                         <h3 class="category-card__title">Trabalhador</h3>
                         <p class="category-card__description">
-                            Calcule sua rescisão, férias, 13º salário, horas extras, FGTS e muito mais.
+                            Calcule sua rescisão, férias, 13º salário, horas extras e valor da hora de trabalho.
                             Tudo com base na legislação atualizada.
                         </p>
                         <span class="category-card__link">
@@ -167,7 +169,7 @@
                         <div class="category-card__icon" aria-hidden="true">📊</div>
                         <h3 class="category-card__title">Empreendedor</h3>
                         <p class="category-card__description">
-                            Margem de lucro, markup, preço de venda, Simples Nacional e fluxo de caixa.
+                            Margem de lucro, preço de venda, taxas de maquininha e valor da hora.
                             Decisões melhores para o seu negócio.
                         </p>
                         <span class="category-card__link">
@@ -202,7 +204,7 @@
                     <span class="section__kicker">Populares</span>
                     <h2 class="section__title" id="featuredTitle">Calculadoras em destaque</h2>
                     <p class="section__description">
-                        As ferramentas mais usadas pelos nossos visitantes esta semana.
+                        Algumas das calculadoras mais procuradas do portal.
                     </p>
                 </header>
 
@@ -245,6 +247,35 @@
             </div>
         </section>
 
+        <!-- =============================================== -->
+        <!-- 5. GUIA E PERGUNTAS FREQUENTES                  -->
+        <!-- =============================================== -->
+        <section class="section home-guide" aria-labelledby="guideTitle">
+            <div class="container prose">
+                <h2 class="section__title" id="guideTitle">Como o PodeCalcular ajuda no seu dia a dia</h2>
+                <p>Muita gente só descobre que errou uma conta quando o dinheiro já saiu do bolso: um acerto de rescisão com valores diferentes do esperado, um produto vendido sem margem ou uma meta calórica que não fazia sentido. O PodeCalcular reúne calculadoras gratuitas, em português, que mostram o resultado e também <strong>explicam de onde ele vem</strong>, com a fórmula, exemplos numéricos e as regras da legislação brasileira.</p>
+
+                <h3>Para quem trabalha com carteira assinada</h3>
+                <p>As calculadoras trabalhistas seguem a CLT e ajudam a conferir <a href="ferias.html">férias com o terço constitucional</a>, o <a href="decimo-terceiro.html">13º salário em duas parcelas</a>, o valor da <a href="hora-extra.html">hora extra e do adicional noturno</a> e as <a href="rescisao.html">verbas da rescisão</a>. São estimativas brutas, úteis para chegar ao departamento pessoal com perguntas objetivas.</p>
+
+                <h3>Para quem empreende ou trabalha por conta própria</h3>
+                <p>Formar preço é uma das decisões mais importantes de um pequeno negócio. Calcule quanto precisa cobrar pela sua hora de trabalho, monte o <a href="preco-venda.html">preço de venda com markup divisor</a>, entenda a diferença entre <a href="margem-lucro.html">margem e markup</a> e simule as <a href="maquininha.html">taxas da maquininha</a> antes de decidir se vai repassá-las ao cliente.</p>
+
+                <h3>Para acompanhar sua saúde</h3>
+                <p>Descubra seu <a href="imc.html">IMC</a> pela classificação da Organização Mundial da Saúde, estime sua <a href="tmb.html">taxa metabólica basal</a> e veja quanto de <a href="agua.html">água</a> tomar por dia. São indicadores gerais, que não substituem a consulta com um profissional de saúde.</p>
+
+                <h2 class="section__title">Perguntas frequentes</h2>
+                <h3>As calculadoras são gratuitas e precisam de cadastro?</h3>
+                <p>São totalmente gratuitas e não exigem cadastro. Os cálculos são feitos no seu navegador e os valores digitados não são enviados a nenhum servidor.</p>
+                <h3>Os resultados são oficiais?</h3>
+                <p>Não. São estimativas para orientação. Descontos individuais, convenções coletivas e particularidades de contrato podem alterar os valores. Para cálculos oficiais, procure um contador, um advogado trabalhista ou o departamento pessoal da empresa.</p>
+                <h3>De onde vêm as regras usadas nos cálculos?</h3>
+                <p>As calculadoras trabalhistas se baseiam na CLT e na legislação complementar; as de saúde, em referências como a Organização Mundial da Saúde e a equação de Mifflin-St Jeor; as financeiras, em conceitos consagrados de gestão, como markup e margem. Cada página lista suas fontes ao final.</p>
+                <h3>Encontrei um erro. Como aviso?</h3>
+                <p>Escreva pela página de <a href="contato.html">contato</a> informando a calculadora, os valores digitados e o resultado esperado. Verificamos cada relato e corrigimos o que for confirmado. Saiba mais <a href="sobre.html">sobre o projeto</a>.</p>
+            </div>
+        </section>
+
     </main>
 
     <!-- =============================================== -->
@@ -255,21 +286,21 @@
 
             <!-- Bloco de texto rico em conteúdo (importante para o AdSense) -->
             <div class="footer__seo">
-                <h2 class="footer__seo-title">Sobre o Portal Calculei</h2>
+                <h2 class="footer__seo-title">Sobre o Portal PodeCalcular</h2>
                 <p class="footer__seo-text">
-                    O <strong>Calculei</strong> é um portal brasileiro criado para descomplicar os cálculos
+                    O <strong>PodeCalcular</strong> é um portal brasileiro criado para descomplicar os cálculos
                     do dia a dia. Reunimos em um único lugar <strong>calculadoras online gratuitas</strong>
                     para as mais diversas áreas da vida: desde o cálculo da sua
                     <strong>rescisão trabalhista</strong>, férias e 13º salário, passando por ferramentas
                     essenciais para <strong>empreendedores</strong> (como margem de lucro, markup e formação
                     de preço), até indicadores de <strong>saúde</strong> como o IMC e a taxa metabólica basal.
-                    Todas as fórmulas são revisadas por profissionais e mantidas atualizadas conforme a
+                    Cada calculadora explica a fórmula utilizada e indica as fontes oficiais, com base na
                     legislação vigente.
                 </p>
                 <p class="footer__seo-text">
                     Nosso compromisso é oferecer uma experiência rápida, transparente e 100% gratuita.
                     Você não precisa criar conta, instalar aplicativos ou preencher formulários longos:
-                    basta acessar o Calculei, escolher a calculadora que precisa e receber o resultado em
+                    basta acessar o PodeCalcular, escolher a calculadora que precisa e receber o resultado em
                     segundos, com explicações claras sobre como cada valor foi obtido. Acreditamos que o
                     acesso à informação financeira, trabalhista e de saúde deve ser simples e universal,
                     por isso mantemos este portal em constante evolução, adicionando novas ferramentas
@@ -280,11 +311,12 @@
             <div class="footer__divider"></div>
 
             <div class="footer__bottom">
-                <p class="footer__copy">© 2026 Calculei. Todos os direitos reservados.</p>
+                <p class="footer__copy">© 2026 PodeCalcular. Todos os direitos reservados.</p>
                 <ul class="footer__links">
                     <li><a href="politica-privacidade.html" class="footer__link">Política de Privacidade</a></li>
                     <li><a href="termos-de-uso.html" class="footer__link">Termos de Uso</a></li>
-                    <li><a href="#contato" class="footer__link">Contato</a></li>
+                    <li><a href="sobre.html" class="footer__link">Sobre</a></li>
+                    <li><a href="contato.html" class="footer__link">Contato</a></li>
                 </ul>
             </div>
 
