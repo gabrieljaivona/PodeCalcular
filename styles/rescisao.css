@@ -554,4 +554,13 @@
 /* Dica abaixo dos campos */
 .form-hint { font-size: .8125rem; color: var(--color-text-muted); margin-top: 4px; line-height: 1.5; }
 .form-field.has-error .form-hint { display: none; }
-.result-line--desconto .result-line__value { color: var(--color-danger); }
+.result-line--desconto .result-line__value { color: var(--color-danger, #DC2626); }
+
+/* =========== TOTAIS SEPARADOS (TRCT x FGTS) =========== */
+.result-totals { display: grid; gap: 10px; margin-top: 12px; }
+.result-totals .result-total { margin-top: 0; gap: 12px; }
+.result-total__label { display: flex; flex-direction: column; gap: 2px; }
+.result-total__desc { font-size: .8125rem; font-weight: 500; opacity: .9; }
+.result-total__value { white-space: nowrap; }
+.result-total--fgts { background: linear-gradient(135deg, #047857 0%, var(--color-success) 100%); }
+.result-total--fgts .result-total__value { font-size: 1.25rem; }

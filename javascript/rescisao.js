@@ -24,6 +24,8 @@
             const resultadoEl = document.getElementById('resultado');
             const resultadoLinhasEl = document.getElementById('resultadoLinhas');
             const resultadoTotalEl = document.getElementById('resultadoTotal');
+            const resultadoFgtsEl = document.getElementById('resultadoFgts');
+            const resultadoFgtsDescEl = document.getElementById('resultadoFgtsDesc');
             const memoriaCalculoEl = document.getElementById('memoriaCalculo');
             const motivoEl = document.getElementById('motivo');
             const avisoEl = document.getElementById('aviso');
@@ -385,7 +387,7 @@
                     );
                 }
 
-                const valores = [d.saldoSalario, d.avisoPrevio, d.decimoTerceiro, d.ferias, d.multaFgts]
+                const valores = [d.saldoSalario, d.avisoPrevio, d.decimoTerceiro, d.ferias]
                     .filter(v => v !== 0);
                 const parcelas = valores
                     .map((v, i) => (i === 0 ? '' : (v < 0 ? ' − ' : ' + ')) + formatBRL(Math.abs(v)))
@@ -394,7 +396,10 @@
                 return `
                     <h3 class="memoria-calculo__titulo">Memória de cálculo: como chegamos a esse valor</h3>
                     <ol class="memoria-calculo__lista">${itens.join('')}</ol>
-                    <p class="memoria-calculo__total">Somando tudo: ${parcelas} = <strong>${formatBRL(d.total)}</strong>.</p>
+                    <p class="memoria-calculo__total">Soma das verbas rescisórias (TRCT): ${parcelas} = <strong>${formatBRL(d.totalTrct)}</strong>.</p>
+                    <p class="memoria-calculo__total">Multa depositada no FGTS: ${d.percentualMulta > 0
+                        ? `<strong>${formatBRL(d.multaFgts)}</strong>${d.fgtsInformado ? '' : ' (estimativa)'}.`
+                        : 'não há multa no pedido de demissão.'}</p>
                     <p class="memoria-calculo__nota">Meses com 15 dias ou mais de trabalho contam como mês inteiro.
                     Este cálculo considera que férias de períodos anteriores já foram tiradas.</p>
                 `;
@@ -437,17 +442,16 @@
                     dados.ferias
                 ));
 
+                resultadoTotalEl.textContent = formatBRL(dados.totalTrct);
+                resultadoFgtsEl.textContent = formatBRL(dados.multaFgts);
                 if (dados.percentualMulta > 0) {
-                    resultadoLinhasEl.appendChild(criarLinha(
-                        dados.motivo === 'acordo' ? 'Multa de 20% do FGTS (acordo)' : 'Multa de 40% do FGTS',
-                        dados.fgtsInformado
-                            ? `Sobre o saldo informado de ${formatBRL(dados.fgtsBase)}`
-                            : 'Estimativa sobre os depósitos de 8% de FGTS',
-                        dados.multaFgts
-                    ));
+                    const pct = dados.motivo === 'acordo' ? '20%' : '40%';
+                    resultadoFgtsDescEl.textContent = dados.fgtsInformado
+                        ? `Multa de ${pct} sobre o saldo informado de ${formatBRL(dados.fgtsBase)}`
+                        : `Multa de ${pct}, estimada sobre depósitos de 8% ao mês`;
+                } else {
+                    resultadoFgtsDescEl.textContent = 'Sem multa no pedido de demissão';
                 }
-
-                resultadoTotalEl.textContent = formatBRL(dados.total);
                 memoriaCalculoEl.innerHTML = gerarMemoriaCalculo(dados);
                 resultadoEl.classList.add('is-visible');
 
@@ -513,7 +517,8 @@
                     : calcFGTSEstimado(salario, dataAdmissao, dataDemissao, Math.max(avisoPrevio, 0));
                 const multaFgts = fgtsBase * percentualMulta;
 
-                const total = saldoSalario + avisoPrevio + decimoTerceiro + ferias + multaFgts;
+                // Verbas pagas no termo de rescisão (TRCT); a multa vai para a conta do FGTS
+                const totalTrct = saldoSalario + avisoPrevio + decimoTerceiro + ferias;
 
                 // --- Metadados para exibir nas linhas ---
                 const inicioAno = new Date(dataDemissao.getFullYear(), 0, 1);
@@ -544,7 +549,7 @@
                     decimoTerceiro,
                     ferias,
                     multaFgts,
-                    total
+                    totalTrct
                 });
             });
 

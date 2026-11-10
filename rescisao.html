@@ -207,9 +207,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <!-- O conteúdo das linhas é inserido via JavaScript -->
                     <div id="resultadoLinhas"></div>
 
-                    <div class="result-total">
-                        <span class="result-total__label">Total Estimado</span>
-                        <span class="result-total__value" id="resultadoTotal">R$ 0,00</span>
+                    <div class="result-totals">
+                        <div class="result-total">
+                            <span class="result-total__label">
+                                Recebido na rescisão (TRCT)
+                                <small class="result-total__desc">Saldo de salário, aviso, 13º e férias</small>
+                            </span>
+                            <span class="result-total__value" id="resultadoTotal">R$ 0,00</span>
+                        </div>
+                        <div class="result-total result-total--fgts">
+                            <span class="result-total__label">
+                                Depositado no FGTS
+                                <small class="result-total__desc" id="resultadoFgtsDesc">Multa rescisória</small>
+                            </span>
+                            <span class="result-total__value" id="resultadoFgts">R$ 0,00</span>
+                        </div>
                     </div>
 
                     <!-- Memória de cálculo: preenchida via JavaScript -->
