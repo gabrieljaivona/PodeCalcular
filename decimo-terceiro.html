@@ -133,9 +133,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                     <option value="11">11 meses</option>
                                     <option value="12">12 meses (ano completo)</option>
                                 </select>
-                                <span class="form-error">Selecione o número de meses trabalhados.</span>
+                                <span class="form-help" id="mesesAjuda" hidden>Calculado pela data de admissão. Apague a data para escolher manualmente.</span>
+                                <span class="form-error">Selecione o número de meses trabalhados ou informe a data de admissão.</span>
                             </div>
 
+                        </div>
+
+                        <!-- Data de admissão (opcional): alternativa ao select de meses -->
+                        <div class="form-field" id="field-admissao">
+                            <label for="dataAdmissao" class="form-label">
+                                Data de admissão no ano atual
+                                <span class="form-label-hint">(opcional)</span>
+                            </label>
+                            <input
+                                type="date"
+                                id="dataAdmissao"
+                                class="form-input"
+                                aria-describedby="admissaoAjuda">
+                            <span class="form-help" id="admissaoAjuda">
+                                Escolha um dos dois jeitos: <strong>informe a data</strong> em que você entrou na empresa
+                                este ano e o sistema conta os meses pela regra dos 15 dias, <strong>ou</strong> deixe em
+                                branco e selecione os meses no campo acima.
+                            </span>
+                            <span class="form-error" id="admissaoErro">Informe uma data válida.</span>
                         </div>
 
                         <button type="submit" class="submit-btn">
@@ -400,6 +420,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </footer>
 
+    <script src="javascript/clt-comum.js"></script>
     <script src="javascript/decimo-terceiro.js"></script>
 
 </body>
