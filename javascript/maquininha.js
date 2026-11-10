@@ -11,6 +11,11 @@
          *    Cobrar      = valorDesejado / (1 − taxa / 100)
          *    Desconto    = cobrar × (taxa / 100)
          *    Conferência = cobrar − desconto === valorDesejado
+         *
+         * Centavos: preço e desconto são arredondados ao centavo mais próximo.
+         * Com essa regra, o líquido do repasse fecha exatamente no valor desejado
+         * (verificado em milhares de combinações). Operadoras que arredondam a
+         * taxa de outro jeito podem diferir em 1 centavo (aviso no disclaimer).
          */
 
         (function() {
@@ -23,6 +28,7 @@
             var resultTitle = document.getElementById('resultTitle');
             var resultKicker = document.getElementById('resultKicker');
             var labelValor = document.getElementById('labelValor');
+            var memoriaCalculoEl = document.getElementById('memoriaCalculo');
 
             // =========== ATUALIZAR LABEL DO CAMPO DE VALOR ===========
             // Muda o label dinamicamente conforme a opção selecionada
@@ -68,6 +74,119 @@
                 return div;
             }
 
+            function formatTaxa(taxa) {
+                return taxa.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 4 }) + '%';
+            }
+
+            function formatFator(f) {
+                return f.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+            }
+
+            /**
+             * Valor exato com até 4 casas, para mostrar a dízima antes do arredondamento.
+             */
+            function formatExato(v) {
+                return 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+            }
+
+            // =========== CÁLCULO EM CENTAVOS ===========
+
+            function emCentavos(v) {
+                return Math.round(v * 100);
+            }
+
+            /**
+             * Vendedor assume a taxa: desconto arredondado ao centavo.
+             */
+            function calcAssumir(valor, taxa) {
+                var valorC = emCentavos(valor);
+                var descontoC = Math.round(valorC * taxa / 100);
+                return { valor: valorC / 100, desconto: descontoC / 100, liquido: (valorC - descontoC) / 100 };
+            }
+
+            /**
+             * Vendedor repassa a taxa: preço = desejado ÷ (1 − taxa), arredondado
+             * ao centavo mais próximo. A conferência é calculada, não presumida.
+             */
+            function calcRepassar(desejado, taxa) {
+                var desejadoC = emCentavos(desejado);
+                var exato = desejadoC / (1 - taxa / 100);
+                var cobrarC = Math.round(exato);
+                var descontoC = Math.round(cobrarC * taxa / 100);
+                return {
+                    desejado: desejadoC / 100,
+                    exato: exato / 100,
+                    cobrar: cobrarC / 100,
+                    desconto: descontoC / 100,
+                    recebe: (cobrarC - descontoC) / 100
+                };
+            }
+
+            // =========== MEMÓRIA DE CÁLCULO ===========
+
+            function passosAssumir(valor, taxa) {
+                var a = calcAssumir(valor, taxa);
+                return '<li><strong>Se você assume a taxa:</strong> valor da venda − (valor da venda × taxa) = valor ' +
+                    'líquido. ' + formatBRL(a.valor) + ' × ' + formatTaxa(taxa) + ' = ' + formatBRL(a.desconto) +
+                    ' de desconto da operadora, então ' + formatBRL(a.valor) + ' − ' + formatBRL(a.desconto) + ' = <strong>' +
+                    formatBRL(a.liquido) + '</strong> caem na sua conta.</li>';
+            }
+
+            function passosRepassar(desejado, taxa) {
+                var r = calcRepassar(desejado, taxa);
+                var fator = 1 - taxa / 100;
+                var erroC = Math.round(emCentavos(desejado) * (1 + taxa / 100));
+                var erroDescC = Math.round(erroC * taxa / 100);
+                var erroRecebe = (erroC - erroDescC) / 100;
+                var diferenca = Math.round((r.recebe - r.desejado) * 100);
+                var difTexto = formatBRL(Math.abs(diferenca) / 100) + (diferenca > 0 ? ' acima' : ' abaixo');
+                var itens = [];
+
+                itens.push(
+                    '<li><strong>Se você repassa a taxa:</strong> o erro mais comum é somar a porcentagem ao preço. Com ' +
+                    formatTaxa(taxa) + ' a mais, você cobraria ' + formatBRL(erroC / 100) + ', mas a taxa incide sobre ' +
+                    'esse valor maior: a operadora fica com ' + formatBRL(erroDescC / 100) + ' e sobram só ' +
+                    formatBRL(erroRecebe) + ', ' + formatBRL(r.desejado - erroRecebe) + ' a menos do que você queria.</li>'
+                );
+
+                itens.push(
+                    '<li><strong>A fórmula certa:</strong> valor desejado ÷ (1 − taxa) = preço a cobrar. ' +
+                    formatBRL(r.desejado) + ' ÷ (1 − ' + formatTaxa(taxa) + ') = ' + formatBRL(r.desejado) + ' ÷ ' +
+                    formatFator(fator) + ' = ' +
+                    (Math.abs(r.cobrar - r.exato) < 1e-9
+                        ? '<strong>' + formatBRL(r.cobrar) + '</strong>, um valor exato em centavos.'
+                        : formatExato(r.exato) + ', que arredondamos para <strong>' + formatBRL(r.cobrar) +
+                          '</strong>, já que o cliente paga em centavos.') +
+                    '</li>'
+                );
+
+                itens.push(
+                    '<li><strong>Conferência:</strong> ' + formatTaxa(taxa) + ' de ' + formatBRL(r.cobrar) + ' = ' +
+                    formatBRL(r.desconto) + ' para a operadora, e ' + formatBRL(r.cobrar) + ' − ' + formatBRL(r.desconto) +
+                    ' = <strong>' + formatBRL(r.recebe) + '</strong> para você' +
+                    (diferenca === 0 ? ', exatamente o valor desejado.' :
+                        ', ' + difTexto + ' do desejado por causa do arredondamento dos centavos.') + '</li>'
+                );
+                return itens.join('');
+            }
+
+            function gerarMemoriaCalculo(modo, valor, taxa) {
+                var principal = modo === 'assumir' ? passosAssumir(valor, taxa) : passosRepassar(valor, taxa);
+                var comparacao = modo === 'assumir' ? passosRepassar(valor, taxa) : passosAssumir(valor, taxa);
+                var tituloComparacao = modo === 'assumir'
+                    ? 'E se você quisesse receber ' + formatBRL(calcAssumir(valor, taxa).valor) + ' inteiros?'
+                    : 'E se você vendesse por ' + formatBRL(calcAssumir(valor, taxa).valor) + ' e assumisse a taxa?';
+
+                return '' +
+                    '<h3 class="memoria-calculo__titulo">Memória de cálculo: como chegamos a esse valor</h3>' +
+                    '<ol class="memoria-calculo__lista">' + principal + '</ol>' +
+                    '<p class="memoria-calculo__total"><strong>' + tituloComparacao + '</strong></p>' +
+                    '<ol class="memoria-calculo__lista">' + comparacao + '</ol>' +
+                    '<p class="memoria-calculo__nota">A conta usa uma única taxa. Em vendas parceladas ou com ' +
+                    'antecipação, a operadora cobra uma taxa diferente para cada modalidade: informe a taxa total ' +
+                    'daquela opção, como aparece no seu contrato ou no aplicativo da maquininha.</p>';
+            }
+
             // =========== VALIDAÇÃO ===========
 
             function limparErros() {
@@ -97,8 +216,9 @@
             // =========== RENDERIZAÇÃO ===========
 
             function renderAssumirTaxa(valor, taxa) {
-                var desconto = valor * (taxa / 100);
-                var liquido = valor - desconto;
+                var a = calcAssumir(valor, taxa);
+                var desconto = a.desconto;
+                var liquido = a.liquido;
 
                 resultKicker.textContent = '📉 Você assume a taxa';
                 resultTitle.textContent = 'Quanto vai cair na sua conta';
@@ -114,7 +234,7 @@
                 flowContainer.appendChild(criarFlowStep(
                     'flow-step--loss',
                     'Desconto da operadora',
-                    taxa.toFixed(2).replace('.', ',') + '% de taxa',
+                    formatTaxa(taxa) + ' de taxa',
                     '− ' + formatBRL(desconto)
                 ));
                 flowContainer.appendChild(criarArrow());
@@ -127,8 +247,9 @@
             }
 
             function renderRepassarTaxa(valorDesejado, taxa) {
-                var cobrar = valorDesejado / (1 - taxa / 100);
-                var desconto = cobrar * (taxa / 100);
+                var r = calcRepassar(valorDesejado, taxa);
+                var cobrar = r.cobrar;
+                var desconto = r.desconto;
 
                 resultKicker.textContent = '📈 Você repassa a taxa';
                 resultTitle.textContent = 'Quanto cobrar do cliente';
@@ -151,15 +272,17 @@
                 flowContainer.appendChild(criarFlowStep(
                     'flow-step--loss',
                     'Desconto da operadora',
-                    taxa.toFixed(2).replace('.', ',') + '% de ' + formatBRL(cobrar),
+                    formatTaxa(taxa) + ' de ' + formatBRL(cobrar),
                     '− ' + formatBRL(desconto)
                 ));
                 flowContainer.appendChild(criarArrow());
                 flowContainer.appendChild(criarFlowStep(
                     'flow-step--input',
                     'Você recebe',
-                    'Conferência: exatamente o que desejou',
-                    formatBRL(valorDesejado)
+                    r.recebe === r.desejado
+                        ? 'Conferência: exatamente o que desejou'
+                        : 'Conferência: diferença de centavos pelo arredondamento',
+                    formatBRL(r.recebe)
                 ));
             }
 
@@ -180,6 +303,8 @@
                 } else {
                     renderRepassarTaxa(valor, taxa);
                 }
+
+                memoriaCalculoEl.innerHTML = gerarMemoriaCalculo(modo, valor, taxa);
 
                 resultadoEl.classList.add('is-visible');
 
