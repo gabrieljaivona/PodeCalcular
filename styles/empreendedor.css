@@ -68,6 +68,7 @@
         .tool-card__btn-arrow { transition: transform var(--transition); }
         .tool-card:hover .tool-card__btn-arrow { transform: translateX(3px); }
 
+        .intro-section { padding: 40px 0 0; }
         .seo-section { padding: 0 0 60px; }
         .seo-card { background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 28px 24px; }
         .seo-card h2 { font-size: 1.375rem; font-weight: 800; margin-bottom: 12px; }
