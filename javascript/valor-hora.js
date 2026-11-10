@@ -27,6 +27,10 @@
             var legendCosts = document.getElementById('legendCosts');
 
             var valComMargem = document.getElementById('valComMargem');
+            var memoriaCalculoEl = document.getElementById('memoriaCalculo');
+
+            var SEMANAS_POR_MES = 4;
+            var MARGEM_SEGURANCA = 0.25;
 
             // =========== HELPERS ===========
 
@@ -37,6 +41,76 @@
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2
                 });
+            }
+
+            /**
+             * Número no padrão brasileiro, sem zeros sobrando (4,5 / 90 / 0,25).
+             */
+            function formatNum(v, max) {
+                return v.toLocaleString('pt-BR', { maximumFractionDigits: max === undefined ? 2 : max });
+            }
+
+            /**
+             * Horas por dia em decimal e, quando fracionadas, também em h:min (4,5 h = 4h30).
+             */
+            function formatHorasDia(h) {
+                var inteiras = Math.floor(h);
+                var minutos = Math.round((h - inteiras) * 60);
+                var base = formatNum(h) + ' h';
+                if (minutos === 0) return base;
+                return base + ' (' + inteiras + 'h' + (minutos < 10 ? '0' : '') + minutos + ')';
+            }
+
+            function formatValorHora(v) {
+                return 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+            }
+
+            // =========== MEMÓRIA DE CÁLCULO ===========
+
+            /**
+             * Gera o passo a passo do valor da hora com os dados do usuário.
+             */
+            function gerarMemoriaCalculo(d) {
+                var itens = [];
+                var exata = Math.round(d.valorHora * 100) / 100 === d.valorHora;
+
+                itens.push(
+                    '<li><strong>Quanto você precisa faturar por mês:</strong> a renda que quer receber mais os custos ' +
+                    'fixos: ' + formatBRL(d.ganho) + ' + ' + formatBRL(d.custos) + ' = <strong>' + formatBRL(d.bruto) +
+                    '</strong>.</li>'
+                );
+
+                itens.push(
+                    '<li><strong>Total de horas no mês:</strong> dias por semana × horas por dia × ' + SEMANAS_POR_MES +
+                    ' semanas: ' + d.dias + (d.dias === 1 ? ' dia' : ' dias') + ' × ' + formatHorasDia(d.horas) + ' × ' +
+                    SEMANAS_POR_MES + ' = <strong>' + formatNum(d.horasMes) + ' horas</strong>. Um mês tem cerca de ' +
+                    '4,33 semanas; usar 4 deixa de fora cerca de um terço de semana, que funciona como folga e torna ' +
+                    'o valor da hora um pouco mais seguro.</li>'
+                );
+
+                itens.push(
+                    '<li><strong>Valor da hora:</strong> faturamento necessário ÷ horas no mês: ' + formatBRL(d.bruto) +
+                    ' ÷ ' + formatNum(d.horasMes) + ' h = <strong>' + formatValorHora(d.valorHora) + '</strong>' +
+                    (exata ? '' : ', exibido como ' + formatBRL(d.valorHora)) +
+                    '. É o mínimo para pagar suas contas e a sua renda se você vender todas essas horas.</li>'
+                );
+
+                itens.push(
+                    '<li><strong>Margem de segurança de 25%:</strong> a sugestão fixa da calculadora acrescenta 25% ao ' +
+                    'valor da hora para cobrir férias, dias de doença, impostos e o tempo gasto com orçamentos e ' +
+                    'prospecção. O acréscimo é de ' + formatValorHora(d.valorHora) + ' × 25% = ' +
+                    formatValorHora(d.acrescimoHora) + ' por hora, e o valor sugerido fica ' + formatValorHora(d.valorHora) +
+                    ' × 1,25 = <strong>' + formatBRL(d.valorComMargem) + ' por hora</strong>. Vendendo as ' +
+                    formatNum(d.horasMes) + ' horas a esse preço, a margem embute cerca de <strong>' +
+                    formatBRL(d.reservaMes) + ' por mês</strong> de reserva.</li>'
+                );
+
+                return '' +
+                    '<h3 class="memoria-calculo__titulo">Memória de cálculo: como chegamos a esse valor</h3>' +
+                    '<ol class="memoria-calculo__lista">' + itens.join('') + '</ol>' +
+                    '<p class="memoria-calculo__nota">Na prática, quase ninguém fatura todas as horas trabalhadas. Se ' +
+                    'apenas parte delas for cobrada do cliente, informe só as horas faturáveis: o valor da hora sobe na ' +
+                    'mesma proporção.</p>';
             }
 
             // =========== VALIDAÇÃO ===========
@@ -79,11 +153,12 @@
             function renderizarResultado(dados) {
                 // Valor da hora em destaque
                 valHora.textContent = formatBRL(dados.valorHora);
-                rateSub.textContent = 'base: ' + dados.horasMes + 'h/mês (' + dados.dias + ' dias × ' + dados.horas + 'h × 4 semanas)';
+                rateSub.textContent = 'base: ' + formatNum(dados.horasMes) + 'h/mês (' + dados.dias + ' dias × ' +
+                    formatNum(dados.horas) + 'h × ' + SEMANAS_POR_MES + ' semanas)';
 
                 // Métricas
                 valBruto.textContent = formatBRL(dados.bruto);
-                valHorasMes.textContent = dados.horasMes + 'h';
+                valHorasMes.textContent = formatNum(dados.horasMes) + 'h';
 
                 var custoPct = dados.bruto > 0 ? ((dados.custos / dados.bruto) * 100).toFixed(1) : 0;
                 valCustoPct.textContent = custoPct + '%';
@@ -106,7 +181,9 @@
                 legendCosts.textContent = 'Custos fixos: ' + formatBRL(dados.custos);
 
                 // Valor com margem (+25%)
-                valComMargem.textContent = formatBRL(dados.valorHora * 1.25) + '/hora';
+                valComMargem.textContent = formatBRL(dados.valorComMargem) + '/hora';
+
+                memoriaCalculoEl.innerHTML = gerarMemoriaCalculo(dados);
 
                 resultadoEl.classList.add('is-visible');
 
@@ -129,9 +206,11 @@
                 if (!validar(ganho, custos, dias, horas)) return;
 
                 // --- Cálculos ---
-                var bruto = ganho + custos;
-                var horasMes = dias * horas * 4;
+                // Centavos e horas arredondados para tirar ruído de ponto flutuante
+                var bruto = Math.round((ganho + custos) * 100) / 100;
+                var horasMes = Math.round(dias * horas * SEMANAS_POR_MES * 100) / 100;
                 var valorHora = bruto / horasMes;
+                var valorComMargem = valorHora * (1 + MARGEM_SEGURANCA);
 
                 renderizarResultado({
                     ganho: ganho,
@@ -140,7 +219,10 @@
                     horas: horas,
                     bruto: bruto,
                     horasMes: horasMes,
-                    valorHora: valorHora
+                    valorHora: valorHora,
+                    acrescimoHora: valorHora * MARGEM_SEGURANCA,
+                    valorComMargem: valorComMargem,
+                    reservaMes: Math.round(bruto * MARGEM_SEGURANCA * 100) / 100
                 });
             });
 
