@@ -32,11 +32,75 @@
             var valDeficit   = document.getElementById('valDeficit');
             var valManter    = document.getElementById('valManter');
             var valSuperavit = document.getElementById('valSuperavit');
+            var memoriaCalculoEl = document.getElementById('memoriaCalculo');
 
             // =========== HELPERS ===========
 
             function formatNum(num) {
                 return Math.round(num).toLocaleString('pt-BR');
+            }
+
+            /**
+             * Formata no padrão brasileiro com até `max` casas (sem zeros sobrando).
+             */
+            function formatDec(num, max) {
+                return num.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: max });
+            }
+
+            // =========== MEMÓRIA DE CÁLCULO ===========
+
+            /**
+             * Gera o passo a passo da TMB e do gasto calórico total com os dados do usuário.
+             */
+            function gerarMemoriaCalculo(d) {
+                var masc = d.genero === 'masculino';
+                var parcelaPeso = 10 * d.peso;
+                var parcelaAltura = 6.25 * d.altura;
+                var parcelaIdade = 5 * d.idade;
+                var fatorSexo = masc ? '+ 5' : '− 161';
+                var itens = [];
+
+                itens.push(
+                    '<li><strong>Equação de Mifflin-St Jeor:</strong> TMB = (10 × peso em kg) + (6,25 × altura em cm) ' +
+                    '− (5 × idade em anos) ' + fatorSexo + '. O último termo depende do sexo biológico: ' +
+                    'soma 5 para o masculino e subtrai 161 para o feminino. Você marcou <strong>' +
+                    (masc ? 'masculino' : 'feminino') + '</strong>.</li>'
+                );
+
+                itens.push(
+                    '<li><strong>Com os seus dados:</strong> (10 × ' + formatDec(d.peso, 2) + ') + (6,25 × ' +
+                    formatDec(d.altura, 2) + ') − (5 × ' + d.idade + ') ' + fatorSexo + ' = ' +
+                    formatDec(parcelaPeso, 2) + ' + ' + formatDec(parcelaAltura, 2) + ' − ' + formatDec(parcelaIdade, 2) +
+                    ' ' + fatorSexo + ' = <strong>' + formatDec(d.tmb, 2) + ' kcal</strong>' +
+                    (Math.round(d.tmb) !== d.tmb ? ', que arredondamos para ' + formatNum(d.tmb) + ' kcal' : '') +
+                    '. Essa é a sua taxa metabólica basal: a energia que o corpo gasta em repouso total, só para ' +
+                    'manter respiração, circulação e temperatura.</li>'
+                );
+
+                itens.push(
+                    '<li><strong>Gasto calórico total diário:</strong> a TMB é multiplicada pelo fator do nível de ' +
+                    'atividade que você escolheu, <em>' + d.atividadeTexto + '</em>, que é <strong>' +
+                    formatDec(d.fator, 3) + '</strong>: ' + formatDec(d.tmb, 2) + ' × ' + formatDec(d.fator, 3) + ' = ' +
+                    formatDec(d.tdee, 2) + ', ou cerca de <strong>' + formatNum(d.tdee) + ' kcal por dia</strong>. ' +
+                    'É o quanto você gasta somando o metabolismo em repouso às atividades do dia e aos exercícios.</li>'
+                );
+
+                itens.push(
+                    '<li><strong>Metas:</strong> para emagrecer, a sugestão é comer cerca de 500 kcal a menos que o ' +
+                    'gasto total (' + formatNum(d.tdee) + ' − 500' +
+                    (d.deficitLimitado ? ', mas sem ficar abaixo da TMB, por isso ' + formatNum(d.deficit) + ' kcal'
+                                       : ' = ' + formatNum(d.deficit) + ' kcal') +
+                    '); para ganhar massa, cerca de 300 kcal a mais (' + formatNum(d.tdee) + ' + 300 = ' +
+                    formatNum(d.superavit) + ' kcal).</li>'
+                );
+
+                return '' +
+                    '<h3 class="memoria-calculo__titulo">Memória de cálculo: como chegamos a esses valores</h3>' +
+                    '<ol class="memoria-calculo__lista">' + itens.join('') + '</ol>' +
+                    '<p class="memoria-calculo__nota">A equação de Mifflin-St Jeor (1990) foi validada em estudos ' +
+                    'científicos e é apontada em revisões como uma das mais precisas para estimar a TMB de adultos. ' +
+                    'Ainda assim, é uma estimativa: o metabolismo varia de pessoa para pessoa conforme a massa ' +
+                    'muscular, os hormônios, a genética, o sono e o uso de medicamentos.</p>';
             }
 
             // =========== VALIDAÇÃO ===========
@@ -80,7 +144,7 @@
 
             // =========== RENDERIZAÇÃO ===========
 
-            function renderizarResultado(tmb, tdee) {
+            function renderizarResultado(tmb, tdee, dados) {
                 // Stat cards
                 valTMB.textContent = formatNum(tmb);
                 valTDEE.textContent = formatNum(tdee);
@@ -105,6 +169,13 @@
                 var deficit = Math.max(tdee - 500, tmb); // nunca abaixo da TMB
                 var manter = tdee;
                 var superavit = tdee + 300;
+
+                dados.tmb = tmb;
+                dados.tdee = tdee;
+                dados.deficit = deficit;
+                dados.deficitLimitado = tdee - 500 < tmb;
+                dados.superavit = superavit;
+                memoriaCalculoEl.innerHTML = gerarMemoriaCalculo(dados);
 
                 valDeficit.textContent = formatNum(deficit) + ' kcal';
                 valManter.textContent = formatNum(manter) + ' kcal';
@@ -136,7 +207,15 @@
                 var tmb  = calcTMB(genero, peso, altura, idade);
                 var tdee = tmb * fator;
 
-                renderizarResultado(tmb, tdee);
+                var atividadeEl = document.getElementById('atividade');
+                renderizarResultado(tmb, tdee, {
+                    genero: genero,
+                    idade: idade,
+                    peso: peso,
+                    altura: altura,
+                    fator: fator,
+                    atividadeTexto: atividadeEl.options[atividadeEl.selectedIndex].text.trim()
+                });
             });
 
             // Limpa erros ao interagir
