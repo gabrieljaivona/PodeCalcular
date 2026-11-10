@@ -9,6 +9,8 @@
          *  - 13º proporcional: salário/12 × meses no ano corrente (>= 15 dias = mês cheio)
          *  - Férias proporcionais + 1/3: salário/12 × meses no período aquisitivo atual
          *  - Multa 40% FGTS: (salário × 8% × meses + 8% do aviso indenizado) × 40% — apenas dispensa sem justa causa
+         *  - Acordo (CLT art. 484-A): aviso indenizado pela metade, multa de 20% do FGTS, saque de até 80%
+         *    e sem seguro-desemprego. A projeção do contrato usa apenas os dias de aviso efetivamente pagos.
          *
          * Descontos de INSS/IRRF NÃO são aplicados (conforme briefing).
          */
@@ -162,8 +164,8 @@
             }
 
             /**
-             * Multa de 40% do FGTS sobre todo o contrato.
-             * Aproximação: FGTS ≈ 8% do salário bruto por mês trabalhado.
+             * FGTS estimado do contrato e multa rescisória (40% na dispensa sem justa causa,
+             * 20% no acordo). Aproximação: FGTS ≈ 8% do salário bruto por mês trabalhado.
              */
             function calcFGTSEstimado(salario, dataAdmissao, dataDemissao, avisoIndenizado) {
                 const totalMeses = contarMesesCLT(dataAdmissao, dataDemissao);
@@ -171,17 +173,25 @@
                 return salario * 0.08 * totalMeses + avisoIndenizado * 0.08;
             }
 
-            function calcMultaFGTS(salario, dataAdmissao, dataDemissao, avisoIndenizado) {
-                return calcFGTSEstimado(salario, dataAdmissao, dataDemissao, avisoIndenizado) * 0.40;
+            function calcMultaFGTS(salario, dataAdmissao, dataDemissao, avisoIndenizado, percentual) {
+                return calcFGTSEstimado(salario, dataAdmissao, dataDemissao, avisoIndenizado) * percentual;
+            }
+
+            /**
+             * Formata um número com vírgula decimal (ex.: 16,5).
+             */
+            function formatNum(n) {
+                return n.toLocaleString('pt-BR', { maximumFractionDigits: 1 });
             }
 
             /**
              * Habilita apenas as opções de aviso compatíveis com o motivo.
              */
             function sincronizarAviso() {
-                const semJustaCausa = motivoEl.value === 'sem-justa-causa';
-                avisoEl.querySelector('option[value="indenizado-empregador"]').disabled = !semJustaCausa;
-                avisoEl.querySelector('option[value="indenizado-trabalhador"]').disabled = semJustaCausa;
+                const motivo = motivoEl.value;
+                avisoEl.querySelector('option[value="indenizado-empregador"]').disabled =
+                    !(motivo === 'sem-justa-causa' || motivo === 'acordo');
+                avisoEl.querySelector('option[value="indenizado-trabalhador"]').disabled = motivo !== 'pedido-demissao';
                 if (avisoEl.selectedOptions[0] && avisoEl.selectedOptions[0].disabled) {
                     avisoEl.value = 'trabalhado';
                 }
@@ -221,7 +231,7 @@
                         ok = false;
                     }
                 }
-                if ((aviso === 'indenizado-empregador' && motivo !== 'sem-justa-causa') ||
+                if ((aviso === 'indenizado-empregador' && motivo !== 'sem-justa-causa' && motivo !== 'acordo') ||
                     (aviso === 'indenizado-trabalhador' && motivo !== 'pedido-demissao')) {
                     marcarErro('field-aviso');
                     ok = false;
@@ -262,7 +272,24 @@
                 const tempoCasa = d.anosCompletos === 0
                     ? 'menos de 1 ano'
                     : qtd(d.anosCompletos, 'ano completo', 'anos completos');
-                if (d.aviso === 'indenizado-empregador') {
+                if (d.aviso === 'indenizado-empregador' && d.motivo === 'acordo') {
+                    itens.push(
+                        `<li><strong>Aviso prévio indenizado (acordo):</strong> com ${tempoCasa} de empresa, o seu aviso ` +
+                        `seria de ${d.diasAviso} dias (30 dias + 3 por ano completo, até 90). No acordo, a empresa paga ` +
+                        `metade: ${formatNum(d.diasAvisoPagos)} dias, ou <strong>${formatBRL(d.avisoPrevio)}</strong> ` +
+                        `(${s} dividido por 30, multiplicado por ${formatNum(d.diasAvisoPagos)}).</li>`
+                    );
+                    itens.push(
+                        `<li><strong>Projeção do contrato no acordo:</strong> como o art. 484-A da CLT reduz o aviso ` +
+                        `indenizado à metade, a projeção do contrato foi feita considerando apenas os ` +
+                        (d.diasProjecao === d.diasAvisoPagos
+                            ? `${d.diasProjecao} dias de aviso efetivamente pagos`
+                            : `${d.diasProjecao} dias inteiros dos ${formatNum(d.diasAvisoPagos)} dias de aviso pagos`) +
+                        `, e não os ${d.diasAviso} dias do aviso integral. ` +
+                        `O contrato vai até ${formatData(d.dataProjetada)}, data usada no 13º e nas férias abaixo. ` +
+                        `Esse é o critério adotado por esta calculadora; há quem projete o aviso inteiro, então confirme com o RH.</li>`
+                    );
+                } else if (d.aviso === 'indenizado-empregador') {
                     itens.push(
                         `<li><strong>Aviso prévio indenizado:</strong> com ${tempoCasa} de empresa, o seu aviso é de ` +
                         `${d.diasAviso} dias (30 dias + 3 por ano completo, até 90). Como a empresa dispensou o cumprimento, ` +
@@ -279,7 +306,9 @@
                     );
                 } else {
                     let extra = '';
-                    if (d.motivo === 'sem-justa-causa' && d.diasAviso > 30) {
+                    if (d.motivo === 'acordo') {
+                        extra = ' No acordo, só o aviso indenizado cai pela metade: o aviso trabalhado é cumprido normalmente.';
+                    } else if (d.motivo === 'sem-justa-causa' && d.diasAviso > 30) {
                         extra = ` Com ${tempoCasa} de empresa, o seu aviso total é de ${d.diasAviso} dias. ` +
                             `Se você trabalhou só 30, os ${d.diasAviso - 30} dias restantes costumam ser pagos à parte: confirme com o RH.`;
                     }
@@ -317,8 +346,17 @@
                     itens.push(
                         `<li><strong>Multa do FGTS:</strong> em ${qtd(d.totalMesesContrato, 'mês', 'meses')} de contrato, ` +
                         `o FGTS depositado é estimado em ${formatBRL(fgts)} (8% de ${s} por mês${avisoFgts}). ` +
-                        `A multa é 40% desse valor: <strong>${formatBRL(d.multaFgts)}</strong>.</li>`
+                        `A multa é ${d.motivo === 'acordo' ? '20%' : '40%'} desse valor: <strong>${formatBRL(d.multaFgts)}</strong>` +
+                        `${d.motivo === 'acordo' ? ', metade da multa da dispensa sem justa causa' : ''}.</li>`
                     );
+                    if (d.motivo === 'acordo') {
+                        itens.push(
+                            `<li><strong>Saque do FGTS e seguro-desemprego:</strong> no acordo, você pode sacar no máximo ` +
+                            `<strong>80% do saldo do FGTS</strong> (estimado em ${formatBRL((fgts + d.multaFgts) * 0.8)}, ` +
+                            `já com a multa). Os outros 20% ficam na conta. Essa modalidade <strong>não dá direito ao ` +
+                            `seguro-desemprego</strong>.</li>`
+                        );
+                    }
                 } else {
                     itens.push(
                         `<li><strong>Multa do FGTS:</strong> no pedido de demissão não há multa de 40% ` +
@@ -352,8 +390,10 @@
 
                 if (dados.avisoPrevio > 0) {
                     resultadoLinhasEl.appendChild(criarLinha(
-                        'Aviso Prévio Indenizado',
-                        `${dados.diasAviso} dias (30 + 3 por ano completo)`,
+                        dados.motivo === 'acordo' ? 'Aviso Prévio Indenizado (50%)' : 'Aviso Prévio Indenizado',
+                        dados.motivo === 'acordo'
+                            ? `${formatNum(dados.diasAvisoPagos)} de ${dados.diasAviso} dias (metade, art. 484-A)`
+                            : `${dados.diasAviso} dias (30 + 3 por ano completo)`,
                         dados.avisoPrevio
                     ));
                 } else if (dados.avisoPrevio < 0) {
@@ -378,7 +418,7 @@
 
                 if (dados.multaFgts > 0) {
                     resultadoLinhasEl.appendChild(criarLinha(
-                        'Multa de 40% do FGTS',
+                        dados.motivo === 'acordo' ? 'Multa de 20% do FGTS (acordo)' : 'Multa de 40% do FGTS',
                         'Estimativa sobre os depósitos de 8% de FGTS',
                         dados.multaFgts
                     ));
@@ -416,17 +456,23 @@
 
                 // --- Aviso prévio ---
                 const anos = anosCompletos(dataAdmissao, dataDemissao);
-                const diasAviso = motivo === 'sem-justa-causa' ? calcDiasAvisoProporcional(anos) : 30;
+                const diasAviso = (motivo === 'sem-justa-causa' || motivo === 'acordo')
+                    ? calcDiasAvisoProporcional(anos)
+                    : 30;
+                // No acordo (art. 484-A, I, "a"), o aviso indenizado é pago pela metade
+                const diasAvisoPagos = motivo === 'acordo' ? diasAviso / 2 : diasAviso;
                 let avisoPrevio = 0;
                 if (aviso === 'indenizado-empregador') {
-                    avisoPrevio = (salario / 30) * diasAviso;
+                    avisoPrevio = (salario / 30) * diasAvisoPagos;
                 } else if (aviso === 'indenizado-trabalhador') {
                     avisoPrevio = -(salario / 30) * 30;
                 }
 
-                // Aviso indenizado pelo empregador integra o tempo de serviço (CLT, art. 487, §1º)
+                // Aviso indenizado pelo empregador integra o tempo de serviço (CLT, art. 487, §1º).
+                // No acordo, projeta-se apenas a metade efetivamente paga (dias inteiros).
                 const projetado = aviso === 'indenizado-empregador';
-                const dataProjetada = projetado ? somarDias(dataDemissao, diasAviso) : dataDemissao;
+                const diasProjecao = projetado ? Math.floor(diasAvisoPagos) : 0;
+                const dataProjetada = projetado ? somarDias(dataDemissao, diasProjecao) : dataDemissao;
 
                 // --- Cálculos ---
                 const saldoSalario = calcSaldoSalario(salario, dataDemissao);
@@ -434,9 +480,10 @@
                 const decimoTerceiro = calc13Proporcional(salario, dataAdmissao, dataDemissao, dataProjetada);
                 const ferias = calcFeriasProporcionais(salario, mesesFerias);
 
-                // Multa 40% FGTS apenas para dispensa sem justa causa
-                const multaFgts = (motivo === 'sem-justa-causa')
-                    ? calcMultaFGTS(salario, dataAdmissao, dataDemissao, Math.max(avisoPrevio, 0))
+                // Multa do FGTS: 40% na dispensa sem justa causa, 20% no acordo, nenhuma no pedido de demissão
+                const percentualMulta = motivo === 'sem-justa-causa' ? 0.40 : (motivo === 'acordo' ? 0.20 : 0);
+                const multaFgts = percentualMulta > 0
+                    ? calcMultaFGTS(salario, dataAdmissao, dataDemissao, Math.max(avisoPrevio, 0), percentualMulta)
                     : 0;
 
                 const total = saldoSalario + avisoPrevio + decimoTerceiro + ferias + multaFgts;
@@ -453,6 +500,8 @@
                     aviso,
                     anosCompletos: anos,
                     diasAviso,
+                    diasAvisoPagos,
+                    diasProjecao,
                     avisoPrevio,
                     projetado,
                     dataProjetada,
