@@ -9,6 +9,7 @@
          *  - 13º proporcional: salário/12 × meses no ano corrente (>= 15 dias = mês cheio)
          *  - Férias proporcionais + 1/3: salário/12 × meses no período aquisitivo atual
          *  - Multa 40% FGTS: (salário × 8% × meses + 8% do aviso indenizado) × 40% — apenas dispensa sem justa causa
+         *  - Saldo do FGTS informado pelo usuário (opcional) substitui a estimativa na multa e no limite de saque
          *  - Acordo (CLT art. 484-A): aviso indenizado pela metade, multa de 20% do FGTS, saque de até 80%
          *    e sem seguro-desemprego. A projeção do contrato usa apenas os dias de aviso efetivamente pagos.
          *
@@ -173,8 +174,12 @@
                 return salario * 0.08 * totalMeses + avisoIndenizado * 0.08;
             }
 
-            function calcMultaFGTS(salario, dataAdmissao, dataDemissao, avisoIndenizado, percentual) {
-                return calcFGTSEstimado(salario, dataAdmissao, dataDemissao, avisoIndenizado) * percentual;
+            /**
+             * Converte o campo opcional de saldo do FGTS: null quando em branco.
+             */
+            function lerSaldoFgts(str) {
+                const limpo = (str || '').trim();
+                return limpo === '' ? null : parseFloat(limpo);
             }
 
             /**
@@ -208,7 +213,7 @@
                 if (field) field.classList.add('has-error');
             }
 
-            function validar(salario, admissao, demissao, motivo, aviso) {
+            function validar(salario, admissao, demissao, motivo, aviso, saldoFgts) {
                 let ok = true;
 
                 if (!salario || salario <= 0 || isNaN(salario)) {
@@ -234,6 +239,10 @@
                 if ((aviso === 'indenizado-empregador' && motivo !== 'sem-justa-causa' && motivo !== 'acordo') ||
                     (aviso === 'indenizado-trabalhador' && motivo !== 'pedido-demissao')) {
                     marcarErro('field-aviso');
+                    ok = false;
+                }
+                if (saldoFgts !== null && (isNaN(saldoFgts) || saldoFgts < 0)) {
+                    marcarErro('field-fgts');
                     ok = false;
                 }
                 return ok;
@@ -340,21 +349,33 @@
                     `<strong>${formatBRL(d.ferias)}</strong>.</li>`
                 );
 
-                if (d.multaFgts > 0) {
-                    const fgts = d.salario * 0.08 * d.totalMesesContrato + Math.max(d.avisoPrevio, 0) * 0.08;
-                    const avisoFgts = d.avisoPrevio > 0 ? ', mais 8% sobre o aviso indenizado' : '';
+                if (d.percentualMulta > 0) {
+                    const pct = d.motivo === 'acordo' ? '20%' : '40%';
+                    const metade = d.motivo === 'acordo' ? ', metade da multa da dispensa sem justa causa' : '';
+                    let base;
+                    if (d.fgtsInformado) {
+                        base = `Com base no saldo informado de ${formatBRL(d.fgtsBase)}, `;
+                    } else {
+                        const avisoFgts = d.avisoPrevio > 0 ? ', mais 8% sobre o aviso indenizado' : '';
+                        base = `Como o saldo do FGTS não foi informado, fizemos um cálculo aproximado: em ` +
+                            `${qtd(d.totalMesesContrato, 'mês', 'meses')} de contrato, o FGTS depositado é estimado em ` +
+                            `${formatBRL(d.fgtsBase)} (8% de ${s} por mês${avisoFgts}). Com essa estimativa, `;
+                    }
                     itens.push(
-                        `<li><strong>Multa do FGTS:</strong> em ${qtd(d.totalMesesContrato, 'mês', 'meses')} de contrato, ` +
-                        `o FGTS depositado é estimado em ${formatBRL(fgts)} (8% de ${s} por mês${avisoFgts}). ` +
-                        `A multa é ${d.motivo === 'acordo' ? '20%' : '40%'} desse valor: <strong>${formatBRL(d.multaFgts)}</strong>` +
-                        `${d.motivo === 'acordo' ? ', metade da multa da dispensa sem justa causa' : ''}.</li>`
+                        `<li><strong>Multa do FGTS:</strong> ${base}a multa de ${pct} é de ` +
+                        `<strong>${formatBRL(d.multaFgts)}</strong>${metade}. ` +
+                        `Ela é depositada na sua conta do FGTS, e não paga no termo de rescisão.` +
+                        `${d.fgtsInformado ? '' : ' Para o valor exato, informe o saldo que aparece no app do FGTS.'}</li>`
                     );
                     if (d.motivo === 'acordo') {
+                        const totalConta = d.fgtsBase + d.multaFgts;
                         itens.push(
                             `<li><strong>Saque do FGTS e seguro-desemprego:</strong> no acordo, você pode sacar no máximo ` +
-                            `<strong>80% do saldo do FGTS</strong> (estimado em ${formatBRL((fgts + d.multaFgts) * 0.8)}, ` +
-                            `já com a multa). Os outros 20% ficam na conta. Essa modalidade <strong>não dá direito ao ` +
-                            `seguro-desemprego</strong>.</li>`
+                            `<strong>80% do saldo do FGTS</strong>. ${d.fgtsInformado ? 'Com o saldo informado' : 'Pela estimativa'} ` +
+                            `de ${formatBRL(d.fgtsBase)} mais a multa de ${formatBRL(d.multaFgts)}, a conta fica com ` +
+                            `${formatBRL(totalConta)}, e o limite de saque é de <strong>${formatBRL(totalConta * 0.8)}</strong>. ` +
+                            `Os outros ${formatBRL(totalConta * 0.2)} ficam na conta. Essa modalidade ` +
+                            `<strong>não dá direito ao seguro-desemprego</strong>.</li>`
                         );
                     }
                 } else {
@@ -416,10 +437,12 @@
                     dados.ferias
                 ));
 
-                if (dados.multaFgts > 0) {
+                if (dados.percentualMulta > 0) {
                     resultadoLinhasEl.appendChild(criarLinha(
                         dados.motivo === 'acordo' ? 'Multa de 20% do FGTS (acordo)' : 'Multa de 40% do FGTS',
-                        'Estimativa sobre os depósitos de 8% de FGTS',
+                        dados.fgtsInformado
+                            ? `Sobre o saldo informado de ${formatBRL(dados.fgtsBase)}`
+                            : 'Estimativa sobre os depósitos de 8% de FGTS',
                         dados.multaFgts
                     ));
                 }
@@ -446,8 +469,9 @@
                 const demissaoStr = document.getElementById('dataDemissao').value;
                 const motivo = motivoEl.value;
                 const aviso = avisoEl.value;
+                const saldoFgts = lerSaldoFgts(document.getElementById('saldoFgts').value);
 
-                if (!validar(salario, admissaoStr, demissaoStr, motivo, aviso)) {
+                if (!validar(salario, admissaoStr, demissaoStr, motivo, aviso, saldoFgts)) {
                     return;
                 }
 
@@ -482,9 +506,12 @@
 
                 // Multa do FGTS: 40% na dispensa sem justa causa, 20% no acordo, nenhuma no pedido de demissão
                 const percentualMulta = motivo === 'sem-justa-causa' ? 0.40 : (motivo === 'acordo' ? 0.20 : 0);
-                const multaFgts = percentualMulta > 0
-                    ? calcMultaFGTS(salario, dataAdmissao, dataDemissao, Math.max(avisoPrevio, 0), percentualMulta)
-                    : 0;
+                // Base da multa: saldo informado pelo usuário ou, em branco, a estimativa de 8% ao mês
+                const fgtsInformado = saldoFgts !== null;
+                const fgtsBase = fgtsInformado
+                    ? saldoFgts
+                    : calcFGTSEstimado(salario, dataAdmissao, dataDemissao, Math.max(avisoPrevio, 0));
+                const multaFgts = fgtsBase * percentualMulta;
 
                 const total = saldoSalario + avisoPrevio + decimoTerceiro + ferias + multaFgts;
 
@@ -501,6 +528,9 @@
                     anosCompletos: anos,
                     diasAviso,
                     diasAvisoPagos,
+                    percentualMulta,
+                    fgtsInformado,
+                    fgtsBase,
                     diasProjecao,
                     avisoPrevio,
                     projetado,
