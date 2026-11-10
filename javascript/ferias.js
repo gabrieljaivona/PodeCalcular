@@ -21,6 +21,7 @@
             const resultadoEl = document.getElementById('resultado');
             const resultadoLinhasEl = document.getElementById('resultadoLinhas');
             const resultadoTotalEl = document.getElementById('resultadoTotal');
+            const memoriaCalculoEl = document.getElementById('memoriaCalculo');
 
             // =========== HELPERS ===========
 
@@ -106,6 +107,65 @@
                 return div;
             }
 
+            /**
+             * Gera o passo a passo do cálculo com os valores do próprio usuário.
+             */
+            function gerarMemoriaCalculo(d) {
+                const s = formatBRL(d.salario);
+                const diaria = formatBRL(d.salario / 30);
+                const qtdDias = d.dias === 1 ? '1 dia' : `${d.dias} dias`;
+                const itens = [];
+
+                itens.push(
+                    `<li><strong>Valor de um dia:</strong> como o seu salário é ${s}, cada dia vale ` +
+                    `<strong>${diaria}</strong> (${s} dividido por 30, pois a CLT usa o mês comercial de 30 dias).</li>`
+                );
+
+                itens.push(
+                    `<li><strong>Férias:</strong> como você vai tirar ${qtdDias} de descanso, o valor das férias é de ` +
+                    `<strong>${formatBRL(d.valorFerias)}</strong> (${diaria} multiplicado por ${d.dias}).</li>`
+                );
+
+                itens.push(
+                    `<li><strong>1/3 constitucional:</strong> a Constituição garante um adicional de um terço sobre ` +
+                    `as férias: ${formatBRL(d.valorFerias)} dividido por 3 = <strong>${formatBRL(d.umTercoFerias)}</strong>.</li>`
+                );
+
+                if (d.vendeuAbono) {
+                    itens.push(
+                        `<li><strong>Abono pecuniário (venda de 10 dias):</strong> os 10 dias vendidos valem ` +
+                        `${formatBRL(d.abonoValor)} (${diaria} multiplicado por 10), mais 1/3 sobre eles, ` +
+                        `${formatBRL(d.abonoUmTerco)}, totalizando <strong>${formatBRL(d.abonoValor + d.abonoUmTerco)}</strong>. ` +
+                        `Nesses 10 dias você trabalha normalmente e recebe o salário do mês à parte.</li>`
+                    );
+                }
+
+                const parcelas = [d.valorFerias, d.umTercoFerias]
+                    .concat(d.vendeuAbono ? [d.abonoValor, d.abonoUmTerco] : [])
+                    .map(formatBRL)
+                    .join(' + ');
+
+                let alerta = '';
+                if (d.vendeuAbono && d.dias + 10 > 30) {
+                    alerta = `<p class="memoria-calculo__alerta">Atenção: você informou ${qtdDias} de descanso e a ` +
+                        `venda de 10 dias, somando ${d.dias + 10} dias. Pela CLT (art. 143), é possível vender até 1/3 ` +
+                        `do período: quem tem 30 dias de férias e vende 10 descansa 20. Confira os dias informados.</p>`;
+                }
+
+                const tributos = d.vendeuAbono
+                    ? 'As férias e o 1/3 têm desconto de INSS e Imposto de Renda; o abono e o 1/3 sobre ele são isentos.'
+                    : 'As férias e o 1/3 têm desconto de INSS e Imposto de Renda.';
+
+                return `
+                    <h3 class="memoria-calculo__titulo">Memória de cálculo: como chegamos a esse valor</h3>
+                    <ol class="memoria-calculo__lista">${itens.join('')}</ol>
+                    <p class="memoria-calculo__total">Soma: ${parcelas} = <strong>${formatBRL(d.total)}</strong> (valor bruto).</p>
+                    ${alerta}
+                    <p class="memoria-calculo__nota">${tributos} O pagamento deve ser feito até 2 dias antes
+                    do início das férias (art. 145 da CLT).</p>
+                `;
+            }
+
             function renderizarResultado(dados) {
                 resultadoLinhasEl.innerHTML = '';
 
@@ -138,6 +198,7 @@
                 }
 
                 resultadoTotalEl.textContent = formatBRL(dados.total);
+                memoriaCalculoEl.innerHTML = gerarMemoriaCalculo(dados);
                 resultadoEl.classList.add('is-visible');
 
                 // Scroll suave até o resultado
@@ -178,6 +239,7 @@
                 const total = valorFerias + umTercoFerias + abonoTotal;
 
                 renderizarResultado({
+                    salario,
                     dias,
                     valorFerias,
                     umTercoFerias,
