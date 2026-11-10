@@ -651,3 +651,11 @@
         @media (min-width: 900px) {
             .hero__title { line-height: 1.15; }
         }
+/* Memória de cálculo (mesmo padrão da rescisão) */
+.memoria-calculo { margin-top: 16px; padding: 16px 18px; background: #EFF6FF; border-left: 4px solid var(--color-primary); border-radius: var(--radius-sm); font-size: .925rem; line-height: 1.65; }
+.memoria-calculo:empty { display: none; }
+.memoria-calculo__titulo { font-size: 1rem; margin: 0 0 10px; }
+.memoria-calculo__lista { padding-left: 20px; margin: 0 0 10px; }
+.memoria-calculo__lista li { margin-bottom: 8px; }
+.memoria-calculo__total { margin: 0 0 6px; }
+.memoria-calculo__nota { margin: 0; font-size: .825rem; color: var(--color-text-muted); }
