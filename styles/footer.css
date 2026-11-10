@@ -16,3 +16,11 @@
 .prose li { margin-bottom: 8px; line-height: 1.7; }
 .prose a { text-decoration: underline; }
 .container.prose { margin-left: auto; margin-right: auto; }
+
+/* Caixa de autor (páginas de calculadora) */
+.author-box { display:flex; gap:16px; align-items:flex-start; margin:40px 0 0; padding:20px; border:1px solid var(--color-border, #E2E8F0); border-radius:12px; background:var(--color-surface, #FFFFFF); }
+.author-box__avatar { flex:0 0 52px; width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:var(--color-primary, #1D4ED8); color:#FFFFFF; font-weight:700; font-size:1.1rem; }
+.author-box__kicker { margin:0 0 2px; font-size:.8rem; text-transform:uppercase; letter-spacing:.04em; color:var(--color-text-muted, #475569); }
+.author-box__name { margin:0 0 6px; font-weight:700; font-size:1.05rem; }
+.author-box__bio { margin:0; font-size:.95rem; line-height:1.65; color:var(--color-text-muted, #475569); }
+@media (max-width: 480px) { .author-box { flex-direction:column; gap:12px; } }

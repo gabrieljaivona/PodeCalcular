@@ -550,3 +550,8 @@
 .memoria-calculo__lista li { margin-bottom: 8px; }
 .memoria-calculo__total { margin: 0 0 6px; }
 .memoria-calculo__nota { margin: 0; font-size: .825rem; color: var(--color-text-muted); }
+
+/* Dica abaixo dos campos */
+.form-hint { font-size: .8125rem; color: var(--color-text-muted); margin-top: 4px; line-height: 1.5; }
+.form-field.has-error .form-hint { display: none; }
+.result-line--desconto .result-line__value { color: var(--color-danger); }

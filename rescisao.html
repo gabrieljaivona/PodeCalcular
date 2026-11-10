@@ -20,7 +20,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="keywords" content="calculadora de rescisão, rescisão CLT, cálculo rescisão trabalhista, demissão sem justa causa, multa 40% FGTS, férias proporcionais, 13º proporcional">
     <link rel="canonical" href="https://podecalcular.com.br/rescisao.html">
     <meta name="robots" content="index, follow">
-    <meta name="author" content="PodeCalcular">
+    <meta name="author" content="Gabriel Jaivona">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Calculadora de Rescisão Trabalhista CLT | PodeCalcular">
@@ -141,6 +141,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                     id="dataDemissao"
                                     class="form-input"
                                     required>
+                                <span class="form-hint">Informe o último dia efetivamente trabalhado.</span>
                                 <span class="form-error">A data de demissão deve ser posterior à admissão.</span>
                             </div>
 
@@ -153,6 +154,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <option value="sem-justa-causa">Dispensa sem justa causa</option>
                                 <option value="pedido-demissao">Pedido de demissão</option>
                             </select>
+                        </div>
+
+                        <!-- Aviso prévio -->
+                        <div class="form-field" id="field-aviso">
+                            <label for="aviso" class="form-label">Aviso Prévio</label>
+                            <select id="aviso" class="form-select" required>
+                                <option value="trabalhado">Trabalhado (cumpri o aviso)</option>
+                                <option value="indenizado-empregador">Indenizado pelo empregador (fui dispensado de cumprir)</option>
+                                <option value="indenizado-trabalhador" disabled>Não cumprido pelo trabalhador (será descontado)</option>
+                            </select>
+                            <span class="form-hint">As opções mudam conforme o motivo: a empresa indeniza o aviso quando demite, e o trabalhador tem o aviso descontado quando pede demissão e não cumpre.</span>
+                            <span class="form-error">Essa opção de aviso não se aplica ao motivo escolhido.</span>
                         </div>
 
                         <button type="submit" class="submit-btn">
@@ -335,6 +348,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         particulares do seu contrato — o ideal é procurar um contador, um
                         advogado trabalhista ou o sindicato da sua categoria profissional.
                     </p>
+                    <aside class="author-box" aria-label="Sobre o autor">
+                        <div class="author-box__avatar" aria-hidden="true">GJ</div>
+                        <div>
+                            <p class="author-box__kicker">Escrito e mantido por</p>
+                            <p class="author-box__name"><a href="sobre.html">Gabriel Jaivona</a></p>
+                            <p class="author-box__bio">Desenvolvedor Full Stack e estudante de Ciência da Computação na UNEMAT, Gabriel Jaivona atua com TI e mantém o PodeCalcular. Cada calculadora segue a legislação vigente e referências como a OMS, mostra a fórmula usada e roda no seu navegador, sem coletar dados. Encontrou um erro? Avise pelo <a href="contato.html">contato</a>.</p>
+                        </div>
+                    </aside>
 
                 </article>
             </div>

@@ -136,6 +136,7 @@
 
         /* =========== SEO CONTENT =========== */
         .seo-section { padding: 0 0 60px; }
+        .intro-section { padding: 40px 0 0; }
         .seo-card {
             background-color: var(--color-surface); border: 1px solid var(--color-border);
             border-radius: var(--radius-lg); padding: 28px 24px;
