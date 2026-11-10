@@ -18,6 +18,7 @@
             const resultadoEl = document.getElementById('resultado');
             const resultadoLinhasEl = document.getElementById('resultadoLinhas');
             const resultadoTotalEl = document.getElementById('resultadoTotal');
+            const memoriaCalculoEl = document.getElementById('memoriaCalculo');
 
             // =========== HELPERS ===========
 
@@ -185,6 +186,62 @@
                 return div;
             }
 
+            /**
+             * Gera o passo a passo do cálculo com os valores do próprio usuário.
+             */
+            function gerarMemoriaCalculo(d) {
+                const s = formatBRL(d.salario);
+                const qtd = (n, um, varios) => `${n} ${n === 1 ? um : varios}`;
+                const feriasBase = (d.salario / 12) * d.mesesFerias;
+                const itens = [];
+
+                itens.push(
+                    `<li><strong>Saldo de salário:</strong> como o seu salário é ${s} e você trabalhou ` +
+                    `${qtd(d.diasTrabalhados, 'dia', 'dias')} no mês da saída, o saldo é de ` +
+                    `<strong>${formatBRL(d.saldoSalario)}</strong> (${s} dividido por 30, multiplicado por ${d.diasTrabalhados}).</li>`
+                );
+
+                itens.push(
+                    `<li><strong>13º proporcional:</strong> como o seu salário é ${s} e você trabalhou ` +
+                    `${qtd(d.mesesNoAno, 'mês', 'meses')} neste ano, o seu 13º proporcional é de ` +
+                    `<strong>${formatBRL(d.decimoTerceiro)}</strong> (${s} dividido por 12, multiplicado por ${d.mesesNoAno}).</li>`
+                );
+
+                itens.push(
+                    `<li><strong>Férias proporcionais:</strong> você tem ${qtd(d.mesesFerias, 'mês', 'meses')} no período ` +
+                    `aquisitivo atual. As férias somam ${formatBRL(feriasBase)} (${s} dividido por 12, multiplicado por ` +
+                    `${d.mesesFerias}), mais 1/3 constitucional de ${formatBRL(feriasBase / 3)}, totalizando ` +
+                    `<strong>${formatBRL(d.ferias)}</strong>.</li>`
+                );
+
+                if (d.multaFgts > 0) {
+                    const fgts = d.salario * 0.08 * d.totalMesesContrato;
+                    itens.push(
+                        `<li><strong>Multa do FGTS:</strong> em ${qtd(d.totalMesesContrato, 'mês', 'meses')} de contrato, ` +
+                        `o FGTS depositado é estimado em ${formatBRL(fgts)} (8% de ${s} por mês). ` +
+                        `A multa é 40% desse valor: <strong>${formatBRL(d.multaFgts)}</strong>.</li>`
+                    );
+                } else {
+                    itens.push(
+                        `<li><strong>Multa do FGTS:</strong> no pedido de demissão não há multa de 40% ` +
+                        `nem saque do FGTS.</li>`
+                    );
+                }
+
+                const parcelas = [d.saldoSalario, d.decimoTerceiro, d.ferias, d.multaFgts]
+                    .filter(v => v > 0)
+                    .map(formatBRL)
+                    .join(' + ');
+
+                return `
+                    <h3 class="memoria-calculo__titulo">Memória de cálculo: como chegamos a esse valor</h3>
+                    <ol class="memoria-calculo__lista">${itens.join('')}</ol>
+                    <p class="memoria-calculo__total">Somando tudo: ${parcelas} = <strong>${formatBRL(d.total)}</strong>.</p>
+                    <p class="memoria-calculo__nota">Meses com 15 dias ou mais de trabalho contam como mês inteiro.
+                    Este cálculo considera que férias de períodos anteriores já foram tiradas.</p>
+                `;
+            }
+
             function renderizarResultado(dados) {
                 resultadoLinhasEl.innerHTML = ''; // limpa anterior
 
@@ -215,6 +272,7 @@
                 }
 
                 resultadoTotalEl.textContent = formatBRL(dados.total);
+                memoriaCalculoEl.innerHTML = gerarMemoriaCalculo(dados);
                 resultadoEl.classList.add('is-visible');
 
                 // Scroll suave até o resultado
@@ -263,6 +321,8 @@
                 if (totalMesesContrato > 0 && mesesFerias === 0) mesesFerias = 12;
 
                 renderizarResultado({
+                    salario,
+                    totalMesesContrato,
                     diasTrabalhados: dataDemissao.getDate(),
                     mesesNoAno,
                     mesesFerias,
