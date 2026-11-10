@@ -22,6 +22,12 @@
             const resultadoLinhasEl = document.getElementById('resultadoLinhas');
             const resultadoTotalEl = document.getElementById('resultadoTotal');
             const memoriaCalculoEl = document.getElementById('memoriaCalculo');
+            const diasInput = document.getElementById('diasFerias');
+            const diasErroEl = document.querySelector('#field-dias .form-error');
+
+            // Limites de dias de descanso (art. 143 da CLT: só é possível vender até 1/3 das férias)
+            const MAX_DIAS = 30;
+            const MAX_DIAS_COM_ABONO = 20;
 
             // =========== HELPERS ===========
 
@@ -67,6 +73,40 @@
                 };
             }
 
+            // =========== TRAVA: ABONO x DIAS DE DESCANSO ===========
+
+            function abonoMarcado() {
+                return document.querySelector('input[name="abono"]:checked').value === 'sim';
+            }
+
+            function limiteDias() {
+                return abonoMarcado() ? MAX_DIAS_COM_ABONO : MAX_DIAS;
+            }
+
+            /**
+             * Ao vender 10 dias, o descanso fica limitado a 20 dias. Ajusta o
+             * atributo max do campo, a mensagem de erro e reduz o valor já
+             * digitado caso ele ultrapasse o novo limite.
+             */
+            function aplicarLimiteDias() {
+                const max = limiteDias();
+                diasInput.max = String(max);
+                diasInput.placeholder = String(max);
+                diasErroEl.textContent = max === MAX_DIAS_COM_ABONO
+                    ? 'Vendendo 10 dias, o descanso pode ser de no máximo 20 dias.'
+                    : 'Informe um número entre 1 e 30.';
+
+                const atual = parseInt(diasInput.value, 10);
+                if (!isNaN(atual) && atual > max) {
+                    diasInput.value = String(max);
+                }
+            }
+
+            document.querySelectorAll('input[name="abono"]').forEach(function(radio) {
+                radio.addEventListener('change', aplicarLimiteDias);
+            });
+            aplicarLimiteDias();
+
             // =========== VALIDAÇÃO ===========
 
             function limparErros() {
@@ -85,7 +125,7 @@
                     marcarErro('field-salario');
                     ok = false;
                 }
-                if (!dias || dias < 1 || dias > 30 || isNaN(dias)) {
+                if (!dias || dias < 1 || dias > limiteDias() || isNaN(dias)) {
                     marcarErro('field-dias');
                     ok = false;
                 }
@@ -145,13 +185,6 @@
                     .map(formatBRL)
                     .join(' + ');
 
-                let alerta = '';
-                if (d.vendeuAbono && d.dias + 10 > 30) {
-                    alerta = `<p class="memoria-calculo__alerta">Atenção: você informou ${qtdDias} de descanso e a ` +
-                        `venda de 10 dias, somando ${d.dias + 10} dias. Pela CLT (art. 143), é possível vender até 1/3 ` +
-                        `do período: quem tem 30 dias de férias e vende 10 descansa 20. Confira os dias informados.</p>`;
-                }
-
                 const tributos = d.vendeuAbono
                     ? 'As férias e o 1/3 têm desconto de INSS e Imposto de Renda; o abono e o 1/3 sobre ele são isentos.'
                     : 'As férias e o 1/3 têm desconto de INSS e Imposto de Renda.';
@@ -160,7 +193,6 @@
                     <h3 class="memoria-calculo__titulo">Memória de cálculo: como chegamos a esse valor</h3>
                     <ol class="memoria-calculo__lista">${itens.join('')}</ol>
                     <p class="memoria-calculo__total">Soma: ${parcelas} = <strong>${formatBRL(d.total)}</strong> (valor bruto).</p>
-                    ${alerta}
                     <p class="memoria-calculo__nota">${tributos} O pagamento deve ser feito até 2 dias antes
                     do início das férias (art. 145 da CLT).</p>
                 `;
@@ -215,7 +247,7 @@
 
                 const salario = parseFloat(document.getElementById('salario').value);
                 const dias = parseInt(document.getElementById('diasFerias').value, 10);
-                const vendeuAbono = document.querySelector('input[name="abono"]:checked').value === 'sim';
+                const vendeuAbono = abonoMarcado();
 
                 if (!validar(salario, dias)) {
                     return;

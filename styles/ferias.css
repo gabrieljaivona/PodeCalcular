@@ -648,5 +648,4 @@
 .memoria-calculo__lista { padding-left: 20px; margin: 0 0 10px; }
 .memoria-calculo__lista li { margin-bottom: 8px; }
 .memoria-calculo__total { margin: 0 0 6px; }
-.memoria-calculo__alerta { margin: 0 0 8px; padding: 10px 12px; background: var(--color-warning-bg, #FEF3C7); color: var(--color-warning-text, #92400E); border-radius: var(--radius-sm); }
 .memoria-calculo__nota { margin: 0; font-size: .825rem; color: var(--color-text-muted); }
