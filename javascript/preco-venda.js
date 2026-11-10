@@ -2,10 +2,11 @@
          * PodeCalcular - Calculadora de Preço de Venda
          * -----------------------------------------------
          * Fórmula do Markup Divisor:
-         *   Preço de Venda = Custo / (1 - ((Despesas% + Lucro%) / 100))
+         *   Custo total    = Custo do produto + Custo fixo por unidade (opcional)
+         *   Preço de Venda = Custo total / (1 - ((Despesas% + Lucro%) / 100))
          *
          * Raio-X:
-         *   Custo       = valor informado
+         *   Custo       = custo do produto + custo fixo por unidade
          *   Taxas       = Preço × (Despesas / 100)
          *   Lucro       = Preço × (Margem / 100)
          *   Conferência = Custo + Taxas + Lucro === Preço
@@ -80,10 +81,13 @@
                 if (el) el.classList.add('has-error');
             }
 
-            function validar(custo, despesas, margem) {
+            function validar(custo, custoFixo, despesas, margem) {
                 var ok = true;
                 if (!custo || custo <= 0 || isNaN(custo)) {
                     marcarErro('field-custo'); ok = false;
+                }
+                if (isNaN(custoFixo) || custoFixo < 0) {
+                    marcarErro('field-custo-fixo'); ok = false;
                 }
                 if (isNaN(despesas) || despesas < 0 || despesas > 90) {
                     marcarErro('field-despesas'); ok = false;
@@ -105,8 +109,12 @@
              * Calcula o preço pelo markup divisor e decompõe o resultado em
              * centavos, para que custo + despesas + lucro feche exatamente
              * com o preço exibido (o lucro absorve o arredondamento).
+             * A base de cálculo é o custo total: produto + custo fixo por unidade.
              */
-            function calcularPreco(custo, despesas, margem) {
+            function calcularPreco(custoProduto, custoFixo, despesas, margem) {
+                var custoProdutoArred = Math.round(custoProduto * 100) / 100;
+                var custoFixoArred = Math.round(custoFixo * 100) / 100;
+                var custo = custoProdutoArred + custoFixoArred;
                 var divisor = 1 - ((despesas + margem) / 100);
                 var preco = Math.round((custo / divisor) * 100) / 100;
                 var custoArred = Math.round(custo * 100) / 100;
@@ -118,6 +126,8 @@
                 var lucroSomando = precoSomando - custo - precoSomando * (despesas / 100);
 
                 return {
+                    custoProduto: custoProdutoArred,
+                    custoFixo: custoFixoArred,
                     custo: custoArred,
                     despesas: despesas,
                     margem: margem,
@@ -142,11 +152,22 @@
             function gerarMemoriaCalculo(d) {
                 var itens = [];
 
-                itens.push(
-                    '<li><strong>Custo do produto:</strong> você informou <strong>' + formatBRL(d.custo) +
-                    '</strong> (material, mercadoria e frete). Esse valor ocupa ' + formatPct(d.custoPct) +
-                    ' do preço final.</li>'
-                );
+                if (d.custoFixo > 0) {
+                    itens.push(
+                        '<li><strong>Custo total do item:</strong> o custo do produto, ' + formatBRL(d.custoProduto) +
+                        ' (material, mercadoria e frete), mais a parte dos custos fixos que cabe a cada unidade, ' +
+                        formatBRL(d.custoFixo) + ' (aluguel, internet, DAS e outras contas do mês divididas pelas ' +
+                        'unidades vendidas). ' + formatBRL(d.custoProduto) + ' + ' + formatBRL(d.custoFixo) +
+                        ' = <strong>' + formatBRL(d.custo) + '</strong>. Essa é a base do cálculo e ocupa ' +
+                        formatPct(d.custoPct) + ' do preço final.</li>'
+                    );
+                } else {
+                    itens.push(
+                        '<li><strong>Custo do produto:</strong> você informou <strong>' + formatBRL(d.custo) +
+                        '</strong> (material, mercadoria e frete) e nenhum custo fixo por unidade. Esse valor ocupa ' +
+                        formatPct(d.custoPct) + ' do preço final.</li>'
+                    );
+                }
 
                 itens.push(
                     '<li><strong>Impostos e taxas:</strong> ' + formatPct(d.despesas) + ' de despesas sobre a venda ' +
@@ -156,7 +177,8 @@
                 );
 
                 itens.push(
-                    '<li><strong>Lucro desejado:</strong> é o que sobra depois de pagar o custo e as taxas: ' +
+                    '<li><strong>Lucro desejado:</strong> é o que sobra depois de pagar o custo' +
+                    (d.custoFixo > 0 ? ' total' : '') + ' e as taxas: ' +
                     formatBRL(d.preco) + ' − ' + formatBRL(d.custo) + ' − ' + formatBRL(d.taxasReais) + ' = <strong>' +
                     formatBRL(d.lucroReais) + '</strong> no seu bolso por unidade, ou seja, a margem de ' +
                     formatPct(d.margem) + ' sobre o preço que você pediu. Em relação ao custo, esse lucro ' +
@@ -178,24 +200,34 @@
                     ' sobre o preço. São dois jeitos de olhar o mesmo valor.</li>'
                 );
 
+                var parcelasCusto = d.custoFixo > 0
+                    ? formatBRL(d.custoProduto) + ' (produto) + ' + formatBRL(d.custoFixo) + ' (custo fixo)'
+                    : formatBRL(d.custo) + ' (custo)';
+
+                var nota = d.custoFixo > 0
+                    ? 'Revise o custo fixo por unidade sempre que suas contas do mês ou o volume de vendas mudarem: ' +
+                      'vendendo menos unidades, cada uma precisa carregar uma parte maior dos custos fixos.'
+                    : 'Custos fixos, como aluguel, internet e a DAS, não entraram no cálculo. Para incluí-los, divida ' +
+                      'o total do mês pela quantidade de unidades que você vende e informe o resultado no campo ' +
+                      '"Custo fixo por unidade".';
+
                 return '' +
                     '<h3 class="memoria-calculo__titulo">Memória de cálculo: como chegamos a esse preço</h3>' +
                     '<ol class="memoria-calculo__lista">' + itens.join('') + '</ol>' +
-                    '<p class="memoria-calculo__total">Conferência: ' + formatBRL(d.custo) + ' (custo) + ' +
+                    '<p class="memoria-calculo__total">Conferência: ' + parcelasCusto + ' + ' +
                     formatBRL(d.taxasReais) + ' (impostos e taxas) + ' + formatBRL(d.lucroReais) +
                     ' (lucro) = <strong>' + formatBRL(d.preco) + '</strong>.</p>' +
                     '<p class="memoria-calculo__total">Se você simplesmente somasse ' + formatPct(d.despesas + d.margem) +
                     ' em cima do custo, cobraria ' + formatBRL(d.precoSomando) + ' e sua margem real cairia para ' +
                     formatPct(d.margemSomando) + ', e não os ' + formatPct(d.margem) + ' que você queria.</p>' +
-                    '<p class="memoria-calculo__nota">Custos fixos, como aluguel, internet e a DAS em valor fixo, ' +
-                    'não entram automaticamente: divida o total do mês pela quantidade de unidades que você vende ' +
-                    'e some ao custo do produto, ou inclua esse peso no percentual de despesas.</p>';
+                    '<p class="memoria-calculo__nota">' + nota + '</p>';
             }
 
             // =========== RENDERIZAÇÃO ===========
 
-            function renderizarResultado(custo, despesas, margem) {
-                var d = calcularPreco(custo, despesas, margem);
+            function renderizarResultado(custoProduto, custoFixo, despesas, margem) {
+                var d = calcularPreco(custoProduto, custoFixo, despesas, margem);
+                var custo = d.custo;
                 var divisor = d.divisor;
                 var preco = d.preco;
                 var taxasReais = d.taxasReais;
@@ -265,10 +297,12 @@
                 var custo = parseFloat(document.getElementById('custo').value);
                 var despesas = parseFloat(document.getElementById('despesas').value) || 0;
                 var margem = parseFloat(document.getElementById('margem').value);
+                var custoFixoRaw = document.getElementById('custoFixo').value;
+                var custoFixo = custoFixoRaw === '' ? 0 : parseFloat(custoFixoRaw);
 
-                if (!validar(custo, despesas, margem)) return;
+                if (!validar(custo, custoFixo, despesas, margem)) return;
 
-                renderizarResultado(custo, despesas, margem);
+                renderizarResultado(custo, custoFixo, despesas, margem);
             });
 
             form.addEventListener('input', function(e) {

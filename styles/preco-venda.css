@@ -511,6 +511,7 @@
             .hero { padding: 56px 0 48px; }
             .calc-card, .article__wrapper { padding: 32px; }
             .form-grid--3col { grid-template-columns: 1fr 1fr 1fr; }
+            .form-grid--2col { grid-template-columns: 1fr 1fr; }
             .receipt__header, .receipt__body, .receipt__formula,
             .receipt__bar-section, .receipt__footer { padding-left: 32px; padding-right: 32px; }
             .receipt__total { padding: 16px 32px; }
@@ -524,3 +525,7 @@
 .memoria-calculo__lista li { margin-bottom: 8px; }
 .memoria-calculo__total { margin: 0 0 6px; }
 .memoria-calculo__nota { margin: 0; font-size: .825rem; color: var(--color-text-muted); }
+
+/* Texto de ajuda abaixo de um campo (some quando o erro aparece) */
+.form-help { display: block; font-size: .8125rem; color: var(--color-text-muted); margin-top: 4px; }
+.form-field.has-error .form-help { display: none; }
