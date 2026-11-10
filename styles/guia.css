@@ -50,3 +50,7 @@
 .article .cta-box__btn { color: var(--color-primary-dark); }
 .cta-box__btn:hover,
 .cta-box__btn:focus-visible { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+/* CTA com mais de um botão e links no texto */
+.cta-box__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.article .cta-box p a { color: #FFFFFF; font-weight: 700; text-decoration: underline; }
