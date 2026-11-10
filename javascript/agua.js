@@ -23,6 +23,10 @@
             var cupsGrid = document.getElementById('cupsGrid');
             var infoFrequencia = document.getElementById('infoFrequencia');
             var infoGarrafas = document.getElementById('infoGarrafas');
+            var memoriaCalculoEl = document.getElementById('memoriaCalculo');
+
+            var ML_POR_KG_BASE = 35;
+            var ML_POR_KG_ATIVIDADE = 45;
 
             // =========== HELPERS ===========
 
@@ -63,6 +67,75 @@
                 return Math.round(intervalo) + ' min';
             }
 
+            /**
+             * Formata no padrão brasileiro com casas decimais entre min e max.
+             */
+            function formatDec(num, min, max) {
+                return num.toLocaleString('pt-BR', { minimumFractionDigits: min, maximumFractionDigits: max });
+            }
+
+            /**
+             * Litros com duas casas, arredondando para o mais próximo de verdade
+             * (toFixed arredonda conforme a representação binária: 3,15 virava 3,1).
+             */
+            function litrosDe(ml) {
+                return Math.round(ml / 10) / 100;
+            }
+
+            // =========== MEMÓRIA DE CÁLCULO ===========
+
+            /**
+             * Gera o passo a passo da recomendação de água com o peso do usuário.
+             */
+            function gerarMemoriaCalculo(d) {
+                var peso = formatDec(d.peso, 0, 1);
+                var itens = [];
+
+                itens.push(
+                    '<li><strong>Base:</strong> a recomendação geral é de ' + ML_POR_KG_BASE + ' ml por kg de peso. ' +
+                    'Para seus ' + peso + ' kg: ' + peso + ' × ' + ML_POR_KG_BASE + ' = <strong>' +
+                    formatDec(d.baseMl, 0, 1) + ' ml</strong>.</li>'
+                );
+
+                if (d.ativo) {
+                    var extra = ML_POR_KG_ATIVIDADE - ML_POR_KG_BASE;
+                    itens.push(
+                        '<li><strong>Acréscimo pela atividade física intensa:</strong> quem treina perde mais ' +
+                        'água no suor, então somamos mais ' + extra + ' ml por kg: ' + peso + ' × ' + extra + ' = <strong>+ ' +
+                        formatDec(d.extraMl, 0, 1) + ' ml</strong>. No total, ' + formatDec(d.baseMl, 0, 1) + ' + ' +
+                        formatDec(d.extraMl, 0, 1) + ' = ' + formatDec(d.totalExato, 0, 1) + ' ml, o mesmo que ' +
+                        peso + ' × ' + ML_POR_KG_ATIVIDADE + ' ml.</li>'
+                    );
+                }
+
+                if (d.totalExato !== d.totalMl) {
+                    itens.push(
+                        '<li><strong>Arredondamento:</strong> ' + formatDec(d.totalExato, 0, 1) + ' ml ficam ' +
+                        '<strong>' + formatDec(d.totalMl, 0, 0) + ' ml</strong>.</li>'
+                    );
+                }
+
+                itens.push(
+                    '<li><strong>Em litros:</strong> 1 litro tem 1.000 ml, então ' + formatDec(d.totalMl, 0, 0) +
+                    ' ml ÷ 1.000 = <strong>' + formatDec(d.litros, 2, 2) + ' litros</strong>' +
+                    (litrosDe(d.totalMl) * 1000 !== d.totalMl ? ' (arredondado para duas casas)' : '') + '.</li>'
+                );
+
+                itens.push(
+                    '<li><strong>Em copos:</strong> ' + formatDec(d.totalMl, 0, 0) + ' ml ÷ 250 ml = ' +
+                    formatDec(d.totalMl / 250, 0, 2) + ', que arredondamos para cima: <strong>' + d.copos +
+                    ' copos</strong>, para não ficar abaixo da meta.</li>'
+                );
+
+                return '' +
+                    '<h3 class="memoria-calculo__titulo">Memória de cálculo: como chegamos a esse valor</h3>' +
+                    '<ol class="memoria-calculo__lista">' + itens.join('') + '</ol>' +
+                    '<p class="memoria-calculo__nota">A conta por quilo é uma referência geral para adultos ' +
+                    'saudáveis, usada em orientações de nutrição, e inclui a água vinda de chás, sucos e alimentos. ' +
+                    'Doenças renais ou cardíacas, gestação, amamentação, calor intenso e alguns medicamentos podem ' +
+                    'exigir uma recomendação diferente, que deve vir do seu médico.</p>';
+            }
+
             // =========== VALIDAÇÃO ===========
 
             function limparErros() {
@@ -86,15 +159,15 @@
 
             // =========== RENDERIZAÇÃO ===========
 
-            function renderizarResultado(totalMl, peso) {
-                var litros = totalMl / 1000;
+            function renderizarResultado(totalMl, peso, dados) {
+                var litros = litrosDe(totalMl);
                 var copos = Math.ceil(totalMl / 250);
                 var garrafas = (totalMl / 500).toFixed(1).replace('.', ',');
                 var freq = calcFrequencia(copos);
 
                 // Valores principais
-                valLitros.textContent = litros.toFixed(1).replace('.', ',');
-                valMl.textContent = Math.round(totalMl).toLocaleString('pt-BR') + ' ml';
+                valLitros.textContent = formatDec(litros, 2, 2);
+                valMl.textContent = totalMl.toLocaleString('pt-BR') + ' ml';
 
                 // Copos
                 cupsLabel.innerHTML = 'Equivale a <strong>' + copos + ' copos</strong> de 250 ml';
@@ -106,6 +179,11 @@
                 // Info rows
                 infoFrequencia.innerHTML = 'Tente beber <strong>1 copo a cada ' + freq + '</strong> ao longo do dia (das 7h às 22h).';
                 infoGarrafas.innerHTML = 'Isso equivale a aproximadamente <strong>' + garrafas + ' garrafas</strong> de 500 ml.';
+
+                dados.totalMl = totalMl;
+                dados.litros = litros;
+                dados.copos = copos;
+                memoriaCalculoEl.innerHTML = gerarMemoriaCalculo(dados);
 
                 resultadoEl.classList.add('is-visible');
 
@@ -125,11 +203,21 @@
 
                 if (!validar(peso)) return;
 
-                // Cálculo: 35 ml/kg (sedentário) ou 45 ml/kg (ativo)
-                var mlPorKg = ativo ? 45 : 35;
-                var totalMl = mlPorKg * peso;
+                // Cálculo: 35 ml/kg de base + 10 ml/kg com atividade intensa (= 45 ml/kg).
+                // Arredonda a 1 casa para tirar ruído de ponto flutuante (70,3 × 45
+                // dava 3163,4999…) e depois para o ml inteiro exibido.
+                var baseMl = Math.round(ML_POR_KG_BASE * peso * 10) / 10;
+                var extraMl = ativo ? Math.round((ML_POR_KG_ATIVIDADE - ML_POR_KG_BASE) * peso * 10) / 10 : 0;
+                var totalExato = Math.round((baseMl + extraMl) * 10) / 10;
+                var totalMl = Math.round(totalExato);
 
-                renderizarResultado(totalMl, peso);
+                renderizarResultado(totalMl, peso, {
+                    peso: peso,
+                    ativo: ativo,
+                    baseMl: baseMl,
+                    extraMl: extraMl,
+                    totalExato: totalExato
+                });
             });
 
             // Limpa erros ao interagir
