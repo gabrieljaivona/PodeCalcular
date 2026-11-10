@@ -35,6 +35,7 @@
             var legendProfitDot = document.getElementById('legendProfitDot');
 
             var alertBox = document.getElementById('alertBox');
+            var memoriaCalculoEl = document.getElementById('memoriaCalculo');
 
             // =========== HELPERS ===========
 
@@ -47,6 +48,51 @@
 
             function formatPct(v) {
                 return v.toFixed(2).replace('.', ',') + '%';
+            }
+
+            // =========== MEMÓRIA DE CÁLCULO ===========
+
+            /**
+             * Gera o passo a passo de lucro, margem e markup com os valores digitados.
+             */
+            function gerarMemoriaCalculo(d) {
+                var itens = [];
+                var resultado = d.lucro > 0 ? 'lucro' : (d.lucro < 0 ? 'prejuízo' : 'nem lucro nem prejuízo');
+
+                itens.push(
+                    '<li><strong>Lucro bruto:</strong> preço de venda menos custos: ' + formatBRL(d.venda) + ' − ' +
+                    formatBRL(d.custo) + ' = <strong>' + formatBRL(d.lucro) + '</strong>' +
+                    (d.lucro < 0 ? ' por unidade, ou seja, um <strong>prejuízo</strong> de ' + formatBRL(Math.abs(d.lucro)) + '.'
+                                 : (d.lucro === 0 ? ' por unidade (' + resultado + ').' : ' de lucro por unidade.')) + '</li>'
+                );
+
+                itens.push(
+                    '<li><strong>Margem de lucro:</strong> lucro bruto ÷ preço de venda × 100: ' + formatBRL(d.lucro) +
+                    ' ÷ ' + formatBRL(d.venda) + ' × 100 = <strong>' + formatPct(d.margem) + '</strong>. De cada ' +
+                    'R$ 100,00 que o cliente paga, ' + (d.lucro < 0 ? 'você perde ' + formatBRL(Math.abs(d.margem)) : 'sobram ' + formatBRL(d.margem)) +
+                    '.</li>'
+                );
+
+                itens.push(
+                    '<li><strong>Markup:</strong> lucro bruto ÷ custos × 100: ' + formatBRL(d.lucro) + ' ÷ ' +
+                    formatBRL(d.custo) + ' × 100 = <strong>' + formatPct(d.markup) + '</strong>. Na prática, o preço ' +
+                    'é o custo multiplicado por ' + (d.venda / d.custo).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 4 }) +
+                    ' (' + formatBRL(d.venda) + ' ÷ ' + formatBRL(d.custo) + ').</li>'
+                );
+
+                itens.push(
+                    '<li><strong>Margem x markup:</strong> a margem mede o lucro sobre o preço cobrado do cliente, ' +
+                    'enquanto o markup mede o lucro sobre o seu custo. Por isso, com o mesmo lucro de ' +
+                    formatBRL(d.lucro) + ', os percentuais são diferentes: ' + formatPct(d.margem) + ' e ' +
+                    formatPct(d.markup) + '.</li>'
+                );
+
+                return '' +
+                    '<h3 class="memoria-calculo__titulo">Memória de cálculo: como chegamos a esses valores</h3>' +
+                    '<ol class="memoria-calculo__lista">' + itens.join('') + '</ol>' +
+                    '<p class="memoria-calculo__nota">Este é o lucro bruto: ele ainda não desconta impostos, taxas ' +
+                    'de cartão, comissões nem a parte dos custos fixos de cada venda. Para formar um preço que já ' +
+                    'cubra tudo isso, use a <a href="preco-venda.html">calculadora de preço de venda</a>.</p>';
             }
 
             // =========== VALIDAÇÃO ===========
@@ -78,7 +124,8 @@
             // =========== RENDERIZAÇÃO ===========
 
             function renderizarResultado(custo, venda) {
-                var lucro = venda - custo;
+                // Em centavos, para evitar ruído de ponto flutuante (100 − 50,10 dava 49,900000000000006)
+                var lucro = Math.round((venda - custo) * 100) / 100;
                 var margem = (lucro / venda) * 100;
                 var markup = (lucro / custo) * 100;
 
@@ -168,6 +215,10 @@
                     alertBox.classList.add('is-visible', 'alert-box--profit');
                     alertBox.innerHTML = '<span aria-hidden="true">✅</span> <span><strong>Margem saudável!</strong> A cada venda de ' + formatBRL(venda) + ', você lucra ' + formatBRL(lucro) + '. Seu markup de ' + formatPct(markup) + ' significa que o lucro equivale a ' + formatPct(markup) + ' do custo.</span>';
                 }
+
+                memoriaCalculoEl.innerHTML = gerarMemoriaCalculo({
+                    custo: custo, venda: venda, lucro: lucro, margem: margem, markup: markup
+                });
 
                 resultadoEl.classList.add('is-visible');
 
